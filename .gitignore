@@ -1,1 +1,6 @@
 bundle/
+.netrwhist
+spell/*.spl
+tags
+tags.lock
+tags.temp
