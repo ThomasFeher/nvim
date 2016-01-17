@@ -92,6 +92,7 @@ endfunction
 " press gJ to join multiline expressions on one line
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim' " press gs to x.y → x->y or && → || or true → false
+Plug 'jamessan/vim-gnupg' " read and write gnupg encrypted files (.gpg,.pgp,.asc)
 
 call plug#end()            " required
 filetype plugin indent on    " required
