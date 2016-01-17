@@ -88,6 +88,9 @@ function! BuildComposer(info)
 	endif
 endfunction
 "Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+" press gS to split expressions on multiple lines
+" press gJ to join multiline expressions on one line
+Plug 'AndrewRadev/splitjoin.vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
