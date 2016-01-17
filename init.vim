@@ -91,6 +91,7 @@ endfunction
 " press gS to split expressions on multiple lines
 " press gJ to join multiline expressions on one line
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/switch.vim' " press gs to x.y → x->y or && → || or true → false
 
 call plug#end()            " required
 filetype plugin indent on    " required
