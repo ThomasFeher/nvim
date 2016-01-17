@@ -15,7 +15,7 @@ Plug 'altercation/vim-colors-solarized'
 " LaTex
 "Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'lervag/vimtex' " LaTeX
-let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_enabled = 0 " actvated folding slowes neovim down significantly
 let g:vimtex_latexmk_build_dir = 'build'
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique @pdf\#src:@line@tex'
