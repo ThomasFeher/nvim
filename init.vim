@@ -31,6 +31,7 @@ Plug 'honza/vim-snippets'
 " git integration
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
+Plug 'airblade/vim-gitgutter'
 
 " others
 Plug 'ervandew/supertab'
