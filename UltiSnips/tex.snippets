@@ -1,0 +1,33 @@
+priority -50
+
+extends texmath
+
+snippet si "siunitx: \SI{}{}"
+\SI{$1}{$2}
+endsnippet
+
+snippet ang "siunitx: \ang{}"
+\ang{$1}
+endsnippet
+
+snippet standalone "standalone file skeleton" b
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+$1
+\end{document}
+endsnippet
+
+snippet todo "simple TODO"
+\todo{TODO}
+endsnippet
+
+snippet frame "beamer frame skeleton" b
+\begin{frame}
+\frametitle{$1}
+\framesubtitle{$2}
+
+\end{frame}
+endsnippet
