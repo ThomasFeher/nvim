@@ -97,6 +97,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim' " press gs to x.y → x->y or && → || or true → false
 Plug 'jamessan/vim-gnupg' " read and write gnupg encrypted files (.gpg,.pgp,.asc)
 Plug 'chrisbra/NrrwRgn' " work on a specified region in a separate buffer (<leader>nr or :NrrwRgn)
+" use gits improved diff algorithms (:h EnhancedDiff, :EnhancedDiff <algorithm)
+Plug 'chrisbra/vim-diff-enhanced'
 
 call plug#end()            " required
 filetype plugin indent on    " required
