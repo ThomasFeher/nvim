@@ -71,6 +71,8 @@ map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 map zg/ <Plug>(incsearch-fuzzy-stay)
 Plug 'ludovicchabant/vim-gutentags' " update tag files automatically
+" store tag files in /tmp directory
+let g:gutentags_cache_dir = '/tmp'
 Plug 'thinca/vim-quickrun' " execute code in current buffer
 Plug 'chrisbra/csv.vim'
 "Plug 'vim-pandoc/vim-pandoc'
