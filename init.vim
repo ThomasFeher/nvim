@@ -54,6 +54,7 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
 			              \ '.wiki': 'media'}
 Plug 'junegunn/vim-easy-align'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/targets.vim'
 Plug 'haya14busa/incsearch.vim'
 map /  <Plug>(incsearch-forward)
