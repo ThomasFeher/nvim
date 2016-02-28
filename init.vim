@@ -99,6 +99,8 @@ Plug 'jamessan/vim-gnupg' " read and write gnupg encrypted files (.gpg,.pgp,.asc
 Plug 'chrisbra/NrrwRgn' " work on a specified region in a separate buffer (<leader>nr or :NrrwRgn)
 " use gits improved diff algorithms (:h EnhancedDiff, :EnhancedDiff <algorithm)
 Plug 'chrisbra/vim-diff-enhanced'
+Plug 'tpope/vim-projectionist' " :A open alternative file, :E<groupname> <filename>
+nnoremap <leader>a :A<return>
 
 call plug#end()            " required
 filetype plugin indent on    " required
