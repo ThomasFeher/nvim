@@ -360,3 +360,7 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " highlight current column
 set cursorcolumn
+
+" row numbering
+set number
+set relativenumber
