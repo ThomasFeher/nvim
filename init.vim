@@ -117,6 +117,7 @@ Plug 'rking/ag.vim'
 let g:ag_working_path_mode="r" " start search from project root directory
 
 nnoremap <leader>a :A<return>
+"Plug 'jeaye/color_coded', {'do': 'cmake . && make && make install && make clean && make clean_clang'} " improved syntax highlighting (needs gcc 4.9 or higher, so not usable on openSUSE 13.2)
 
 call plug#end()            " required
 filetype plugin indent on    " required
