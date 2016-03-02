@@ -109,14 +109,13 @@ Plug 'chrisbra/NrrwRgn' " work on a specified region in a separate buffer (<lead
 " use gits improved diff algorithms (:h EnhancedDiff, :EnhancedDiff <algorithm)
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'tpope/vim-projectionist' " :A open alternative file, :E<groupname> <filename>
+nnoremap <leader>a :A<return>
 " search in source code files
 " faster than (vim)grep and ack, needs `the_silver_searcher` package installed
 " use `:Ag <search-term>`
 " `:h Ag`
 Plug 'rking/ag.vim'
 let g:ag_working_path_mode="r" " start search from project root directory
-
-nnoremap <leader>a :A<return>
 "Plug 'jeaye/color_coded', {'do': 'cmake . && make && make install && make clean && make clean_clang'} " improved syntax highlighting (needs gcc 4.9 or higher, so not usable on openSUSE 13.2)
 
 call plug#end()            " required
