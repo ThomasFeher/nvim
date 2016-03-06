@@ -109,7 +109,7 @@ Plug 'chrisbra/NrrwRgn' " work on a specified region in a separate buffer (<lead
 " use gits improved diff algorithms (:h EnhancedDiff, :EnhancedDiff <algorithm)
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'tpope/vim-projectionist' " :A open alternative file, :E<groupname> <filename>
-nnoremap <leader>a :A<return>
+nnoremap <leader>a :A<CR>
 " search in source code files
 " faster than (vim)grep and ack, needs `the_silver_searcher` package installed
 " use `:Ag <search-term>`
