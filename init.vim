@@ -233,8 +233,8 @@ endif
 
 "colorscheme molokai
 
-let mapleader = "\<Space>"
-let maplocalleader = "\<Space>"
+let mapleader = "ß"
+let maplocalleader = "ß"
 " mapleader should not time out
 " set notimeout
 
