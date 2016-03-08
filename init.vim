@@ -111,6 +111,14 @@ Plug 'chrisbra/NrrwRgn' " work on a specified region in a separate buffer (<lead
 " use gits improved diff algorithms (:h EnhancedDiff, :EnhancedDiff <algorithm)
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'tpope/vim-projectionist' " :A open alternative file, :E<groupname> <filename>
+" default projections
+let g:projectionist_heuristics = {
+			\ "CMakeLists.txt": {
+			\   "*.cpp": {"type": "source", "alternate": "{}.h"},
+			\   "*.c": {"type": "source", "alternate": "{}.h"},
+			\   "*.h": {"type": "header", "alternate": "{}.cpp"}
+			\ }
+			\ }
 nnoremap <leader>a :A<CR>
 " search in source code files
 " faster than (vim)grep and ack, needs `the_silver_searcher` package installed
