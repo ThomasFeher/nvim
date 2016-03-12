@@ -34,6 +34,10 @@ let g:ycm_semantic_triggers.tex = [
 
 " autocompletion
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+" :YcmGenerateConfig or
+" :YcmGenerateConfig! for overwriting existing config
+" for "color coded" use :CCGenerateConfig
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
