@@ -130,6 +130,8 @@ nnoremap <leader>a :A<CR>
 " `:h Ag`
 Plug 'rking/ag.vim'
 let g:ag_working_path_mode="r" " start search from project root directory
+" use `:Autoformat` to format according to ".clang-format" file in project dir
+Plug 'Chiel92/vim-autoformat'
 "Plug 'jeaye/color_coded', {'do': 'cmake . && make && make install && make clean && make clean_clang'} " improved syntax highlighting (needs gcc 4.9 or higher, so not usable on openSUSE 13.2)
 
 call plug#end()            " required
