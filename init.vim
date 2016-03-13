@@ -397,3 +397,7 @@ set cursorcolumn
 " row numbering
 set number
 set relativenumber
+
+" ignore case if search string is lower case only
+set ignorecase
+set smartcase
