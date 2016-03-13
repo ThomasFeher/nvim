@@ -401,3 +401,6 @@ set relativenumber
 " ignore case if search string is lower case only
 set ignorecase
 set smartcase
+
+" show wrapped lines
+set showbreak=→→→
