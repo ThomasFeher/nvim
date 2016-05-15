@@ -53,6 +53,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch' " Move, Chmod, etc.
 Plug 'neomake/neomake' " syntax checker
+autocmd! BufWritePost * Neomake
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdcommenter'
