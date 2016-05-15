@@ -52,7 +52,7 @@ Plug 'MPogoda/octave.vim--'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch' " Move, Chmod, etc.
-Plug 'benekastah/neomake' " syntax checker
+Plug 'neomake/neomake' " syntax checker
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdcommenter'
