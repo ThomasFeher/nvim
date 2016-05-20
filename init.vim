@@ -49,7 +49,7 @@ Plug 'airblade/vim-gitgutter'
 " others
 Plug 'ervandew/supertab'
 Plug 'MPogoda/octave.vim--'
-Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar' " press `I` to change to old view, press `s` to change sorting
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch' " Move, Chmod, etc.
 Plug 'neomake/neomake' " syntax checker
