@@ -95,7 +95,7 @@ Plug 'ludovicchabant/vim-gutentags' " update tag files automatically
 let g:gutentags_cache_dir = '/tmp'
 Plug 'thinca/vim-quickrun' " execute code in current buffer
 Plug 'chrisbra/csv.vim'
-"Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc'
 let g:pandoc#filetypes#pandoc_markdown = 0
 let g:pandoc#modules#disabled = ["folding","formatting"]
 Plug 'sjl/clam.vim' " execute console commands and put result in buffer
