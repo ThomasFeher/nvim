@@ -196,7 +196,7 @@ endif
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-	syntax on
+	syntax enable
 	set hlsearch
 endif
 
@@ -344,7 +344,6 @@ nmap <leader>gv :Gitv --all<cr>
 nmap <leader>gV :Gitv! --all<cr>
 vmap <leader>gV :Gitv! --all<cr>
 
-syntax enable
 set background=dark
 colorscheme solarized
 
