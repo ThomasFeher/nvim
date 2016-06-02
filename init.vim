@@ -53,7 +53,7 @@ Plug 'tpope/vim-vinegar' " press `I` to change to old view, press `s` to change 
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch' " Move, Chmod, etc.
 Plug 'neomake/neomake' " syntax checker
-autocmd! BufWritePost * Neomake
+autocmd! BufWritePost,BufWinEnter * Neomake
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdcommenter'
