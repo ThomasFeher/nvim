@@ -61,7 +61,11 @@ Plug 'tpope/vim-vinegar' " press `I` to change to old view, press `s` to change 
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch' " Move, Chmod, etc.
 Plug 'neomake/neomake' " syntax checker
-autocmd! BufWritePost,BufWinEnter * Neomake
+" ignore C/C++, they are already linted by YCM (and configuration of paths is
+" hard with neomke
+" copied from http://vi.stackexchange.com/a/4500/7823
+let ftIgnore = ['cpp','c']
+autocmd! BufWritePost,BufWinEnter * if index(ftIgnore,&ft) < 0 | Neomake
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdcommenter'
