@@ -43,7 +43,15 @@ Plug 'honza/vim-snippets'
 
 " git integration
 Plug 'tpope/vim-fugitive'
-Plug 'gregsexton/gitv'
+" gv - a possible replacement for gitv (unmaintained)
+" o or <cr> on a commit to display the content of it
+" o or <cr> on commits to display the diff in the range
+" O opens a new tab instead
+" gb for :Gbrowse
+" ]] and [[ to move between commits
+" . to start command-line with :Git [CURSOR] SHA à la fugitive
+" q to close
+Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
 " others
@@ -339,10 +347,8 @@ let g:airline_powerline_fonts = 1
 set diffopt=filler,vertical
 nnoremap <leader>gs :Gstatus<CR>
 
-" gitv
-nmap <leader>gv :Gitv --all<cr>
-nmap <leader>gV :Gitv! --all<cr>
-vmap <leader>gV :Gitv! --all<cr>
+" gv
+nmap <leader>gv :GV --all<cr>
 
 set background=dark
 colorscheme solarized
