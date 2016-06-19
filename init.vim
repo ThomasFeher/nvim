@@ -151,6 +151,8 @@ Plug 'Chiel92/vim-autoformat'
 "Plug 'jeaye/color_coded', {'do': 'cmake . && make && make install && make clean && make clean_clang'} " improved syntax highlighting (needs gcc 4.9 or higher, so not usable on openSUSE 13.2)
 Plug 'critiqjo/lldb.nvim'
 
+Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
+
 call plug#end()            " required
 filetype plugin indent on    " required
 "
