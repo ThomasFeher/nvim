@@ -423,3 +423,15 @@ set showbreak=→→→
 
 " set spell checking in commit messages
 autocmd FileType gitcommit setlocal spell
+
+" do not use tabs in markdown documents, because that would give incosistent
+" indentation
+" example:
+" * something long that has to be broken into several lines and is already
+"   indented
+" ^^ here we need spaces, having tabs for indentation in front of it would be
+" messy
+augroup markdown
+	au!
+	autocmd FileType markdown,vimwiki setlocal expandtab
+augroup END
