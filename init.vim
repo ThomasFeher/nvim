@@ -348,6 +348,20 @@ set t_Co=16
 
 " airline
 let g:airline_powerline_fonts = 1
+" taken from :help airline
+let g:airline_mode_map = {
+			\ '__' : '-',
+			\ 'n'  : 'N',
+			\ 'i'  : 'I',
+			\ 'R'  : 'R',
+			\ 'c'  : 'C',
+			\ 'v'  : 'V',
+			\ 'V'  : 'V',
+			\ '' : 'V',
+			\ 's'  : 'S',
+			\ 'S'  : 'S',
+			\ '' : 'S',
+			\ }
 
 " fugitive
 set diffopt=filler,vertical
