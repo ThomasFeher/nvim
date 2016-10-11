@@ -81,7 +81,6 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
 " make vimwikis default syntax markdown
 let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 map <leader>w/ :VimwikiSearch
-map w/ :VimwikiSearch
 " command: ga<movement><align-char>
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
