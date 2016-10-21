@@ -8,3 +8,9 @@
     :PlugInstall # install all plugins (this can take some time)
     :qa # quit neovim (needs to restart in order to make plugins work correctly)
 ```
+
+## Usefull tools
+
+openSuse package names:
+
+* ShellCheck
