@@ -149,6 +149,10 @@ let g:ag_working_path_mode="r" " start search from project root directory
 " use `:Autoformat` to format according to ".clang-format" file in project dir
 Plug 'Chiel92/vim-autoformat'
 "Plug 'jeaye/color_coded', {'do': 'cmake . && make && make install && make clean && make clean_clang'} " improved syntax highlighting (needs gcc 4.9 or higher, so not usable on openSUSE 13.2)
+" unterstützt aber kein Neovim, anscheinend arbeitet YCM an einer API um
+" solche Plugins zu unterstützen. Ein
+" [MR](https://github.com/Valloric/ycmd/pull/291) ist kurz vorm merge. Dann
+" könnte man [dieses Plugin](https://github.com/davits/DyeVim) benutzen.
 Plug 'critiqjo/lldb.nvim'
 " start with <leader>rf, run current line <leader>ll, run current selection
 " <leader>ss, quit <leader>rq, hilfe :h Nvim-R
