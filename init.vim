@@ -73,7 +73,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'PProvost/vim-ps1'
 Plug 'yazug/vim-taglist-plus'
 Plug 'jceb/vim-orgmode'
-Plug 'vimwiki/vimwiki'
+Plug 'ThomasFeher/vimwiki'
 " use vimwiki for markdown files
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
 			\ '.mkd': 'markdown',
