@@ -164,6 +164,9 @@ Plug 'tmhedberg/SimpylFold'
 " add ("yank") double quotes around current word: ysiw"
 " delete next surrounding single quotes: ds'
 Plug 'tpope/vim-surround'
+" dot command repeats plugin mappings, too, if supported by the plugin (e.g.
+" vim-surround)
+Plug 'tpope/vim-repeat'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 
