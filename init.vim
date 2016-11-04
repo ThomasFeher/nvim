@@ -159,6 +159,11 @@ Plug 'critiqjo/lldb.nvim'
 Plug 'jalvesaq/Nvim-R'
 " fold python functions and classes
 Plug 'tmhedberg/SimpylFold'
+" edit surrounding tags, quotes, etc.
+" change next surrounding double quotes to single quotes: cs"'
+" add ("yank") double quotes around current word: ysiw"
+" delete next surrounding single quotes: ds'
+Plug 'tpope/vim-surround'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 
