@@ -157,6 +157,8 @@ Plug 'critiqjo/lldb.nvim'
 " start with <leader>rf, run current line <leader>ll, run current selection
 " <leader>ss, quit <leader>rq, hilfe :h Nvim-R
 Plug 'jalvesaq/Nvim-R'
+" fold python functions and classes
+Plug 'tmhedberg/SimpylFold'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 
