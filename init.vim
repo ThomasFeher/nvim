@@ -452,7 +452,6 @@ set ignorecase
 set smartcase
 
 " show wrapped lines
-set showbreak=→→→
 
 " set spell checking in commit messages
 autocmd FileType gitcommit setlocal spell
