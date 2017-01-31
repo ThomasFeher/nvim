@@ -170,6 +170,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
+let g:bob_config_path = "configurations"
 
 call plug#end()            " required
 filetype plugin indent on    " required
