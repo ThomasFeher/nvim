@@ -471,3 +471,5 @@ augroup END
 " vimwiki
 nnoremap <leader>w/ :VimwikiSearch 
 nnoremap <leader>/ :VimwikiSearch 
+
+set wildmode=longest:full
