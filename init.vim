@@ -472,4 +472,5 @@ augroup END
 nnoremap <leader>w/ :VimwikiSearch 
 nnoremap <leader>/ :VimwikiSearch 
 
+" modify autocompletion behaviour
 set wildmode=longest:full
