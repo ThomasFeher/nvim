@@ -474,3 +474,9 @@ nnoremap <leader>/ :VimwikiSearch
 
 " modify autocompletion behaviour
 set wildmode=longest:full
+
+" mappings for vim-bob
+nmap <leader>bc :BobClean<CR>
+nmap <leader>bi :BobInit<CR>
+nmap <leader>bd :BobDev 
+nmap <leader>bg :BobGoto 
