@@ -442,6 +442,8 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " highlight current column
 set cursorcolumn
+" highlight current line
+set cursorline
 
 " row numbering
 set number
