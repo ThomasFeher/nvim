@@ -178,6 +178,8 @@ Plug 'JuliaEditorSupport/julia-vim'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 let g:bob_config_path = "configurations"
+" let CtrlP's root directory for searching be the recipe repository
+let g:ctrlp_root_markers = ['recipes']
 
 call plug#end()            " required
 filetype plugin indent on    " required
