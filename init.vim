@@ -10,7 +10,7 @@ function! BuildYCM(info)
 endfunction
 
 " color scheme
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 
 " LaTex
 "Plug 'LaTeX-Box-Team/LaTeX-Box'
@@ -365,6 +365,9 @@ if !has("gui_running")
 	set t_Co=16
 endif
 
+" call :colorscheme in neovim to change colorscheme on the fly
+colorscheme solarized8_dark
+
 " disable autotag, set to 0 or delete to activate autotag
 "let g:autotag_vim_version_sourced=1
 
@@ -391,9 +394,6 @@ nnoremap <leader>gs :Gstatus<CR>
 
 " gv
 nmap <leader>gv :GV --all<cr>
-
-set background=dark
-colorscheme solarized
 
 " clang-format
 map <leader>f :pyfile /usr/share/clang/clang-format.py<cr>
