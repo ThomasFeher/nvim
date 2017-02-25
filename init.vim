@@ -358,9 +358,12 @@ set guifont=Monospace\ 8,\ Lucida_Console:h8:cANSI
 " hide toolbar
 set guioptions-=T
 
-" force 256 color support
-" set t_Co=256
-set t_Co=16
+" this is only necessary for 256 color terminals, because solarized will not
+" work there
+if !has("gui_running")
+	" force 16 color support
+	set t_Co=16
+endif
 
 " disable autotag, set to 0 or delete to activate autotag
 "let g:autotag_vim_version_sourced=1
