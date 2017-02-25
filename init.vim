@@ -484,4 +484,5 @@ set wildmode=longest:full
 nmap <leader>bc :BobClean<CR>
 nmap <leader>bi :BobInit<CR>
 nmap <leader>bd :BobDev 
+nmap <leader>br :BobDev  -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto 
