@@ -168,6 +168,13 @@ Plug 'tpope/vim-surround'
 " dot command repeats plugin mappings, too, if supported by the plugin (e.g.
 " vim-surround)
 Plug 'tpope/vim-repeat'
+" syntax highlighting for PlantUML
+" The filetype will be set to plantuml for *.pu, *.uml or *.plantuml files or
+" if the first line of a file contains @startuml.
+" Additionally the makeprg is set to plantuml.
+Plug 'aklt/plantuml-syntax'
+" renders ASCII diagrams from PlantUML description files when saving
+Plug 'scrooloose/vim-slumlord'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 let g:bob_config_path = "configurations"
