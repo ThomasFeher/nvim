@@ -175,6 +175,8 @@ Plug 'tpope/vim-repeat'
 Plug 'aklt/plantuml-syntax'
 " renders ASCII diagrams from PlantUML description files when saving
 Plug 'scrooloose/vim-slumlord'
+" Syntax highlighting and more for Julia language
+Plug 'JuliaEditorSupport/julia-vim'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 let g:bob_config_path = "configurations"
