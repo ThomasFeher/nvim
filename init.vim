@@ -173,8 +173,6 @@ Plug 'tpope/vim-repeat'
 " if the first line of a file contains @startuml.
 " Additionally the makeprg is set to plantuml.
 Plug 'aklt/plantuml-syntax'
-" renders ASCII diagrams from PlantUML description files when saving
-Plug 'scrooloose/vim-slumlord'
 " Syntax highlighting and more for Julia language
 Plug 'JuliaEditorSupport/julia-vim'
 
@@ -496,3 +494,9 @@ nmap <leader>bi :BobInit<CR>
 nmap <leader>bd :BobDev 
 nmap <leader>br :BobDev  -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto 
+
+augroup uml
+	"Remove all uml autocommands
+	autocmd!
+	autocmd BufWritePost *.uml silent !plantuml <afile>
+augroup END
