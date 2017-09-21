@@ -491,11 +491,12 @@ nnoremap <leader>/ :VimwikiSearch
 set wildmode=longest:full
 
 " mappings for vim-bob
-nmap <leader>bc :BobClean<CR>
+nmap <leader>bC :BobClean<CR>
 nmap <leader>bi :BobInit<CR>
-nmap <leader>bd :BobDev 
-nmap <leader>br :BobDev  -DBUILD_TYPE=Release<s-left><left>
+nmap <leader>bd :BobDev! 
+nmap <leader>br :BobDev! -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto 
+nmap <leader>bb :make!<CR>
 
 augroup uml
 	"Remove all uml autocommands
