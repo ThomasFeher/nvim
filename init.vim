@@ -180,6 +180,11 @@ Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 let g:bob_config_path = "configurations"
 " let CtrlP's root directory for searching be the recipe repository
 let g:ctrlp_root_markers = ['recipes']
+" diff two blocks in the same file
+" mark first block and do :LineDiff
+" mark second block and do :LineDiff
+" exit diff view with :LineDiffReset
+Plug 'AndrewRadev/linediff.vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
