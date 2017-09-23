@@ -185,6 +185,9 @@ let g:ctrlp_root_markers = ['recipes']
 " mark second block and do :LineDiff
 " exit diff view with :LineDiffReset
 Plug 'AndrewRadev/linediff.vim'
+" semantic highlighting of C/C++ files
+Plug 'arakashic/chromatica.nvim'
+let g:chromatica#libclang_path='/usr/lib64/libclang.so.4'
 
 call plug#end()            " required
 filetype plugin indent on    " required
