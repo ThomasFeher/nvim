@@ -512,3 +512,8 @@ augroup uml
 	autocmd!
 	autocmd BufWritePost *.uml silent !plantuml <afile>
 augroup END
+
+augroup cpp
+	autocmd!
+	autocmd FileType c,cpp setlocal comments-=:// comments+=://!,:///,://
+augroup END
