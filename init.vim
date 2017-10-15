@@ -188,6 +188,7 @@ Plug 'AndrewRadev/linediff.vim'
 " semantic highlighting of C/C++ files
 Plug 'arakashic/chromatica.nvim'
 let g:chromatica#libclang_path='/usr/lib64/libclang.so.4'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
