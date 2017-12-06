@@ -131,6 +131,8 @@ Plug 'jamessan/vim-gnupg' " read and write gnupg encrypted files (.gpg,.pgp,.asc
 Plug 'chrisbra/NrrwRgn' " work on a specified region in a separate buffer (<leader>nr or :NrrwRgn)
 " use gits improved diff algorithms (:h EnhancedDiff, :EnhancedDiff <algorithm)
 Plug 'chrisbra/vim-diff-enhanced'
+" diff viewer on directory level, usage: :DirDiff <dir1> <dir2>
+Plug 'will133/vim-dirdiff'
 Plug 'tpope/vim-projectionist' " :A open alternative file, :E<groupname> <filename>
 " default projections
 let g:projectionist_heuristics = {
