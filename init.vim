@@ -382,7 +382,7 @@ set guioptions-=T
 " work there
 if !has("gui_running")
 	" force 16 color support
-	set t_Co=16
+	let g:solarized_use16 = 1
 endif
 
 " call :colorscheme in neovim to change colorscheme on the fly
