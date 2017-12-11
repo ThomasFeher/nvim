@@ -156,7 +156,7 @@ Plug 'Chiel92/vim-autoformat'
 " solche Plugins zu unterstützen. Ein
 " [MR](https://github.com/Valloric/ycmd/pull/291) ist kurz vorm merge. Dann
 " könnte man [dieses Plugin](https://github.com/davits/DyeVim) benutzen.
-Plug 'critiqjo/lldb.nvim'
+Plug 'dbgx/lldb.nvim'
 " start with <leader>rf, run current line <leader>ll, run current selection
 " <leader>ss, quit <leader>rq, hilfe :h Nvim-R
 Plug 'jalvesaq/Nvim-R'
