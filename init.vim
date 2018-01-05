@@ -512,7 +512,7 @@ nmap <leader>bb :make!<CR>
 augroup uml
 	"Remove all uml autocommands
 	autocmd!
-	autocmd BufWritePost *.uml silent !plantuml <afile>
+	autocmd BufWritePost *.uml,*.puml silent !plantuml <afile>
 augroup END
 
 augroup cpp
