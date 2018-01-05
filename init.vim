@@ -112,6 +112,8 @@ let g:pandoc#filetypes#pandoc_markdown = 0
 let g:pandoc#modules#disabled = ["folding","formatting"]
 Plug 'sjl/clam.vim' " execute console commands and put result in buffer
 Plug 'kien/ctrlp.vim' " fuzzy file finder
+" scan unlimited number of files
+let g:ctrlp_max_files = 0
 Plug 'kassio/neoterm' " REPL functionality and terminal functions
 Plug 'bfredl/nvim-ipy' " jupyter for neovim
 
