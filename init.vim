@@ -15,12 +15,12 @@ Plug 'lifepillar/vim-solarized8'
 " LaTex
 Plug 'lervag/vimtex' " LaTeX
 let g:vimtex_fold_enabled = 0 " actvated folding slowes neovim down significantly
-let g:vimtex_latexmk_build_dir = 'build'
 let g:vimtex_view_general_viewer = 'okular'
-let g:vimtex_view_general_options = '--unique @pdf\#src:@line@tex'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
-let g:vimtex_latexmk_callback = 0
-let g:vimtex_latexmk_continuous = 0
+let g:vimtex_compiler_latexmk = {
+	\ 'build_dir' : 'build'
+	\}
 if !exists('g:ycm_semantic_triggers')
 	let g:ycm_semantic_triggers = {}
 endif
