@@ -192,6 +192,11 @@ Plug 'AndrewRadev/linediff.vim'
 Plug 'arakashic/chromatica.nvim'
 let g:chromatica#libclang_path='/usr/lib64/libclang.so.4'
 Plug 'editorconfig/editorconfig-vim'
+" This plugin adds text object support for comma-separated arguments enclosed
+" by brackets.
+" usage: aa (an argument, includes the separator) or
+"        ia (inner argument, excludes the separator))
+Plug 'b4winckler/vim-angry'
 
 call plug#end()            " required
 filetype plugin indent on    " required
