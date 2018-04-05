@@ -196,6 +196,12 @@ Plug 'editorconfig/editorconfig-vim'
 " usage: aa (an argument, includes the separator) or
 "        ia (inner argument, excludes the separator))
 Plug 'b4winckler/vim-angry'
+" documentation seems out of sync but it seems helpfull for having the source
+" file side by side with the gdb window
+" usage:
+" 	:Nbgdb <binary_name>
+" 	use insert mode in gdb window to use normal gdb commands
+Plug 'huawenyu/neogdb.vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
