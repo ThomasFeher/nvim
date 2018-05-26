@@ -520,6 +520,12 @@ nmap <leader>br :BobDev! -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto 
 nmap <leader>bb :make!<CR>
 
+" mappings for building with make and Neomake, respectively
+" run make in foreground
+nmap <leader>mm :make!<CR>
+" run make in background
+nmap <leader>MM :Neomake!<CR>
+
 augroup uml
 	"Remove all uml autocommands
 	autocmd!
