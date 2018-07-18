@@ -536,3 +536,6 @@ augroup cpp
 	autocmd!
 	autocmd FileType c,cpp setlocal comments-=:// comments+=://!,:///,://
 augroup END
+
+" let gitgutter update more often than the default 4 seconds
+set updatetime=100
