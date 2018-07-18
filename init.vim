@@ -539,3 +539,7 @@ augroup END
 
 " let gitgutter update more often than the default 4 seconds
 set updatetime=100
+
+" commands for changing directory to current file's directory
+command CdFile cd %:p:h
+command LcdFile lcd %:p:h
