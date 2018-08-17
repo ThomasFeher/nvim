@@ -479,7 +479,8 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
-
+" the default of 50 is to small in some cases when completing filepaths
+let g:ycm_max_num_candidates = 200
 " highlight current column
 set cursorcolumn
 " highlight current line
