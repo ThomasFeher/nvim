@@ -358,6 +358,11 @@ nnoremap <leader><right> <C-W>l
 nnoremap <leader><up> <C-W>k
 nnoremap <leader><down> <C-W>j
 nnoremap <leader><home> 0<C-W>w
+" navigate out of terminal mode
+tnoremap <leader><left> <C-\><C-N><C-W>h
+tnoremap <leader><right> <C-\><C-N><C-W>l
+tnoremap <leader><up> <C-\><C-N><C-W>k
+tnoremap <leader><down> <C-\><C-N><C-W>j
 
 " tag navigation
 "jump to tag
