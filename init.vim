@@ -203,8 +203,7 @@ Plug 'b4winckler/vim-angry'
 " 	use insert mode in gdb window to use normal gdb commands
 Plug 'huawenyu/neogdb.vim'
 
-call plug#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 "
 " Brief help
 " :PlugList       - lists configured plugins
