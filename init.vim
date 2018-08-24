@@ -549,3 +549,7 @@ set updatetime=100
 " commands for changing directory to current file's directory
 command CdFile cd %:p:h
 command LcdFile lcd %:p:h
+
+" key bindings for CtrlP
+nnoremap <leader>pp :CtrlP<CR>
+nnoremap <leader>pb :CtrlPBuffer<CR>
