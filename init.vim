@@ -481,6 +481,13 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 " the default of 50 is to small in some cases when completing filepaths
 let g:ycm_max_num_candidates = 200
+" mappings for YouCompleteMe
+nnoremap <leader>go :YcmCompleter GoTo<CR>
+nnoremap <leader>doc :YcmCompleter GetDoc<CR>
+nnoremap <leader>type :YcmCompleter GetType<CR>
+nnoremap <leader>fix :YcmCompleter FixIt<CR>
+let g:ycm_key_detailed_diagnostics = '<leader>det'
+
 " highlight current column
 set cursorcolumn
 " highlight current line
