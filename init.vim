@@ -553,3 +553,6 @@ command LcdFile lcd %:p:h
 " key bindings for CtrlP
 nnoremap <leader>pp :CtrlP<CR>
 nnoremap <leader>pb :CtrlPBuffer<CR>
+
+" show result of substitution command while typing it
+set inccommand=split
