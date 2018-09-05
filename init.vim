@@ -196,12 +196,16 @@ Plug 'editorconfig/editorconfig-vim'
 " usage: aa (an argument, includes the separator) or
 "        ia (inner argument, excludes the separator))
 Plug 'b4winckler/vim-angry'
-" documentation seems out of sync but it seems helpfull for having the source
-" file side by side with the gdb window
-" usage:
-" 	:Nbgdb <binary_name>
-" 	use insert mode in gdb window to use normal gdb commands
-Plug 'huawenyu/neogdb.vim'
+" <leader> dd start debugging with gdb
+" <leader> dp start debugging python
+" F8 :GdbBreakpointToggle
+" F5 :GdbContinue
+" F10 :GdbNext
+" F11 :GdbStep
+" F12 :GdbFinish
+" <C-p> :GdbFrameUp
+" <C-n> :GdbFrameDown
+Plug 'sakhnik/nvim-gdb'
 
 call plug#end()
 "
