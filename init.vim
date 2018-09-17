@@ -509,7 +509,7 @@ set smartcase
 " set spell checking in commit messages
 autocmd FileType gitcommit setlocal spell
 
-" do not use tabs in markdown documents, because that would give incosistent
+" do not use tabs in markdown documents, because that would give inconsistent
 " indentation
 " example:
 " * something long that has to be broken into several lines and is already
