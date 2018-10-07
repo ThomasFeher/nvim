@@ -217,6 +217,9 @@ Plug 'sakhnik/nvim-gdb'
 " a%: an 'any block'
 " 1a%: an 'open-to-close block'
 Plug 'andymass/vim-matchup'
+" multi-pane file manager for Neovim with fuzzy matching
+" start: :Tc (mnemonic: total commander)
+Plug 'philip-karlsson/bolt.nvim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()
 "
