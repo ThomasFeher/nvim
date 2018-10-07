@@ -206,6 +206,17 @@ Plug 'b4winckler/vim-angry'
 " <C-p> :GdbFrameUp
 " <C-n> :GdbFrameDown
 Plug 'sakhnik/nvim-gdb'
+" modern matchit and matchparen replacement
+" %: as usual
+" g%: like % but backwards
+" [%: previous surrounding open word
+" ]%: next surrounding close word
+" objects:
+" i%: the inside of an 'any block'
+" 1i%: the inside of an 'open-to-close block'
+" a%: an 'any block'
+" 1a%: an 'open-to-close block'
+Plug 'andymass/vim-matchup'
 
 call plug#end()
 "
