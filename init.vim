@@ -590,3 +590,6 @@ nnoremap <leader>pb :CtrlPBuffer<CR>
 
 " show result of substitution command while typing it
 set inccommand=split
+
+" enable better indentation in case of soft wrapping
+set breakindent
