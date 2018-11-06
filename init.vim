@@ -419,7 +419,8 @@ if !has("gui_running")
 endif
 
 " call :colorscheme in neovim to change colorscheme on the fly
-colorscheme solarized8_dark
+set background=dark " set to "light" to switch to solarized light
+colorscheme solarized8
 
 " disable autotag, set to 0 or delete to activate autotag
 "let g:autotag_vim_version_sourced=1
