@@ -73,7 +73,7 @@ Plug 'PProvost/vim-ps1'
 Plug 'yazug/vim-taglist-plus'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating' " necessary for orgmode plugin
-Plug 'ThomasFeher/vimwiki'
+Plug 'vimwiki/vimwiki'
 " use vimwiki for markdown files
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
 			\ '.mkd': 'markdown',
