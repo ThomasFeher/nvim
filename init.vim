@@ -550,7 +550,7 @@ nmap <leader>bd :BobDev!
 nmap <leader>br :BobDev! -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto 
 nmap <leader>bb :make!<CR>
-nmap <leader>bp :BobProject 
+nmap <leader>bp :BobProject! 
 
 " mappings for building with make and Neomake, respectively
 " run make in foreground
