@@ -5,7 +5,7 @@ function! BuildYCM(info)
 	" - status: 'installed', 'updated', or 'unchanged'
 	" - force:  set on PlugInstall! or PlugUpdate!
 	if a:info.status != 'unchanged' || a:info.force
-		!./install.py --clang-completer
+		!./install.py --clang-completer --clangd-completer
 	endif
 endfunction
 
@@ -505,6 +505,7 @@ nnoremap <leader>doc :YcmCompleter GetDoc<CR>
 nnoremap <leader>type :YcmCompleter GetType<CR>
 nnoremap <leader>fix :YcmCompleter FixIt<CR>
 let g:ycm_key_detailed_diagnostics = '<leader>det'
+let g:ycm_clangd_args = ["-background-index"]
 
 " highlight current column
 set cursorcolumn
