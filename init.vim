@@ -537,6 +537,12 @@ augroup markdown
 	autocmd FileType markdown,vimwiki setlocal expandtab spell
 augroup END
 
+augroup cpp
+	autocmd!
+	autocmd FileType c,cpp setlocal comments-=:// comments+=://!,:///,:// spell
+	autocmd FileType cpp setlocal matchpairs+=<:>
+augroup END
+
 " vimwiki
 nnoremap <leader>w/ :VimwikiSearch 
 nnoremap <leader>/ :VimwikiSearch 
@@ -573,11 +579,6 @@ augroup uml
 	"Remove all uml autocommands
 	autocmd!
 	autocmd BufWritePost *.uml,*.puml silent !plantuml <afile>
-augroup END
-
-augroup cpp
-	autocmd!
-	autocmd FileType c,cpp setlocal comments-=:// comments+=://!,:///,://
 augroup END
 
 " let gitgutter update more often than the default 4 seconds
