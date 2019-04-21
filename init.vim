@@ -534,7 +534,7 @@ autocmd FileType gitcommit setlocal spell
 " messy
 augroup markdown
 	au!
-	autocmd FileType markdown,vimwiki setlocal expandtab
+	autocmd FileType markdown,vimwiki setlocal expandtab spell
 augroup END
 
 " vimwiki
