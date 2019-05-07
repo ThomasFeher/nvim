@@ -61,7 +61,7 @@ Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch' " Move, Chmod, etc.
 Plug 'neomake/neomake' " syntax checker
 " ignore C/C++, they are already linted by YCM (and configuration of paths is
-" hard with neomke
+" hard with neomake
 " copied from http://vi.stackexchange.com/a/4500/7823
 let ftIgnore = ['cpp','c']
 autocmd! BufWritePost,BufWinEnter * if index(ftIgnore,&ft) < 0 | Neomake
@@ -109,7 +109,7 @@ Plug 'thinca/vim-quickrun' " execute code in current buffer
 Plug 'chrisbra/csv.vim'
 Plug 'vim-pandoc/vim-pandoc'
 let g:pandoc#filetypes#pandoc_markdown = 0
-let g:pandoc#modules#disabled = ["folding","formatting"]
+let g:pandoc#modules#disabled = ['folding','formatting']
 Plug 'sjl/clam.vim' " execute console commands and put result in buffer
 Plug 'kien/ctrlp.vim' " fuzzy file finder
 " scan unlimited number of files
@@ -137,10 +137,10 @@ Plug 'will133/vim-dirdiff'
 Plug 'tpope/vim-projectionist' " :A open alternative file, :E<groupname> <filename>
 " default projections
 let g:projectionist_heuristics = {
-			\ "CMakeLists.txt": {
-			\   "*.cpp": {"type": "source", "alternate": "{}.h"},
-			\   "*.c": {"type": "source", "alternate": "{}.h"},
-			\   "*.h": {"type": "header", "alternate": "{}.cpp"}
+			\ 'CMakeLists.txt': {
+			\   '*.cpp': {'type': 'source', 'alternate': '{}.h'},
+			\   '*.c': {'type': 'source', 'alternate': '{}.h'},
+			\   '*.h': {'type': 'header', 'alternate': '{}.cpp'}
 			\ }
 			\ }
 nnoremap <leader>a :A<CR>
@@ -230,7 +230,7 @@ call plug#end()
 " :PlugClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 " When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
+if v:progname =~? 'evim'
 	finish
 endif
 
@@ -244,7 +244,7 @@ set backspace=indent,eol,start
 set shiftwidth=4
 set tabstop=4
 
-if has("vms")
+if has('vms')
 	set nobackup " do not keep a backup file, use versions instead
 else
 	set backup " keep a backup file
@@ -276,13 +276,13 @@ endif
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has('gui_running')
 	syntax enable
 	set hlsearch
 endif
 
 " Only do this part when compiled with support for autocommands.
-if has("autocmd")
+if has('autocmd')
 
 	" Enable file type detection.
 	" Use the default filetype settings, so that mail gets 'tw' set to 72,
@@ -318,15 +318,15 @@ endif " has("autocmd")
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
-if !exists(":DiffOrig")
+if !exists(':DiffOrig')
 	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 				\ | wincmd p | diffthis
 endif
 
 "colorscheme molokai
 
-let mapleader = "ß"
-let maplocalleader = "ß"
+let mapleader = 'ß'
+let maplocalleader = 'ß'
 " mapleader should not time out
 " set notimeout
 
@@ -360,9 +360,9 @@ let Tlist_WinWidth = 60
 if exists('+colorcolumn')
 	set colorcolumn=81
 	highlight link OverLength ColorColumn
-	exec 'match OverLength /\%'.&cc.'v.\+/'
+	exec 'match OverLength /\%'.&colorcolumn.'v.\+/'
 else
-	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>79v.\+', -1)
+	autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>79v.\+', -1)
 endif
 
 " Quickly edit/reload the vimrc file
@@ -413,7 +413,7 @@ set guioptions-=T
 
 " this is only necessary for 256 color terminals, because solarized will not
 " work there
-if !has("gui_running")
+if !has('gui_running')
 	" force 16 color support
 	let g:solarized_use16 = 1
 endif
@@ -466,10 +466,10 @@ let g:clang_close_preview=1
 "let g:clang_complete_copen = 1
 
 " LaTeX-Box
-let g:LatexBox_output_type = "pdf"
+let g:LatexBox_output_type = 'pdf'
 let g:LatexBox_quickfix = 2 " do not jump to quickfix window
 let g:LatexBox_Folding = 1
-let g:LatexBox_viewer = "okular"
+let g:LatexBox_viewer = 'okular'
 
 " set language to english independent of system language
 let g:fugitive_git_executable = 'LANG=en_US git'
@@ -481,12 +481,13 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let g:syntastic_always_populate_loc_list=1
 
 " settings for ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsListSnippets='<leader><tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 " with python 3 snippets are not shown in YouCompleteMe list
 let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsSnippetDirectories=['UltiSnips','/home/feher/.config/vic_snippets']
 
 " YouCompleteMe
 let g:ycm_complete_in_comments = 1
@@ -505,7 +506,7 @@ nnoremap <leader>doc :YcmCompleter GetDoc<CR>
 nnoremap <leader>type :YcmCompleter GetType<CR>
 nnoremap <leader>fix :YcmCompleter FixIt<CR>
 let g:ycm_key_detailed_diagnostics = '<leader>det'
-let g:ycm_clangd_args = ["-background-index"]
+let g:ycm_clangd_args = ['-background-index']
 
 " highlight current column
 set cursorcolumn
