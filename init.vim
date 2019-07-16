@@ -574,7 +574,7 @@ let g:neomake_info_sign = {'text': 'I', 'texthl': 'NeomakeInfoSign'}
 augroup uml
 	"Remove all uml autocommands
 	autocmd!
-	autocmd BufWritePost *.uml,*.puml silent !plantuml <afile>
+	autocmd BufWritePost *.uml,*.puml call jobstart('plantuml ' . expand('<afile>'))
 augroup END
 
 " let gitgutter update more often than the default 4 seconds
