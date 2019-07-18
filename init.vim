@@ -200,7 +200,9 @@ Plug 'b4winckler/vim-angry'
 " F12 :GdbFinish
 " <C-p> :GdbFrameUp
 " <C-n> :GdbFrameDown
-Plug 'sakhnik/nvim-gdb'
+" TODO have a look at https://github.com/mechatroner/minimal_gdb to persist
+" breakpoints
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 " modern matchit and matchparen replacement
 " %: as usual
 " g%: like % but backwards
