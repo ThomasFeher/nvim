@@ -73,6 +73,8 @@ Plug 'PProvost/vim-ps1'
 Plug 'yazug/vim-taglist-plus'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating' " necessary for orgmode plugin
+" use :MarkdownPreview to render markdown files in the browser
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'vimwiki/vimwiki'
 " use vimwiki for markdown files
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
