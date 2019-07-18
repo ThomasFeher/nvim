@@ -415,7 +415,9 @@ endif
 
 " call :colorscheme in neovim to change colorscheme on the fly
 set background=dark " set to "light" to switch to solarized light
-colorscheme solarized8
+" making it silent to allow automated installation of all plugins as described
+" here: https://github.com/junegunn/vim-plug/issues/225
+silent! colorscheme solarized8
 
 " disable autotag, set to 0 or delete to activate autotag
 "let g:autotag_vim_version_sourced=1
