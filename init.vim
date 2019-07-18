@@ -530,7 +530,7 @@ autocmd FileType gitcommit setlocal spell
 " messy
 augroup markdown
 	au!
-	autocmd FileType markdown,vimwiki setlocal expandtab spell
+	autocmd FileType markdown,vimwiki setlocal expandtab spell spelllang=en,de
 augroup END
 
 augroup cpp
