@@ -472,9 +472,6 @@ let g:LatexBox_quickfix = 2 " do not jump to quickfix window
 let g:LatexBox_Folding = 1
 let g:LatexBox_viewer = 'okular'
 
-" set language to english independent of system language
-let g:fugitive_git_executable = 'LANG=en_US git'
-
 " syntastic
 " make syntastic C++11 aware
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
