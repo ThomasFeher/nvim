@@ -498,6 +498,8 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 " the default of 50 is to small in some cases when completing filepaths
 let g:ycm_max_num_candidates = 200
+" why should we limit the number of warnings shown?
+let g:ycm_max_diagnostics_to_display = 0
 " mappings for YouCompleteMe
 nnoremap <leader>go :YcmCompleter GoTo<CR>
 nnoremap <leader>doc :YcmCompleter GetDoc<CR>
