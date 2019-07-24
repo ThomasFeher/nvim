@@ -186,7 +186,7 @@ let g:ctrlp_root_markers = ['recipes']
 Plug 'AndrewRadev/linediff.vim'
 " semantic highlighting of C/C++ files
 Plug 'arakashic/chromatica.nvim'
-let g:chromatica#libclang_path='/usr/lib64/libclang.so.4'
+let g:chromatica#libclang_path='/usr/lib64/libclang.so.8'
 Plug 'editorconfig/editorconfig-vim'
 " This plugin adds text object support for comma-separated arguments enclosed
 " by brackets.
