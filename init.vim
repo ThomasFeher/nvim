@@ -544,6 +544,9 @@ augroup cpp
 	autocmd FileType cpp setlocal matchpairs+=<:>
 augroup END
 
+" enable built-in doxygen syntax highlighting
+let g:load_doxygen_syntax=1
+
 " vimwiki
 nnoremap <leader>w/ :VimwikiSearch 
 nnoremap <leader>/ :VimwikiSearch 
