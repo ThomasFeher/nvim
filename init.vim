@@ -52,6 +52,17 @@ Plug 'tpope/vim-fugitive'
 " q to close
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
+" <Leader>gm to open window with last commit changing the content under the
+" cursor.
+" Again <Leader>gm to switch into the window and have the following additional
+" bindings:
+" q 	Close the popup window
+" o 	older. Back to older commit at the line
+" O 	Opposite to o. Forward to newer commit at the line
+" d 	Toggle diff hunks only related to current file in the commit
+" D 	Toggle all diff hunks in the commit
+" ? 	Show mappings help
+Plug 'rhysd/git-messenger.vim'
 
 " others
 Plug 'ervandew/supertab'
