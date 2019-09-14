@@ -32,7 +32,7 @@ let g:ycm_semantic_triggers.tex = [
 			\ ]
 
 " autocompletion
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 " :YcmGenerateConfig or
 " :YcmGenerateConfig! for overwriting existing config
 " for "color coded" use :CCGenerateConfig
