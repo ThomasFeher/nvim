@@ -230,6 +230,9 @@ Plug 'andymass/vim-matchup'
 " multi-pane file manager for Neovim with fuzzy matching
 " start: :Tc (mnemonic: total commander)
 Plug 'philip-karlsson/bolt.nvim', { 'do': ':UpdateRemotePlugins' }
+" Zeal for vim
+" <leader>z on a word to search it in zeal (alternative :Zeavim or :ZeamvimV)
+Plug 'KabbAmine/zeavim.vim'
 
 call plug#end()
 "
