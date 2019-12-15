@@ -576,6 +576,7 @@ nmap <leader>br :BobDev! -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto 
 nmap <leader>bb :make!<CR>
 nmap <leader>bp :BobProject! 
+let g:vim_bob_graph_type = "dot"
 
 " mappings for building with make and Neomake, respectively
 " run make in foreground
