@@ -233,6 +233,8 @@ Plug 'philip-karlsson/bolt.nvim', { 'do': ':UpdateRemotePlugins' }
 " Zeal for vim
 " <leader>z on a word to search it in zeal (alternative :Zeavim or :ZeamvimV)
 Plug 'KabbAmine/zeavim.vim'
+" automatically highlighting other uses of the current word under the cursor
+Plug 'RRethy/vim-illuminate'
 
 call plug#end()
 "
