@@ -235,6 +235,9 @@ Plug 'philip-karlsson/bolt.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'KabbAmine/zeavim.vim'
 " automatically highlighting other uses of the current word under the cursor
 Plug 'RRethy/vim-illuminate'
+" Menu bar using popup windows
+" hit space twice to open menu
+Plug 'skywind3000/vim-quickui'
 
 call plug#end()
 "
@@ -618,3 +621,12 @@ set inccommand=split
 
 " enable better indentation in case of soft wrapping
 set breakindent
+
+" quickui settings
+let g:quickui_show_tip = 1
+noremap <space><space> :call quickui#menu#open()<cr>
+call quickui#menu#install("&Option", [
+			\ ['Set &Spell %{&spell? "Off":"On"}', 'set spell!'],
+			\ ['Set &Cursor Line %{&cursorline? "Off":"On"}', 'set cursorline!'],
+			\ ['Set &Paste %{&paste? "Off":"On"}', 'set paste!'],
+			\ ])
