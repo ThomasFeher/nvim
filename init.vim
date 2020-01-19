@@ -432,8 +432,14 @@ set guioptions-=T
 " this is only necessary for 256 color terminals, because solarized will not
 " work there
 if !has('gui_running')
-	" force 16 color support
-	let g:solarized_use16 = 1
+	if $TERM =~ '^\(rxvt-.*\)\|\(.*16color\)$'
+		" force 16 color support
+		let g:solarized_use16 = 1
+		set notermguicolors
+	else
+		let g:solarized_use16 = 0
+		set termguicolors
+	end
 endif
 
 " call :colorscheme in neovim to change colorscheme on the fly
