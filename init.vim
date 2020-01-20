@@ -636,3 +636,6 @@ call quickui#menu#install("&Option", [
 			\ ['Set &Cursor Line %{&cursorline? "Off":"On"}', 'set cursorline!'],
 			\ ['Set &Paste %{&paste? "Off":"On"}', 'set paste!'],
 			\ ])
+
+" make popup-menu semi-transparent
+set pumblend=10
