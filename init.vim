@@ -432,7 +432,7 @@ set guioptions-=T
 " this is only necessary for 256 color terminals, because solarized will not
 " work there
 if !has('gui_running')
-	if $TERM =~ '^\(rxvt-.*\)\|\(.*16color\)$'
+	if $TERM =~? '^\(rxvt-.*\)\|\(.*16color\)$'
 		" force 16 color support
 		let g:solarized_use16 = 1
 		set notermguicolors
