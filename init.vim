@@ -639,3 +639,7 @@ call quickui#menu#install("&Option", [
 
 " make popup-menu semi-transparent
 set pumblend=10
+
+" to prevent losing connection between browser tab and markdown window in
+" neovim
+let g:mkdp_auto_close = 0
