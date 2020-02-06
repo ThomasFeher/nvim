@@ -81,7 +81,8 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
 Plug 'PProvost/vim-ps1'
-Plug 'yazug/vim-taglist-plus'
+" :Vista to open tag window
+Plug 'liuchengxu/vista.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating' " necessary for orgmode plugin
 " use :MarkdownPreview to render markdown files in the browser
