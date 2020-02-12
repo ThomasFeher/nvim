@@ -82,7 +82,18 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
 Plug 'PProvost/vim-ps1'
 " :Vista to open tag window
+" <CR>  - jump to the tag under the cursor.
+" p     - preview the tag under the context via the floating window if it's avaliable.
+" s     - sort the symbol alphabetically or the location they are declared.
+" q     - close the vista window.
 Plug 'liuchengxu/vista.vim'
+let g:vista_echo_cursor_strategy = 'floating_win'
+let g:vista_executive_for = {
+    \ 'vimwiki': 'markdown',
+    \ 'pandoc': 'markdown',
+    \ 'markdown': 'toc',
+    \ }
+let g:vista_sidebar_position = 'vertical topleft'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating' " necessary for orgmode plugin
 " use :MarkdownPreview to render markdown files in the browser
@@ -357,7 +368,7 @@ nnoremap ö :w<CR>
 vnoremap // y/<C-R>"<CR>
 
 " toggle taglist
-nnoremap <leader>tt :TlistToggle<CR>
+nnoremap <leader>tt :Vista!!<CR>
 let Tlist_GainFocus_On_ToggleOpen = 0 " Jump to taglist window on open.
 let Tlist_Close_On_Select = 0 " Close the taglist window when a file or tag is selected.
 "taglist automatic folding of unvisible files
