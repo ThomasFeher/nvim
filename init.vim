@@ -94,6 +94,10 @@ let g:vista_executive_for = {
     \ 'markdown': 'toc',
     \ }
 let g:vista_sidebar_position = 'vertical topleft'
+" show context of current line
+" use `:Context…` commands
+Plug 'wellle/context.vim'
+let g:context_filetype_blacklist = ['vista']
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating' " necessary for orgmode plugin
 " use :MarkdownPreview to render markdown files in the browser
