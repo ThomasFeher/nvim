@@ -77,7 +77,8 @@ Plug 'neomake/neomake' " syntax checker
 let ftIgnore = ['cpp','c']
 autocmd! BufWritePost,BufWinEnter * if index(ftIgnore,&ft) < 0 | Neomake
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'bronson/vim-trailing-whitespace'
+"Plug 'bronson/vim-trailing-whitespace'
+Plug 'rytkmt/vim-trailing-whitespace' " this fork handles GV windows correctly
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
 Plug 'PProvost/vim-ps1'
