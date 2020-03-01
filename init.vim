@@ -658,7 +658,7 @@ call quickui#menu#install("&Option", [
 set pumblend=10
 
 " to prevent losing connection between browser tab and markdown window in
-" neovim
+" neovim (see https://github.com/iamcco/markdown-preview.nvim/issues/107)
 let g:mkdp_auto_close = 0
 
 " highlight the yanked part
