@@ -110,6 +110,13 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
 			\ '.wiki': 'media'}
 " make vimwikis default syntax markdown
 let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+" Zettelkasten for Vimwiki
+" :ZettelNew create new zettel
+" z in visual mode creates new zettel with highlighted text as title
+" T in normal mode: yank the current note filename and title as a Vimwiki link
+Plug 'michal-h21/vim-zettel'
+let g:zettel_format = '%Y%m%d%H%M'
+let g:zettel_fzf_command = 'ag'
 " command: ga<movement><align-char>
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
