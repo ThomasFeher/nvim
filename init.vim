@@ -556,6 +556,16 @@ nnoremap <leader>type :YcmCompleter GetType<CR>
 nnoremap <leader>fix :YcmCompleter FixIt<CR>
 let g:ycm_key_detailed_diagnostics = '<leader>det'
 let g:ycm_clangd_args = ['-background-index']
+let g:ycm_filetype_blacklist = {
+	\ 'tagbar': 1,
+	\ 'notes': 1,
+	\ 'netrw': 1,
+	\ 'unite': 1,
+	\ 'pandoc': 1,
+	\ 'infolog': 1,
+	\ 'leaderf': 1,
+	\ 'mail': 1
+	\}
 
 " highlight current column
 set cursorcolumn
