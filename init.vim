@@ -515,18 +515,6 @@ let g:clang_close_preview=1
 "let g:clang_complete_auto = 1
 "let g:clang_complete_copen = 1
 
-" LaTeX-Box
-let g:LatexBox_output_type = 'pdf'
-let g:LatexBox_quickfix = 2 " do not jump to quickfix window
-let g:LatexBox_Folding = 1
-let g:LatexBox_viewer = 'okular'
-
-" syntastic
-" make syntastic C++11 aware
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-" use location list (jump to errors with :lne and :lp)
-let g:syntastic_always_populate_loc_list=1
-
 " settings for ultisnips
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsListSnippets='<leader><tab>'
