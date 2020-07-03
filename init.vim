@@ -113,6 +113,7 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
 			\ '.wiki': 'media'}
 " make vimwikis default syntax markdown
 let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_markdown_link_ext = 1
 " Zettelkasten for Vimwiki
 " :ZettelNew create new zettel
 " z in visual mode creates new zettel with highlighted text as title
