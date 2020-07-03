@@ -266,6 +266,12 @@ Plug 'RRethy/vim-illuminate'
 " Menu bar using popup windows
 " hit space twice to open menu
 Plug 'skywind3000/vim-quickui'
+" Entering a text window in Firefox will immediately start an instance of
+" Neovim in an overlay window.
+" :w - put content of buffer into the text window
+" :q - close the Neovim overlay
+" <C-e> - open Neovim overlay in current text window manually
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Whenever cursor jumps some distance or moves between windows, it will flash
 " so you can see where it is.
 Plug 'danilamihailov/beacon.nvim'
