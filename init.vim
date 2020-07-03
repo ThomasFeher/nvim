@@ -375,9 +375,6 @@ endif
 
 "colorscheme molokai
 
-" mapleader should not time out
-" set notimeout
-
 inoremap üü <Esc>
 nnoremap ö :w<CR>
 
