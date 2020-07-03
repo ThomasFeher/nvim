@@ -1,3 +1,6 @@
+let mapleader = 'ß'
+let maplocalleader = 'ß'
+
 call plug#begin('~/.config/nvim/bundle')
 function! BuildYCM(info)
 	" info is a dictionary with 3 fields
@@ -372,8 +375,6 @@ endif
 
 "colorscheme molokai
 
-let mapleader = 'ß'
-let maplocalleader = 'ß'
 " mapleader should not time out
 " set notimeout
 
