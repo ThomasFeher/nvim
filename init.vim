@@ -262,7 +262,12 @@ Plug 'RRethy/vim-illuminate'
 " Menu bar using popup windows
 " hit space twice to open menu
 Plug 'skywind3000/vim-quickui'
-
+" Whenever cursor jumps some distance or moves between windows, it will flash
+" so you can see where it is.
+Plug 'danilamihailov/beacon.nvim'
+" There is a bug when closing buffers created by Fugitive's :Gdiff, therefore
+" ignoring those buffers for now.
+let g:beacon_ignore_buffers = ["[Git]"]
 call plug#end()
 "
 " Brief help
