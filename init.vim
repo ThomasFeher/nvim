@@ -530,8 +530,6 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsListSnippets='<leader><tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-" with python 3 snippets are not shown in YouCompleteMe list
-let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsSnippetDirectories=['UltiSnips','/home/feher/.config/vic_snippets']
 
 " YouCompleteMe
