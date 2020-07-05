@@ -576,8 +576,6 @@ set relativenumber
 set ignorecase
 set smartcase
 
-" show wrapped lines
-
 " set spell checking in commit messages
 autocmd FileType gitcommit setlocal spell
 
