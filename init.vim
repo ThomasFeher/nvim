@@ -45,15 +45,10 @@ Plug 'honza/vim-snippets'
 
 " git integration
 Plug 'tpope/vim-fugitive'
-" gv - a possible replacement for gitv (unmaintained)
-" o or <cr> on a commit to display the content of it
-" o or <cr> on commits to display the diff in the range
-" O opens a new tab instead
-" gb for :Gbrowse
-" ]] and [[ to move between commits
-" . to start command-line with :Git [CURSOR] SHA à la fugitive
-" q to close
-Plug 'junegunn/gv.vim'
+" Git tree viewer
+" g? in tree view to see mappings
+nmap <leader>gv :Flog -all<cr>
+Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 " <Leader>gm to open window with last commit changing the content under the
 " cursor.
