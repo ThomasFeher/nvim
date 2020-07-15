@@ -109,6 +109,8 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
 " make vimwikis default syntax markdown
 let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_markdown_link_ext = 1
+" remove mapping that shadows vim-vinegars mapping to enter file browsing
+nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 " Zettelkasten for Vimwiki
 " :ZettelNew create new zettel
 " z in visual mode creates new zettel with highlighted text as title
