@@ -710,3 +710,6 @@ if has('nvim-0.4')  " {{{ TextYankPost highlight
     autocmd TextYankPost * call s:hl_yank(v:event.operator, v:event.regtype, v:event.inclusive)
   augroup END
 endif  " }}}
+
+" store the complete hash of the current git commit in register `+`
+command! Hash let @+ = execute("Git rev-parse HEAD")
