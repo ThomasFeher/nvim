@@ -598,8 +598,13 @@ augroup END
 let g:load_doxygen_syntax=1
 
 " vimwiki
-nnoremap <leader>w/ :VimwikiSearch 
-nnoremap <leader>/ :VimwikiSearch 
+augroup vimwiki
+	autocmd!
+	autocmd FileType vimwiki set syntax=markdown
+	nnoremap <buffer> <leader>w/ :VimwikiSearch 
+	command! -nargs=1 VimwikiAg :execute "Ag <args> ".fnameescape(vimwiki#vars#get_wikilocal('path'))
+	nnoremap <buffer> <leader>/ :VimwikiAg 
+augroup END
 
 " modify autocompletion behaviour
 set wildmode=longest:full
