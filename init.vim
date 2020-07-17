@@ -544,6 +544,8 @@ nnoremap <leader>go :YcmCompleter GoTo<CR>
 nnoremap <leader>doc :YcmCompleter GetDoc<CR>
 nnoremap <leader>type :YcmCompleter GetType<CR>
 nnoremap <leader>fix :YcmCompleter FixIt<CR>
+" fill in the new name at the end:
+nnoremap <leader>ref :YcmCompleter RefactorRename 
 let g:ycm_key_detailed_diagnostics = '<leader>det'
 let g:ycm_clangd_args = ['-background-index']
 let g:ycm_filetype_blacklist = {
