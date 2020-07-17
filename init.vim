@@ -503,9 +503,6 @@ let g:airline_mode_map = {
 set diffopt=filler,vertical
 nnoremap <leader>gs :Gstatus<CR>
 
-" gv
-nmap <leader>gv :GV --all<cr>
-
 " clang-format
 map <leader>f :pyfile /usr/share/clang/clang-format.py<cr>
 
