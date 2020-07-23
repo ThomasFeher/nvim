@@ -545,7 +545,7 @@ nnoremap <leader>doc :YcmCompleter GetDoc<CR>
 nnoremap <leader>type :YcmCompleter GetType<CR>
 nnoremap <leader>fix :YcmCompleter FixIt<CR>
 " fill in the new name at the end:
-nnoremap <leader>ref :YcmCompleter RefactorRename 
+nnoremap <leader>ref :YcmCompleter RefactorRename<Space>
 let g:ycm_key_detailed_diagnostics = '<leader>det'
 let g:ycm_clangd_args = ['-background-index']
 let g:ycm_filetype_blacklist = {
@@ -603,9 +603,9 @@ let g:load_doxygen_syntax=1
 augroup vimwiki
 	autocmd!
 	autocmd FileType vimwiki set syntax=markdown
-	nnoremap <buffer> <leader>w/ :VimwikiSearch 
+	nnoremap <buffer> <leader>w/ :VimwikiSearch<Space>
 	command! -nargs=1 VimwikiAg :execute "Ag <args> ".fnameescape(vimwiki#vars#get_wikilocal('path'))
-	nnoremap <buffer> <leader>/ :VimwikiAg 
+	nnoremap <buffer> <leader>/ :VimwikiAg<Space>
 augroup END
 
 " modify autocompletion behaviour
@@ -614,11 +614,11 @@ set wildmode=longest:full
 " mappings for vim-bob
 nmap <leader>bC :BobClean<CR>
 nmap <leader>bi :BobInit<CR>
-nmap <leader>bd :BobDev! 
+nmap <leader>bd :BobDev!<Space>
 nmap <leader>br :BobDev! -DBUILD_TYPE=Release<s-left><left>
-nmap <leader>bg :BobGoto 
+nmap <leader>bg :BobGoto<Space>
 nmap <leader>bb :make!<CR>
-nmap <leader>bp :BobProject! 
+nmap <leader>bp :BobProject!<Space>
 let g:bob_graph_type = "dot"
 
 " mappings for building with make and Neomake, respectively
