@@ -182,11 +182,6 @@ let g:projectionist_heuristics = {
 			\ }
 			\ }
 nnoremap <leader>a :A<CR>
-" search in source code files
-" faster than (vim)grep and ack, needs `the_silver_searcher` package installed
-" use `:Ag <search-term>`
-" `:h Ag`
-Plug 'rking/ag.vim'
 let g:ag_working_path_mode="r" " start search from project root directory
 " use `:Autoformat` to format according to ".clang-format" file in project dir
 Plug 'Chiel92/vim-autoformat'
@@ -275,6 +270,48 @@ Plug 'danilamihailov/beacon.nvim'
 " There is a bug when closing buffers created by Fugitive's :Gdiff, therefore
 " ignoring those buffers for now.
 let g:beacon_ignore_buffers = ["[Git]"]
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" FZF for vim
+" :Files
+" :GitFiles :GFiles
+" :Buffers
+" :Lines
+" :BLines
+" :Colors
+" :Ag
+" :Rg
+" :Tags
+" :BTags
+" :Snippets
+" :Commands
+" :Marks
+" :Helptags
+" :Windows
+" :Commits
+" :BCommits
+" :Maps
+" :Filetypes
+" :History
+" install `bat` to get syntax highlighting in preview windows
+Plug 'junegunn/fzf.vim'
+" use floating window for FZF
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
+" AgIn: Start ag in the specified directory
+" Source: https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
+"
+" e.g.
+"   :AgIn .. foo
+function! s:ag_in(bang, ...)
+  if !isdirectory(a:1)
+    throw 'not a valid directory: ' .. a:1
+  endif
+  " Press `?' to enable preview window.
+  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}), a:bang)
+  " If you don't want preview option, use this
+  " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+endfunction
+command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
+nmap <Leader>fzf :FZF '--preview'
 call plug#end()
 "
 " Brief help
@@ -504,7 +541,7 @@ set diffopt=filler,vertical
 nnoremap <leader>gs :Gstatus<CR>
 
 " clang-format
-map <leader>f :pyfile /usr/share/clang/clang-format.py<cr>
+map <leader>cf :pyfile /usr/share/clang/clang-format.py<cr>
 
 " quit ConqueTerm when program running in ConqueTerm quits
 let g:ConqueTerm_CloseOnEnd = 1
@@ -603,9 +640,6 @@ let g:load_doxygen_syntax=1
 augroup vimwiki
 	autocmd!
 	autocmd FileType vimwiki set syntax=markdown
-	nnoremap <buffer> <leader>w/ :VimwikiSearch<Space>
-	command! -nargs=1 VimwikiAg :execute "Ag <args> ".fnameescape(vimwiki#vars#get_wikilocal('path'))
-	nnoremap <buffer> <leader>/ :VimwikiAg<Space>
 augroup END
 
 " modify autocompletion behaviour
