@@ -1,5 +1,6 @@
 let mapleader = 'ß'
 let maplocalleader = 'ß'
+set scrolloff=5
 
 call plug#begin('~/.config/nvim/bundle')
 function! BuildYCM(info)
