@@ -18,6 +18,7 @@ Plug 'lifepillar/vim-solarized8'
 
 " LaTex
 Plug 'lervag/vimtex' " LaTeX
+let g:tex_flavor = 'latex'
 let g:vimtex_fold_enabled = 0 " actvated folding slowes neovim down significantly
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
