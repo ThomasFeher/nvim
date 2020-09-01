@@ -761,4 +761,18 @@ if exists('g:started_by_firenvim')
 	autocmd BufEnter *redmine*.txt set filetype=textile | set textwidth=0
 	autocmd BufEnter *ipynb_er-DIV*.txt set filetype=octave
 	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=vimwiki
+	" jupyter notebooks (it doesn't seem to be possible to get the kernel
+	" name, unfortunately)
+	autocmd BufEnter *ipynb_er-DIV*.txt set filetype=python
+	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=markdown
+    " for chat apps. Enter sends the message and deletes the buffer.
+    " Shift enter is normal return. Insert mode by default.
+	" Need to unmap vimwiki mappings beforehand.
+    autocmd BufEnter *slack.com*,*gitter.com*,*element.io*
+				\ execute "startinsert" |
+				\ execute "iunmap <buffer> <CR>" |
+				\ execute "inoremap <CR> <Esc>:w<CR>:call firenvim#press_keys(\"<LT>CR>\")<CR>ggdGa" |
+				\ execute "iunmap <buffer> <s-CR>" |
+				\ execute "inoremap <s-CR> <CR>" |
+				\ set filetype=text
 endif
