@@ -751,3 +751,14 @@ endif  " }}}
 
 " store the complete hash of the current git commit in register `+`
 command! Hash let @+ = execute("Git rev-parse HEAD")
+
+if exists('g:started_by_firenvim')
+	" generally use markdown syntax (from vimwiki)
+	autocmd BufEnter *.txt set filetype=vimwiki
+	" specialize here for certain pages (URL is always first part of file
+	" name)
+	"autocmd BufEnter github.com_*.txt set filetype=markdown
+	autocmd BufEnter *redmine*.txt set filetype=textile | set textwidth=0
+	autocmd BufEnter *ipynb_er-DIV*.txt set filetype=octave
+	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=vimwiki
+endif
