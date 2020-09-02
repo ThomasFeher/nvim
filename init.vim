@@ -184,7 +184,6 @@ let g:projectionist_heuristics = {
 			\ }
 			\ }
 nnoremap <leader>a :A<CR>
-let g:ag_working_path_mode="r" " start search from project root directory
 " use `:Autoformat` to format according to ".clang-format" file in project dir
 Plug 'Chiel92/vim-autoformat'
 " start with <leader>rf, run current line <leader>ll, run current selection
