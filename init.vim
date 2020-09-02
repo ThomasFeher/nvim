@@ -313,6 +313,7 @@ function! s:ag_in(bang, ...)
 endfunction
 command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 nmap <Leader>fzf :FZF '--preview'
+Plug 'vim-scripts/TWiki-Syntax'
 call plug#end()
 "
 " Brief help
@@ -758,6 +759,8 @@ if exists('g:started_by_firenvim')
 	" name)
 	"autocmd BufEnter github.com_*.txt set filetype=markdown
 	autocmd BufEnter *redmine*.txt set filetype=textile | set textwidth=0
+	" using Twiki syntax file and configuration suggested by https://twiki.org/cgi-bin/view/Codev/VimEditor
+	autocmd BufEnter twiki*.txt set filetype=twiki | set expandtab | set softtabstop=3 | set tabstop=8 | set shiftwidth=3 | set textwidth=0
 	autocmd BufEnter *ipynb_er-DIV*.txt set filetype=octave
 	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=vimwiki
 	" jupyter notebooks (it doesn't seem to be possible to get the kernel
