@@ -314,6 +314,7 @@ endfunction
 command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 nmap <Leader>fzf :FZF '--preview'
 Plug 'vim-scripts/TWiki-Syntax'
+Plug 'stefandtw/quickfix-reflector.vim'
 call plug#end()
 "
 " Brief help
