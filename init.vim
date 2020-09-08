@@ -778,4 +778,5 @@ if exists('g:started_by_firenvim')
 				\ execute "iunmap <buffer> <s-CR>" |
 				\ execute "inoremap <s-CR> <CR>" |
 				\ set filetype=text
+	autocmd BufEnter godbolt.org_*.txt set filetype=cpp
 endif
