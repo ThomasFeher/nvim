@@ -762,12 +762,11 @@ if exists('g:started_by_firenvim')
 	autocmd BufEnter *redmine*.txt set filetype=textile | set textwidth=0
 	" using Twiki syntax file and configuration suggested by https://twiki.org/cgi-bin/view/Codev/VimEditor
 	autocmd BufEnter twiki*.txt set filetype=twiki | set expandtab | set softtabstop=3 | set tabstop=8 | set shiftwidth=3 | set textwidth=0
-	autocmd BufEnter *ipynb_er-DIV*.txt set filetype=octave
-	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=vimwiki
 	" jupyter notebooks (it doesn't seem to be possible to get the kernel
 	" name, unfortunately)
-	autocmd BufEnter *ipynb_er-DIV*.txt set filetype=python
-	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=markdown
+	"autocmd BufEnter *ipynb_er-DIV*.txt set filetype=python
+	autocmd BufEnter *ipynb_er-DIV*.txt set filetype=octave
+	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=vimwiki
     " for chat apps. Enter sends the message and deletes the buffer.
     " Shift enter is normal return. Insert mode by default.
 	" Need to unmap vimwiki mappings beforehand.
