@@ -315,7 +315,32 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 nmap <Leader>fzf :FZF '--preview'
 Plug 'vim-scripts/TWiki-Syntax'
 Plug 'stefandtw/quickfix-reflector.vim'
+if has("nvim-0.5.0")
+	" Statistics about your keystrokes
+	Plug 'ThePrimeagen/vim-apm'
+	" language parser for better syntax highlighting, refactoring, navigation,
+	" text objects, folding and more
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSInstall all'}
+	" Configuration for most commonly used language servers
+	Plug 'neovim/nvim-lspconfig'
+end
 call plug#end()
+
+if has("nvim-0.5.0")
+	"nvim-treesitter configuration
+	if exists('g:loaded_nvim_treesitter')
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {},  -- list of language that will be disabled
+  },
+}
+EOF
+	end
+end
+
 "
 " Brief help
 " :PlugList       - lists configured plugins
