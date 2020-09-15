@@ -304,7 +304,7 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comm
 "   :AgIn .. foo
 function! s:ag_in(bang, ...)
   if !isdirectory(a:1)
-    throw 'not a valid directory: ' .. a:1
+    throw 'not a valid directory: ' . a:1
   endif
   " Press `?' to enable preview window.
   call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}), a:bang)
