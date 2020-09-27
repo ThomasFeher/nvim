@@ -804,3 +804,7 @@ if exists('g:started_by_firenvim')
 				\ set filetype=text
 	autocmd BufEnter godbolt.org_*.txt set filetype=cpp
 endif
+
+if exists('&spelloptions')
+    set spelloptions=camel
+endif
