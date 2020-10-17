@@ -328,7 +328,6 @@ call plug#end()
 
 if has("nvim-0.5.0")
 	"nvim-treesitter configuration
-	if exists('g:loaded_nvim_treesitter')
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
@@ -338,7 +337,6 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-	end
 end
 
 "
