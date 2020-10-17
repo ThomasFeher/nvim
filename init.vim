@@ -321,6 +321,8 @@ if has("nvim-0.5.0")
 	" language parser for better syntax highlighting, refactoring, navigation,
 	" text objects, folding and more
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSInstall all'}
+	Plug 'nvim-treesitter/nvim-treesitter-refactor'
+	Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 	" Configuration for most commonly used language servers
 	Plug 'neovim/nvim-lspconfig'
 end
@@ -332,8 +334,83 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
   highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = {},  -- list of language that will be disabled
+	enable = true,              -- false will disable the whole extension
+	disable = {},  -- list of language that will be disabled
+  },
+  refactor = {
+    highlight_definitions = { enable = true },
+	highlight_current_scope = { enable = true },
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "grr",
+      },
+    },
+    navigation = {
+      enable = true,
+      keymaps = {
+        goto_definition = "gnd",
+        list_definitions = "gnD",
+        list_definitions_toc = "gO",
+        goto_next_usage = "<a-*>",
+        goto_previous_usage = "<a-#>",
+      },
+    },
+  },
+  textobjects = {
+    -- possible text objects:
+    -- @block.inner
+    -- @block.outer
+    -- @call.inner
+    -- @call.outer
+    -- @class.inner
+    -- @class.outer
+    -- @comment.outer
+    -- @conditional.inner
+    -- @conditional.outer
+    -- @function.inner
+    -- @function.outer
+    -- @loop.inner
+    -- @loop.outer
+    -- @parameter.inner
+    -- @statement.outer
+	select = {
+	  enable = true,
+	  keymaps = {
+		["af"] = "@function.outer",
+		["if"] = "@function.inner",
+		["ac"] = "@class.outer",
+		["ic"] = "@class.inner",
+		},
+	  },
+	move = {
+	  enable = true,
+	  goto_next_start = {
+		["]m"] = "@function.outer",
+		["]]"] = "@class.outer",
+	  },
+	  goto_next_end = {
+		["]M"] = "@function.outer",
+		["]["] = "@class.outer",
+	  },
+	  goto_previous_start = {
+		["[m"] = "@function.outer",
+		["[["] = "@class.outer",
+	  },
+	  goto_previous_end = {
+		["[M"] = "@function.outer",
+		["[]"] = "@class.outer",
+	  },
+	},
+	swap = {
+	  enable = true,
+	  swap_next = {
+		["<leader>a"] = "@parameter.inner",
+	  },
+	  swap_previous = {
+		["<leader>A"] = "@parameter.inner",
+	  },
+	},
   },
 }
 EOF
