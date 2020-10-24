@@ -742,12 +742,6 @@ augroup END
 " enable built-in doxygen syntax highlighting
 let g:load_doxygen_syntax=1
 
-" vimwiki
-augroup vimwiki
-	autocmd!
-	autocmd FileType vimwiki set syntax=markdown
-augroup END
-
 " modify autocompletion behaviour
 set wildmode=longest:full
 
