@@ -873,7 +873,8 @@ if exists('g:started_by_firenvim')
 				\ execute "inoremap <CR> <Esc>:w<CR>:call firenvim#press_keys(\"<LT>CR>\")<CR>ggdGa" |
 				\ execute "iunmap <buffer> <s-CR>" |
 				\ execute "inoremap <s-CR> <CR>" |
-				\ set filetype=text
+				\ set filetype=text |
+				\ set textwidth=0
 	autocmd BufEnter godbolt.org_*.txt set filetype=cpp
 endif
 
