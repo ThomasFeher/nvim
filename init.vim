@@ -881,3 +881,5 @@ endif
 if exists('&spelloptions')
     set spelloptions=camel
 endif
+
+set signcolumn=auto:9
