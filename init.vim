@@ -858,7 +858,7 @@ if exists('g:started_by_firenvim')
     " for chat apps. Enter sends the message and deletes the buffer.
     " Shift enter is normal return. Insert mode by default.
 	" Need to unmap vimwiki mappings beforehand.
-    autocmd BufEnter *slack.com*,*gitter.com*,*element.io*
+    autocmd BufEnter *slack.com*,*gitter.im*,*element.io*
 				\ execute "startinsert" |
 				\ execute "iunmap <buffer> <CR>" |
 				\ execute "inoremap <CR> <Esc>:w<CR>:call firenvim#press_keys(\"<LT>CR>\")<CR>ggdGa" |
