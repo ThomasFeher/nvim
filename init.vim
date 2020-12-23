@@ -311,7 +311,7 @@ if has("nvim-0.5.0")
 	Plug 'ThePrimeagen/vim-apm'
 	" language parser for better syntax highlighting, refactoring, navigation,
 	" text objects, folding and more
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSInstall all'}
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'nvim-treesitter/nvim-treesitter-refactor'
 	Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 	" Configuration for most commonly used language servers
