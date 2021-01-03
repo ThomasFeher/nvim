@@ -316,6 +316,9 @@ if has("nvim-0.5.0")
 	Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 	" Configuration for most commonly used language servers
 	Plug 'neovim/nvim-lspconfig'
+	Plug 'nvim-lua/popup.nvim'
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
 end
 " Floating terminal integration
 " see `Floaterm…` commands
