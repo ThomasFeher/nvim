@@ -317,6 +317,13 @@ if has("nvim-0.5.0")
 	" Configuration for most commonly used language servers
 	Plug 'neovim/nvim-lspconfig'
 end
+" Floating terminal integration
+" see `Floaterm…` commands
+" FloatermSend: send marked text to terminal
+" FloatermToggle: toggle terminal window (creates new one in case none is
+"                 existing, keeps terminal buffer once it was opened)
+Plug 'voldikss/vim-floaterm'
+let g:floaterm_keymap_toggle = '<Leader>ft'
 call plug#end()
 
 if has("nvim-0.5.0")
