@@ -199,7 +199,6 @@ Plug 'aklt/plantuml-syntax'
 Plug 'JuliaEditorSupport/julia-vim'
 
 Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
-let g:bob_config_path = "configurations"
 " let CtrlP's root directory for searching be the recipe repository
 let g:ctrlp_root_markers = ['recipes']
 " diff two blocks in the same file
@@ -754,7 +753,9 @@ nmap <leader>br :BobDev! -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto<Space>
 nmap <leader>bb :make!<CR>
 nmap <leader>bp :BobProject!<Space>
-let g:bob_graph_type = "dot"
+let g:bob_config_path = 'configurations'
+let g:bob_graph_type = 'dot'
+let g:bob_auto_complete_items = ['-DBUILD_TYPE=Release', '-DBUILD_TYPE=Debug', '-DBUILD_SCRIPT_AS_SYMLINK=TRUE']
 
 " mappings for building with make and Neomake, respectively
 " run make in foreground
