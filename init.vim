@@ -794,11 +794,27 @@ set breakindent
 
 " quickui settings
 let g:quickui_show_tip = 1
+let g:quickui_color_scheme = 'system'
 noremap <space><space> :call quickui#menu#open()<cr>
+call quickui#menu#reset()
 call quickui#menu#install("&Option", [
 			\ ['Set &Spell %{&spell? "Off":"On"}', 'set spell!'],
 			\ ['Set &Cursor Line %{&cursorline? "Off":"On"}', 'set cursorline!'],
 			\ ['Set &Paste %{&paste? "Off":"On"}', 'set paste!'],
+			\ ['--', ''],
+			\ ['YCM FixIt', 'YcmCompleter FixIt'],
+			\ ['YCM Format', 'YcmCompleter Format'],
+			\ ['YCM GetDoc', 'YcmCompleter GetDoc'],
+			\ ['YCM GetDocImprecise', 'YcmCompleter GetDocImprecise'],
+			\ ['YCM GetType', 'YcmCompleter GetType'],
+			\ ['YCM GetTypeImprecise', 'YcmCompleter GetTypeImprecise'],
+			\ ['YCM GoTo', 'YcmCompleter GoTo'],
+			\ ['YCM GoToDeclaration', 'YcmCompleter GoToDeclaration'],
+			\ ['YCM GoToDefinition', 'YcmCompleter GoToDefinition'],
+			\ ['YCM GoToImprecise', 'YcmCompleter GoToImprecise'],
+			\ ['YCM GoToInclude', 'YcmCompleter GoToInclude'],
+			\ ['YCM GoToReferences', 'YcmCompleter GoToReferences'],
+			\ ['YCM RefactorRename', 'YcmCompleter RefactorRename'],
 			\ ])
 
 " make popup-menu semi-transparent
