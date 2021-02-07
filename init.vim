@@ -898,3 +898,9 @@ if exists('&spelloptions')
 endif
 
 set signcolumn=auto:9
+
+" make popup menu usable via Tab key, equally as for YCM
+cnoremap <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
+cnoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
+cnoremap <expr> <Left>  pumvisible() ? "\<Up>" : "\<Left>"
+cnoremap <expr> <Right> pumvisible() ? "\<Down>" : "\<Right>"
