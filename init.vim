@@ -904,3 +904,6 @@ cnoremap <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
 cnoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
 cnoremap <expr> <Left>  pumvisible() ? "\<Up>" : "\<Left>"
 cnoremap <expr> <Right> pumvisible() ? "\<Down>" : "\<Right>"
+
+" Build neovim from source
+command! MakeNeovim make "CMAKE_INSTALL_PREFIX=$HOME/bin/neovim" "CMAKE_BUILD_TYPE=RelWithDebInfo"
