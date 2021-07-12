@@ -863,7 +863,7 @@ if has('nvim-0.4')  " {{{ TextYankPost highlight
 endif  " }}}
 
 " store the complete hash of the current git commit in register `+`
-command! Hash let @+ = execute("Git rev-parse HEAD")
+command! Hash let @+ = trim(execute("Git rev-parse HEAD"))
 
 if exists('g:started_by_firenvim')
 	" generally use markdown syntax (from vimwiki)
