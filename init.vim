@@ -120,6 +120,9 @@ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 Plug 'michal-h21/vim-zettel'
 let g:zettel_format = '%Y%m%d%H%M'
 let g:zettel_fzf_command = 'ag'
+" disable default mappings, because z in visual mode interferes with lots of
+" vim mappings
+let g:zettel_default_mappings = 0
 " command: ga<movement><align-char>
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
