@@ -640,7 +640,7 @@ let g:airline_mode_map = {
 
 " fugitive
 set diffopt=filler,vertical
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gs :Git<CR>
 
 " clang-format
 map <leader>cf :pyfile /usr/share/clang/clang-format.py<cr>
