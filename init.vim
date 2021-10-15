@@ -776,6 +776,13 @@ augroup END
 " let gitgutter update more often than the default 4 seconds
 set updatetime=100
 
+" update gitgutter when the buffer is written (see:
+" https://github.com/airblade/vim-gitgutter/issues/502)
+augroup GitGutter
+	autocmd!
+	autocmd BufWritePost,BufWinEnter * GitGutterAll
+augroup END
+
 " commands for changing directory to current file's directory
 command! CdFile cd %:p:h
 command! LcdFile lcd %:p:h
