@@ -753,6 +753,7 @@ nmap <leader>bd :BobDev!<Space>
 nmap <leader>br :BobDev! -DBUILD_TYPE=Release<s-left><left>
 nmap <leader>bg :BobGoto<Space>
 nmap <leader>bb :make!<CR>
+nmap <leader>bo :BobOpen<Space>
 nmap <leader>bp :BobProject!<Space>
 let g:bob_config_path = 'configurations'
 let g:bob_graph_type = 'dot'
