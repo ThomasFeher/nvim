@@ -797,6 +797,9 @@ set inccommand=split
 " enable better indentation in case of soft wrapping
 set breakindent
 
+" always preserve the cursorcolumn
+set nostartofline
+
 " quickui settings
 let g:quickui_show_tip = 1
 let g:quickui_color_scheme = 'system'
