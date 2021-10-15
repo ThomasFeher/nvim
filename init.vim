@@ -764,6 +764,8 @@ let g:bob_auto_complete_items = ['-DBUILD_TYPE=Release', '-DBUILD_TYPE=Debug', '
 nmap <leader>mm :make!<CR>
 " run make in background
 nmap <leader>MM :Neomake!<CR>
+" avoid using python 2 (https://github.com/neomake/neomake/issues/2374#issuecomment-498953280)
+let g:neomake_python_python_exe = 'python3'
 
 augroup uml
 	"Remove all uml autocommands
