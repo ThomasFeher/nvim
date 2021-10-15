@@ -764,16 +764,6 @@ let g:bob_auto_complete_items = ['-DBUILD_TYPE=Release', '-DBUILD_TYPE=Debug', '
 nmap <leader>mm :make!<CR>
 " run make in background
 nmap <leader>MM :Neomake!<CR>
-let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {
-	 \   'text': 'W',
-	 \   'texthl': 'NeomakeWarningSign',
-	 \ }
-let g:neomake_message_sign = {
-	  \   'text': 'M',
-	  \   'texthl': 'NeomakeMessageSign',
-	  \ }
-let g:neomake_info_sign = {'text': 'I', 'texthl': 'NeomakeInfoSign'}
 
 augroup uml
 	"Remove all uml autocommands
