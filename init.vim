@@ -317,6 +317,7 @@ if has("nvim-0.5.0")
 	Plug 'nvim-treesitter/nvim-treesitter-refactor'
 	Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 	" Configuration for most commonly used language servers
+	" :LspInfo shows the status of active and configured language servers
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'nvim-lua/popup.nvim'
 	Plug 'nvim-lua/plenary.nvim'
