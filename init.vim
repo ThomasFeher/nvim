@@ -918,3 +918,9 @@ cnoremap <expr> <Right> pumvisible() ? "\<Down>" : "\<Right>"
 
 " Build neovim from source
 command! MakeNeovim make "CMAKE_INSTALL_PREFIX=$HOME/bin/neovim" "CMAKE_BUILD_TYPE=RelWithDebInfo"
+
+" LSP config
+lua << EOF
+local lspconfig = require'lspconfig'
+lspconfig.clangd.setup{}
+EOF
