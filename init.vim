@@ -241,6 +241,8 @@ Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 " a%: an 'any block'
 " 1a%: an 'open-to-close block'
 Plug 'andymass/vim-matchup'
+" does in more situations the correct thing that `autocmd FileType cpp setlocal matchpairs+=<:>`
+let g:matchup_matchpref = {'cpp': {'template': 1}}
 " multi-pane file manager for Neovim with fuzzy matching
 " start: :Tc (mnemonic: total commander)
 Plug 'philip-karlsson/bolt.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -736,7 +738,6 @@ augroup END
 augroup cpp
 	autocmd!
 	autocmd FileType c,cpp setlocal comments-=:// comments+=://!,:///,:// spell
-	autocmd FileType cpp setlocal matchpairs+=<:>
 augroup END
 
 " enable built-in doxygen syntax highlighting
