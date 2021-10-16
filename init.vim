@@ -14,7 +14,7 @@ function! BuildYCM(info)
 endfunction
 
 " color scheme
-Plug 'lifepillar/vim-solarized8'
+Plug 'ishan9299/nvim-solarized-lua'
 
 " LaTex
 Plug 'lervag/vimtex' " LaTeX
@@ -605,24 +605,13 @@ nmap z<down> zj
 " hide toolbar
 set guioptions-=T
 
-" this is only necessary for 256 color terminals, because solarized will not
-" work there
-if !has('gui_running')
-	if $TERM =~? '^\(rxvt-.*\)\|\(.*16color\)$'
-		" force 16 color support
-		let g:solarized_use16 = 1
-		set notermguicolors
-	else
-		let g:solarized_use16 = 0
-		set termguicolors
-	end
-endif
+set termguicolors
 
 " call :colorscheme in neovim to change colorscheme on the fly
 set background=dark " set to "light" to switch to solarized light
 " making it silent to allow automated installation of all plugins as described
 " here: https://github.com/junegunn/vim-plug/issues/225
-silent! colorscheme solarized8
+silent! colorscheme solarized
 
 " disable autotag, set to 0 or delete to activate autotag
 "let g:autotag_vim_version_sourced=1
