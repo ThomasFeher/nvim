@@ -744,6 +744,7 @@ nmap <leader>bg :BobGoto<Space>
 nmap <leader>bb :make!<CR>
 nmap <leader>bo :BobOpen<Space>
 nmap <leader>bp :BobProject!<Space>
+nmap <leader>bs :BobSearchSource<Space>
 let g:bob_config_path = 'configurations'
 let g:bob_graph_type = 'dot'
 let g:bob_auto_complete_items = ['-DBUILD_TYPE=Release', '-DBUILD_TYPE=Debug', '-DBUILD_SCRIPT_AS_SYMLINK=TRUE']
