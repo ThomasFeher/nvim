@@ -205,9 +205,9 @@ Plug 'ThomasFeher/vim-bob' " changes makeprg when in Bob environment
 " let CtrlP's root directory for searching be the recipe repository
 let g:ctrlp_root_markers = ['recipes']
 " diff two blocks in the same file
-" mark first block and do :LineDiff
-" mark second block and do :LineDiff
-" exit diff view with :LineDiffReset
+" mark first block and do :Linediff
+" mark second block and do :Linediff
+" exit diff view with :LinediffReset
 Plug 'AndrewRadev/linediff.vim'
 " semantic highlighting of C/C++ files
 Plug 'arakashic/chromatica.nvim'
