@@ -324,6 +324,8 @@ if has("nvim-0.5.0")
 	Plug 'nvim-lua/popup.nvim'
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'danymat/neogen'
+	nnoremap <Leader>gen :lua require('neogen').generate()<CR>
 end
 " Floating terminal integration
 " see `Floaterm…` commands
@@ -421,6 +423,10 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true,
   },
+}
+require('neogen').setup {
+	enabled = true,
+	languages = { cpp = require("neogen.configurations.cpp"), },
 }
 EOF
 end
