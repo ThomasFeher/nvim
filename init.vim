@@ -426,7 +426,6 @@ require'nvim-treesitter.configs'.setup {
 }
 require('neogen').setup {
 	enabled = true,
-	languages = { cpp = require("neogen.configurations.cpp"), },
 }
 EOF
 end
