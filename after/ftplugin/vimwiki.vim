@@ -10,3 +10,12 @@ command! -buffer -bang -nargs=* VimwikiTodo
 			\     1,
 			\     fzf#vim#with_preview(),
 			\     <bang>0)
+" do not use tabs in markdown documents, because that would give inconsistent
+" indentation
+" example:
+" * something long that has to be broken into several lines and is already
+"   indented
+" ^^ here we need spaces, having tabs for indentation in front of it would be
+" messy
+setlocal expandtab
+setlocal spell spelllang=en,de
