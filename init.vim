@@ -867,8 +867,8 @@ endif  " }}}
 command! Hash let @+ = trim(execute("Git rev-parse HEAD"))
 
 if exists('g:started_by_firenvim')
-	" generally use markdown syntax (from vimwiki)
-	autocmd BufEnter *.txt set filetype=vimwiki
+	" generally use markdown syntax
+	autocmd BufEnter *.txt set filetype=markdown
 	" specialize here for certain pages (URL is always first part of file
 	" name)
 	"autocmd BufEnter github.com_*.txt set filetype=markdown
@@ -882,17 +882,14 @@ if exists('g:started_by_firenvim')
 	autocmd BufEnter *ipynb_er-DIV*.m
 				\ execute "nnoremap <CR> :w<CR>:call firenvim#press_keys(\"<LT>C-CR>\")<CR>" |
 				\ set filetype=octave
-	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=vimwiki
+	autocmd BufEnter *ipynb_ontainer-DIV*.txt set filetype=markdown
     " for chat apps. Enter sends the message and deletes the buffer.
     " Shift enter is normal return. Insert mode by default.
-	" Need to unmap vimwiki mappings beforehand.
     autocmd BufEnter *slack.com*,*gitter.im*,*element.io*,*discord.com*
 				\ execute "startinsert" |
-				\ execute "iunmap <buffer> <CR>" |
 				\ execute "inoremap <CR> <Esc>:w<CR>:call firenvim#press_keys(\"<LT>CR>\")<CR>ggdGa" |
-				\ execute "iunmap <buffer> <s-CR>" |
 				\ execute "inoremap <s-CR> <CR>" |
-				\ set filetype=text |
+				\ set filetype=mardown |
 				\ set textwidth=0
 	autocmd BufEnter godbolt.org_*.txt set filetype=cpp
 endif
