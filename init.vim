@@ -243,9 +243,6 @@ Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 Plug 'andymass/vim-matchup'
 " does in more situations the correct thing that `autocmd FileType cpp setlocal matchpairs+=<:>`
 let g:matchup_matchpref = {'cpp': {'template': 1}}
-" multi-pane file manager for Neovim with fuzzy matching
-" start: :Tc (mnemonic: total commander)
-Plug 'philip-karlsson/bolt.nvim', { 'do': ':UpdateRemotePlugins' }
 " Zeal for vim
 " <leader>z on a word to search it in zeal (alternative :Zeavim or :ZeamvimV)
 Plug 'KabbAmine/zeavim.vim'
