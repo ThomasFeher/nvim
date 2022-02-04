@@ -3,15 +3,6 @@ let maplocalleader = 'ß'
 set scrolloff=5
 
 call plug#begin('~/.config/nvim/bundle')
-function! BuildYCM(info)
-	" info is a dictionary with 3 fields
-	" - name:   name of the plugin
-	" - status: 'installed', 'updated', or 'unchanged'
-	" - force:  set on PlugInstall! or PlugUpdate!
-	if a:info.status != 'unchanged' || a:info.force
-		!./install.py --clang-completer --clangd-completer
-	endif
-endfunction
 
 " color scheme
 Plug 'ishan9299/nvim-solarized-lua'
@@ -26,22 +17,6 @@ let g:vimtex_view_general_options_latexmk = '--unique'
 let g:vimtex_compiler_latexmk = {
 	\ 'build_dir' : 'build'
 	\}
-if !exists('g:ycm_semantic_triggers')
-	let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers.tex = [
-			\ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-			\ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-			\ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-			\ 're!\\(include(only)?|input){[^}]*'
-			\ ]
-
-" autocompletion
-Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
-" :YcmGenerateConfig or
-" :YcmGenerateConfig! for overwriting existing config
-" for "color coded" use :CCGenerateConfig
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -71,7 +46,7 @@ Plug 'tpope/vim-vinegar' " press `I` to change to old view, press `s` to change 
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch' " Move, Chmod, etc.
 Plug 'neomake/neomake' " syntax checker
-" ignore C/C++, they are already linted by YCM (and configuration of paths is
+" ignore C/C++, they are already linted by Clangd (and configuration of paths is
 " hard with neomake
 " copied from http://vi.stackexchange.com/a/4500/7823
 let ftIgnore = ['cpp','c']
@@ -321,6 +296,14 @@ if has("nvim-0.5.0")
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'danymat/neogen'
 	nnoremap <Leader>gen :lua require('neogen').generate()<CR>
+
+	" Auto-completion
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'hrsh7th/cmp-buffer'
+	Plug 'hrsh7th/cmp-path'
+	Plug 'hrsh7th/cmp-cmdline'
+	Plug 'hrsh7th/nvim-cmp'
+	Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 end
 " Floating terminal integration
 " see `Floaterm…` commands
@@ -431,6 +414,53 @@ require'nvim-treesitter.configs'.setup {
 require('neogen').setup {
 	enabled = true,
 }
+
+  -- configure auto-completion with nvim-cmp
+  vim.opt.completeopt={"menu", "menuone", "noselect"}
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["UltiSnips#Anon"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'ultisnips' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  --cmp.setup.cmdline(':', {
+    --sources = cmp.config.sources({
+      --{ name = 'path' }
+    --}, {
+      --{ name = 'cmdline' }
+    --})
+  --})
 EOF
 end
 
@@ -669,39 +699,6 @@ let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=['UltiSnips','/home/feher/.config/vic_snippets']
 
-" YouCompleteMe
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-" the default of 50 is to small in some cases when completing filepaths
-let g:ycm_max_num_candidates = 200
-" why should we limit the number of warnings shown?
-let g:ycm_max_diagnostics_to_display = 0
-" mappings for YouCompleteMe
-nnoremap <leader>go :YcmCompleter GoTo<CR>
-nnoremap <leader>doc :YcmCompleter GetDoc<CR>
-nnoremap <leader>type :YcmCompleter GetType<CR>
-nnoremap <leader>fix :YcmCompleter FixIt<CR>
-" fill in the new name at the end:
-nnoremap <leader>ref :YcmCompleter RefactorRename<Space>
-let g:ycm_key_detailed_diagnostics = '<leader>det'
-let g:ycm_clangd_args = ['-background-index']
-let g:ycm_filetype_blacklist = {
-	\ 'tagbar': 1,
-	\ 'notes': 1,
-	\ 'netrw': 1,
-	\ 'unite': 1,
-	\ 'pandoc': 1,
-	\ 'infolog': 1,
-	\ 'leaderf': 1,
-	\ 'mail': 1
-	\}
-
 " highlight current column
 set cursorcolumn
 " highlight current line
@@ -905,6 +902,39 @@ command! MakeNeovim make "CMAKE_INSTALL_PREFIX=$HOME/bin/neovim" "CMAKE_BUILD_TY
 
 " LSP config
 lua << EOF
+-- custom mappings, source :h lsp and https://www.youtube.com/watch?v=puWgHa7k3SY
+local custom_lsp_attach = function(client)
+  -- See `:help nvim_buf_set_keymap()` for more information
+  vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>def', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>type', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>imp', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>ref', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>ac', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>p', '<cmd>lua vim.diagnostic.goto_prev()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>l', '<cmd>Telescope diagnostics<CR>', {noremap = true})
+
+  -- Use LSP as the handler for omnifunc.
+  --    See `:help omnifunc` and `:help ins-completion` for more information.
+  vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Use LSP as the handler for formatexpr.
+  --    See `:help formatexpr` for more information.
+  vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+
+  -- For plugins with an `on_attach` callback, call them here. For example:
+  -- require('completion').on_attach()
+end
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require'lspconfig'
-lspconfig.clangd.setup{}
+lspconfig.sumneko_lua.setup { -- lua-language-server
+  capabilities = capabilities,
+  on_attach = custom_lsp_attach,
+}
+lspconfig.clangd.setup{
+  capabilities = capabilities,
+  on_attach = custom_lsp_attach,
+}
 EOF
