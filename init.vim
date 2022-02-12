@@ -1,5 +1,11 @@
+" mappings for german keyboard layout
 let mapleader = 'ß'
 let maplocalleader = 'ß'
+lua << EOF
+vim.api.nvim_set_keymap('n', 'ä', ']', {})
+vim.api.nvim_set_keymap('n', 'ü', '[', {})
+EOF
+
 set scrolloff=5
 
 call plug#begin('~/.config/nvim/bundle')
