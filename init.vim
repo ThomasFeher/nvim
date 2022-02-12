@@ -298,6 +298,7 @@ if has("nvim-0.5.0")
 	nnoremap <Leader>gen :lua require('neogen').generate()<CR>
 
 	" Auto-completion
+	Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-buffer'
 	Plug 'hrsh7th/cmp-path'
@@ -440,6 +441,7 @@ require('neogen').setup {
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
+	  { name = "nvim_lsp_signature_help" },
       { name = 'ultisnips' },
     }, {
       { name = 'buffer' },
