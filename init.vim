@@ -321,6 +321,17 @@ end
 "                 existing, keeps terminal buffer once it was opened)
 Plug 'voldikss/vim-floaterm'
 let g:floaterm_keymap_toggle = '<Leader>ft'
+" add information to current search
+Plug 'kevinhwang91/nvim-hlslens'
+noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
+            \<Cmd>lua require('hlslens').start()<CR>
+noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
+            \<Cmd>lua require('hlslens').start()<CR>
+noremap * *<Cmd>lua require('hlslens').start()<CR>
+noremap # #<Cmd>lua require('hlslens').start()<CR>
+noremap g* g*<Cmd>lua require('hlslens').start()<CR>
+noremap g# g#<Cmd>lua require('hlslens').start()<CR>
+" add a scrollbar that shows locations of diagnostics and search results
 Plug 'petertriho/nvim-scrollbar'
 Plug 'b0o/incline.nvim'
 call plug#end()
