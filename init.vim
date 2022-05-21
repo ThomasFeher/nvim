@@ -321,6 +321,7 @@ end
 "                 existing, keeps terminal buffer once it was opened)
 Plug 'voldikss/vim-floaterm'
 let g:floaterm_keymap_toggle = '<Leader>ft'
+Plug 'petertriho/nvim-scrollbar'
 Plug 'b0o/incline.nvim'
 call plug#end()
 
@@ -424,6 +425,8 @@ require'nvim-treesitter.configs'.setup {
 require('neogen').setup {
 	enabled = true,
 }
+require("scrollbar").setup()
+require("scrollbar.handlers.search").setup()
 
   -- configure auto-completion with nvim-cmp
   vim.opt.completeopt={"menu", "menuone", "noselect"}
