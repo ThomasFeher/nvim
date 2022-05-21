@@ -909,6 +909,22 @@ if exists('g:started_by_firenvim')
 				\ set filetype=mardown |
 				\ set textwidth=0
 	autocmd BufEnter godbolt.org_*.txt set filetype=cpp
+	" automatic backup to /tmp/firenvim_backup.txt
+	" source: https://github.com/glacambre/firenvim/issues/1297
+	let g:timer_started = v:false
+	function! Write_Backup(timer) abort
+		let g:timer_started = v:false
+		write! /tmp/firenvim_backup.txt
+	endfunction
+	function! On_Text_Changed() abort
+		if g:timer_started
+			return
+		end
+		let g:timer_started = v:true
+		call timer_start(10000, 'Write_Backup')
+	endfunction
+	au TextChanged * ++nested call On_Text_Changed()
+	au TextChangedI * ++nested call On_Text_Changed()
 endif
 
 if exists('&spelloptions')
