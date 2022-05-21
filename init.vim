@@ -7,6 +7,7 @@ vim.api.nvim_set_keymap('n', 'ü', '[', {})
 EOF
 
 set scrolloff=5
+set laststatus=3 " only a single global status line
 
 call plug#begin('~/.config/nvim/bundle')
 
@@ -319,6 +320,7 @@ end
 "                 existing, keeps terminal buffer once it was opened)
 Plug 'voldikss/vim-floaterm'
 let g:floaterm_keymap_toggle = '<Leader>ft'
+Plug 'b0o/incline.nvim'
 call plug#end()
 
 if has("nvim-0.5.0")
@@ -469,6 +471,7 @@ require('neogen').setup {
       --{ name = 'cmdline' }
     --})
   --})
+require('incline').setup()
 EOF
 end
 
