@@ -333,6 +333,7 @@ noremap g* g*<Cmd>lua require('hlslens').start()<CR>
 noremap g# g#<Cmd>lua require('hlslens').start()<CR>
 " add a scrollbar that shows locations of diagnostics and search results
 Plug 'petertriho/nvim-scrollbar'
+" display file name for each window at the top right via virtual text
 Plug 'b0o/incline.nvim'
 call plug#end()
 
