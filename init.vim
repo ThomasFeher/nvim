@@ -486,7 +486,11 @@ require("scrollbar.handlers.search").setup()
       --{ name = 'cmdline' }
     --})
   --})
-require('incline').setup()
+  require('incline').setup {
+	  hide = {
+		  focused_win = true,
+		  }
+	  }
 EOF
 end
 
