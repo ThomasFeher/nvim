@@ -727,7 +727,6 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsListSnippets='<leader><tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-let g:UltiSnipsSnippetDirectories=['UltiSnips','/home/feher/.config/vic_snippets']
 
 " highlight current column
 set cursorcolumn
