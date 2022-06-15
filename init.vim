@@ -334,6 +334,9 @@ noremap g# g#<Cmd>lua require('hlslens').start()<CR>
 Plug 'petertriho/nvim-scrollbar'
 " display file name for each window at the top right via virtual text
 Plug 'b0o/incline.nvim'
+" improved switching between windows
+Plug 'https://gitlab.com/yorickpeterse/nvim-window.git'
+map <silent> <leader>W :lua require('nvim-window').pick()<CR>
 call plug#end()
 
 if has("nvim-0.5.0")
