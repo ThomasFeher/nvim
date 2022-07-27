@@ -1001,4 +1001,8 @@ lspconfig.clangd.setup{
   capabilities = capabilities,
   on_attach = custom_lsp_attach,
 }
+lspconfig.pyright.setup {
+  capabilities = capabilities,
+  on_attach = custom_lsp_attach,
+}
 EOF
