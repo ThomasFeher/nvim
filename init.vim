@@ -295,6 +295,8 @@ if has("nvim-0.5.0")
 	Plug 'nvim-treesitter/nvim-treesitter-refactor'
 	Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 	Plug 'nvim-treesitter/playground'
+	" Avoid spellchecking of code for tree-sitter enabled buffers
+	Plug 'lewis6991/spellsitter.nvim'
 	" Configuration for most commonly used language servers
 	" :LspInfo shows the status of active and configured language servers
 	Plug 'neovim/nvim-lspconfig'
@@ -436,6 +438,9 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
+
+require('spellsitter').setup()
+
 require('neogen').setup {
 	enabled = true,
 }
