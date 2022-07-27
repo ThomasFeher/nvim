@@ -977,7 +977,15 @@ local custom_lsp_attach = function(client)
 
   -- Use LSP as the handler for formatexpr.
   --    See `:help formatexpr` for more information.
-  vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+  local has_formatting = nil
+  for k,v in pairs(vim.lsp.get_active_clients()) do
+	  if v['document_range_formatting'] then
+		  has_formatting = 1
+	  end
+  end
+  if has_formatting then
+	  vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+  end
 
   -- For plugins with an `on_attach` callback, call them here. For example:
   -- require('completion').on_attach()
