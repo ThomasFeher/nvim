@@ -1,18 +1,13 @@
 " mappings for german keyboard layout
 let mapleader = 'ß'
 let maplocalleader = 'ß'
-lua << EOF
-vim.api.nvim_set_keymap('n', 'ä', ']', {})
-vim.api.nvim_set_keymap('n', 'ü', '[', {})
-EOF
 
 set scrolloff=5
 set laststatus=3 " only a single global status line
 
-call plug#begin('~/.config/nvim/bundle')
+lua require'plugins'
 
-" color scheme
-Plug 'ishan9299/nvim-solarized-lua'
+call plug#begin('~/.config/nvim/bundle')
 
 " LaTex
 Plug 'lervag/vimtex' " LaTeX
@@ -82,8 +77,6 @@ Plug 'wellle/context.vim'
 let g:context_filetype_blacklist = ['vista_kind']
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating' " necessary for orgmode plugin
-" use :MarkdownPreview to render markdown files in the browser
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'vimwiki/vimwiki', { 'branch': 'dev'}
 " use vimwiki for markdown files
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
@@ -197,18 +190,6 @@ Plug 'editorconfig/editorconfig-vim'
 " usage: aa (an argument, includes the separator) or
 "        ia (inner argument, excludes the separator))
 Plug 'b4winckler/vim-angry'
-" <leader> dd start debugging with gdb
-" <leader> dp start debugging python
-" F8 :GdbBreakpointToggle
-" F5 :GdbContinue
-" F10 :GdbNext
-" F11 :GdbStep
-" F12 :GdbFinish
-" <C-p> :GdbFrameUp
-" <C-n> :GdbFrameDown
-" TODO have a look at https://github.com/mechatroner/minimal_gdb to persist
-" breakpoints
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 " modern matchit and matchparen replacement
 " %: as usual
 " g%: like % but backwards
@@ -230,18 +211,6 @@ Plug 'RRethy/vim-illuminate'
 " Menu bar using popup windows
 " hit space twice to open menu
 Plug 'skywind3000/vim-quickui'
-" Entering a text window in Firefox will immediately start an instance of
-" Neovim in an overlay window.
-" :w - put content of buffer into the text window
-" :q - close the Neovim overlay
-" <C-e> - open Neovim overlay in current text window manually
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-" Whenever cursor jumps some distance or moves between windows, it will flash
-" so you can see where it is.
-Plug 'danilamihailov/beacon.nvim'
-" There is a bug when closing buffers created by Fugitive's :Gdiff, therefore
-" ignoring those buffers for now.
-let g:beacon_ignore_buffers = ["[Git]"]
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " FZF for vim
 " :Files
@@ -286,35 +255,6 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 nmap <Leader>fzf :FZF '--preview'
 Plug 'vim-scripts/TWiki-Syntax'
 Plug 'stefandtw/quickfix-reflector.vim'
-if has("nvim-0.5.0")
-	" Statistics about your keystrokes
-	Plug 'ThePrimeagen/vim-apm'
-	" language parser for better syntax highlighting, refactoring, navigation,
-	" text objects, folding and more
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-	Plug 'nvim-treesitter/nvim-treesitter-refactor'
-	Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-	Plug 'nvim-treesitter/playground'
-	" Avoid spellchecking of code for tree-sitter enabled buffers
-	Plug 'lewis6991/spellsitter.nvim'
-	" Configuration for most commonly used language servers
-	" :LspInfo shows the status of active and configured language servers
-	Plug 'neovim/nvim-lspconfig'
-	Plug 'nvim-lua/popup.nvim'
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-telescope/telescope.nvim'
-	Plug 'danymat/neogen'
-	nnoremap <Leader>gen :lua require('neogen').generate()<CR>
-
-	" Auto-completion
-	Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-	Plug 'hrsh7th/cmp-nvim-lsp'
-	Plug 'hrsh7th/cmp-buffer'
-	Plug 'hrsh7th/cmp-path'
-	Plug 'hrsh7th/cmp-cmdline'
-	Plug 'hrsh7th/nvim-cmp'
-	Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-end
 " Floating terminal integration
 " see `Floaterm…` commands
 " FloatermSend: send marked text to terminal
@@ -322,187 +262,7 @@ end
 "                 existing, keeps terminal buffer once it was opened)
 Plug 'voldikss/vim-floaterm'
 let g:floaterm_keymap_toggle = '<Leader>ft'
-" add information to current search
-Plug 'kevinhwang91/nvim-hlslens'
-noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
-            \<Cmd>lua require('hlslens').start()<CR>
-noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
-            \<Cmd>lua require('hlslens').start()<CR>
-noremap * *<Cmd>lua require('hlslens').start()<CR>
-noremap # #<Cmd>lua require('hlslens').start()<CR>
-noremap g* g*<Cmd>lua require('hlslens').start()<CR>
-noremap g# g#<Cmd>lua require('hlslens').start()<CR>
-" add a scrollbar that shows locations of diagnostics and search results
-Plug 'petertriho/nvim-scrollbar'
-" display file name for each window at the top right via virtual text
-Plug 'b0o/incline.nvim'
-" improved switching between windows
-Plug 'https://gitlab.com/yorickpeterse/nvim-window.git'
-map <silent> <leader>W :lua require('nvim-window').pick()<CR>
 call plug#end()
-
-if has("nvim-0.5.0")
-	"nvim-treesitter configuration
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
-  highlight = {
-	enable = true,              -- false will disable the whole extension
-	disable = {},  -- list of language that will be disabled
-  },
-  refactor = {
-    highlight_definitions = { enable = true },
-	highlight_current_scope = { enable = false },
-    smart_rename = {
-      enable = true,
-      keymaps = {
-        smart_rename = "grr",
-      },
-    },
-    navigation = {
-      enable = true,
-      keymaps = {
-        goto_definition = "gnd",
-        list_definitions = "gnD",
-        list_definitions_toc = "gO",
-        goto_next_usage = "<a-*>",
-        goto_previous_usage = "<a-#>",
-      },
-    },
-  },
-  textobjects = {
-    -- possible text objects:
-    -- @block.inner
-    -- @block.outer
-    -- @call.inner
-    -- @call.outer
-    -- @class.inner
-    -- @class.outer
-    -- @comment.outer
-    -- @conditional.inner
-    -- @conditional.outer
-    -- @function.inner
-    -- @function.outer
-    -- @loop.inner
-    -- @loop.outer
-    -- @parameter.inner
-    -- @statement.outer
-	select = {
-	  enable = true,
-	  keymaps = {
-		["af"] = "@function.outer",
-		["if"] = "@function.inner",
-		["ac"] = "@class.outer",
-		["ic"] = "@class.inner",
-		},
-	  },
-	move = {
-	  enable = true,
-	  goto_next_start = {
-		["]m"] = "@function.outer",
-		["]]"] = "@class.outer",
-	  },
-	  goto_next_end = {
-		["]M"] = "@function.outer",
-		["]["] = "@class.outer",
-	  },
-	  goto_previous_start = {
-		["[m"] = "@function.outer",
-		["[["] = "@class.outer",
-	  },
-	  goto_previous_end = {
-		["[M"] = "@function.outer",
-		["[]"] = "@class.outer",
-	  },
-	},
-	swap = {
-	  enable = true,
-	  swap_next = {
-		["<leader>a"] = "@parameter.inner",
-	  },
-	  swap_previous = {
-		["<leader>A"] = "@parameter.inner",
-	  },
-	},
-  },
-  indent = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<CR>',
-      scope_incremental = '<CR>',
-      node_incremental = '<TAB>',
-      node_decremental = '<S-TAB>',
-    },
-  },
-}
-
-require('spellsitter').setup()
-
-require('neogen').setup {
-	enabled = true,
-}
-require("scrollbar").setup()
-require("scrollbar.handlers.search").setup()
-
-  -- configure auto-completion with nvim-cmp
-  vim.opt.completeopt={"menu", "menuone", "noselect"}
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
-
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["UltiSnips#Anon"](args.body)
-      end,
-    },
-    mapping = {
-      ['<C-n>'] = cmp.mapping.select_next_item({ 'i', 'c'}),
-      ['<C-p>'] = cmp.mapping.select_prev_item({ 'i', 'c'}),
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-	  { name = "nvim_lsp_signature_help" },
-      { name = 'ultisnips' },
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  --cmp.setup.cmdline(':', {
-    --sources = cmp.config.sources({
-      --{ name = 'path' }
-    --}, {
-      --{ name = 'cmdline' }
-    --})
-  --})
-  require('incline').setup {
-	  hide = {
-		  focused_win = true,
-		  }
-	  }
-EOF
-end
 
 "
 " Brief help
@@ -955,54 +715,3 @@ cnoremap <expr> <Right> pumvisible() ? "\<Down>" : "\<Right>"
 " Build neovim from source
 command! MakeNeovim make "CMAKE_INSTALL_PREFIX=$HOME/bin/neovim" "CMAKE_BUILD_TYPE=RelWithDebInfo"
 
-" LSP config
-lua << EOF
--- custom mappings, source :h lsp and https://www.youtube.com/watch?v=puWgHa7k3SY
-local custom_lsp_attach = function(client)
-  -- See `:help nvim_buf_set_keymap()` for more information
-  vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>def', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>type', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>imp', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>ref', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>ac', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>p', '<cmd>lua vim.diagnostic.goto_prev()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>l', '<cmd>Telescope diagnostics<CR>', {noremap = true})
-
-  -- Use LSP as the handler for omnifunc.
-  --    See `:help omnifunc` and `:help ins-completion` for more information.
-  vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Use LSP as the handler for formatexpr.
-  --    See `:help formatexpr` for more information.
-  local has_formatting = nil
-  for k,v in pairs(vim.lsp.get_active_clients()) do
-	  if v['document_range_formatting'] then
-		  has_formatting = 1
-	  end
-  end
-  if has_formatting then
-	  vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
-  end
-
-  -- For plugins with an `on_attach` callback, call them here. For example:
-  -- require('completion').on_attach()
-end
-
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lspconfig = require'lspconfig'
-lspconfig.sumneko_lua.setup { -- lua-language-server
-  capabilities = capabilities,
-  on_attach = custom_lsp_attach,
-}
-lspconfig.clangd.setup{
-  capabilities = capabilities,
-  on_attach = custom_lsp_attach,
-}
-lspconfig.pyright.setup {
-  capabilities = capabilities,
-  on_attach = custom_lsp_attach,
-}
-EOF
