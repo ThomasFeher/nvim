@@ -322,4 +322,8 @@ return require('packer').startup(function(use)
     -- CEShowTooltip (local to assembly buffer)
     -- CEGotoLabel (local to assembly buffer)
 	use { 'krady21/compiler-explorer.nvim' }
+	-- quickly switch python virtual environments from within neovim without restarting
+	-- https://github.com/AckslD/swenv.nvim
+	-- require('swenv.api').pick_venv()
+	use { 'AckslD/swenv.nvim' }
 end)
