@@ -326,4 +326,8 @@ return require('packer').startup(function(use)
 	-- https://github.com/AckslD/swenv.nvim
 	-- require('swenv.api').pick_venv()
 	use { 'AckslD/swenv.nvim' }
+	-- Local config file with confirmation
+	-- https://github.com/MunifTanjim/exrc.nvim
+	-- :ExrcSource
+	use { 'MunifTanjim/exrc.nvim' }
 end)
