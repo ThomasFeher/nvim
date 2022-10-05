@@ -311,4 +311,15 @@ return require('packer').startup(function(use)
 		callback = require('nvim-window').pick,
 		desc = 'navigate buffers with nvim-window',
 	})
+	-- interacting with compiler-explorer
+	-- https://github.com/krady21/compiler-explorer.nvim
+    -- CECompile
+    -- CECompileLive
+    -- CEFormat
+    -- CEAddLibrary
+    -- CELoadExample
+    -- CEOpenWebsite
+    -- CEShowTooltip (local to assembly buffer)
+    -- CEGotoLabel (local to assembly buffer)
+	use { 'krady21/compiler-explorer.nvim' }
 end)
