@@ -26,7 +26,6 @@ Plug 'tpope/vim-fugitive'
 " Git tree viewer
 " g? in tree view to see mappings
 " '@ jump to current HEAD
-nmap <leader>gv :Flog -all<cr>
 Plug 'rbong/vim-flog', {'branch': 'v2'}
 Plug 'airblade/vim-gitgutter'
 " <Leader>gm to open window with last commit changing the content under the
