@@ -63,16 +63,93 @@ return require('packer').startup(function(use)
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/nvim-cmp'
 	use 'quangnguyen30192/cmp-nvim-ultisnips'
+	use { 'hrsh7th/nvim-cmp',
+		config = function()
+			-- Setup nvim-cmp.
+			local cmp = require'cmp'
+			cmp.setup({
+				snippet = {
+					-- REQUIRED - you must specify a snippet engine
+					expand = function(args)
+						vim.fn["UltiSnips#Anon"](args.body)
+					end,
+				},
+				mapping = {
+					['<C-n>'] = cmp.mapping.select_next_item({ 'i', 'c'}),
+					['<C-p>'] = cmp.mapping.select_prev_item({ 'i', 'c'}),
+					['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+					['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+					['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+					['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+					['<C-e>'] = cmp.mapping({
+						i = cmp.mapping.abort(),
+						c = cmp.mapping.close(),
+					}),
+					['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				},
+				sources = cmp.config.sources({
+					{ name = 'nvim_lsp' },
+					{ name = 'path' },
+					{ name = "nvim_lsp_signature_help" },
+					{ name = 'ultisnips' },
+					}, {
+						{ name = 'buffer' },
+				})
+			})
+			-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+			cmp.setup.cmdline('/', {
+				sources = {
+					{ name = 'buffer' }
+				}
+			})
+		end
+	}
 	-- add information to current search
-	use 'kevinhwang91/nvim-hlslens'
+	use { 'kevinhwang91/nvim-hlslens',
+		config = function()
+			local kopts = {noremap = true, silent = true}
+			vim.api.nvim_set_keymap('n', 'n',
+				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+			kopts)
+			vim.api.nvim_set_keymap('n', 'N',
+				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+			kopts)
+			vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
+		end
+	}
 	-- add a scrollbar that shows locations of diagnostics and search results
-	use 'petertriho/nvim-scrollbar'
+	use { 'petertriho/nvim-scrollbar',
+		config = function()
+			require("scrollbar").setup()
+			require("scrollbar.handlers.search").setup()
+		end
+	}
 	-- display file name for each window at the top right via virtual text
-	use 'b0o/incline.nvim'
+	use { 'b0o/incline.nvim',
+		config = function()
+			require('incline').setup {
+				hide = {
+					focused_win = true,
+				}
+			}
+		end
+	}
 	-- improved switching between windows
-	use 'https://gitlab.com/yorickpeterse/nvim-window.git'
+	use { 'https://gitlab.com/yorickpeterse/nvim-window.git',
+		config = function()
+			vim.api.nvim_set_keymap('n', '<silent> <leader>W', '',  {
+				noremap = true,
+				callback = require('nvim-window').pick,
+				desc = 'navigate buffers with nvim-window',
+			})
+		end
+	}
+
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
@@ -250,67 +327,6 @@ return require('packer').startup(function(use)
 	)
 	-- configure auto-completion with nvim-cmp
 	vim.opt.completeopt={"menu", "menuone", "noselect"}
-	-- Setup nvim-cmp.
-	local cmp = require'cmp'
-	cmp.setup({
-		snippet = {
-			-- REQUIRED - you must specify a snippet engine
-			expand = function(args)
-				vim.fn["UltiSnips#Anon"](args.body)
-			end,
-		},
-		mapping = {
-			['<C-n>'] = cmp.mapping.select_next_item({ 'i', 'c'}),
-			['<C-p>'] = cmp.mapping.select_prev_item({ 'i', 'c'}),
-			['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-			['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-			['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-			['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-			['<C-e>'] = cmp.mapping({
-				i = cmp.mapping.abort(),
-				c = cmp.mapping.close(),
-			}),
-			['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-		},
-		sources = cmp.config.sources({
-			{ name = 'nvim_lsp' },
-			{ name = 'path' },
-			{ name = "nvim_lsp_signature_help" },
-			{ name = 'ultisnips' },
-		}, {
-				{ name = 'buffer' },
-			})
-	})
-	-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-	cmp.setup.cmdline('/', {
-		sources = {
-			{ name = 'buffer' }
-		}
-	})
-	local kopts = {noremap = true, silent = true}
-	vim.api.nvim_set_keymap('n', 'n',
-		[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-		kopts)
-	vim.api.nvim_set_keymap('n', 'N',
-		[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-		kopts)
-	vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-	vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-	vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-	vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-	vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
-	require("scrollbar").setup()
-	require("scrollbar.handlers.search").setup()
-	require('incline').setup {
-		hide = {
-			focused_win = true,
-		}
-	}
-	vim.api.nvim_set_keymap('n', '<silent> <leader>W', '',  {
-		noremap = true,
-		callback = require('nvim-window').pick,
-		desc = 'navigate buffers with nvim-window',
-	})
 	-- interacting with compiler-explorer
 	-- https://github.com/krady21/compiler-explorer.nvim
     -- CECompile
