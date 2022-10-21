@@ -185,11 +185,6 @@ let g:ctrlp_root_markers = ['recipes']
 " exit diff view with :LinediffReset
 Plug 'AndrewRadev/linediff.vim'
 Plug 'editorconfig/editorconfig-vim'
-" This plugin adds text object support for comma-separated arguments enclosed
-" by brackets.
-" usage: aa (an argument, includes the separator) or
-"        ia (inner argument, excludes the separator))
-Plug 'b4winckler/vim-angry'
 " modern matchit and matchparen replacement
 " %: as usual
 " g%: like % but backwards
