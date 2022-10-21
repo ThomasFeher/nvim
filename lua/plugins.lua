@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
 	-- color scheme
 	use 'ishan9299/nvim-solarized-lua'
 	-- use :MarkdownPreview to render markdown files in the browser
-	use { 'iamcco/markdown-preview.nvim', run = function() fn['mkdp#util#install']() end }  
+	use { 'iamcco/markdown-preview.nvim', run = function() fn['mkdp#util#install']() end }
 	-- <leader> dd start debugging with gdb
 	-- <leader> dp start debugging python
 	-- F8 :GdbBreakpointToggle
