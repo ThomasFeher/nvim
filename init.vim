@@ -7,6 +7,9 @@ set laststatus=3 " only a single global status line
 
 lua require'plugins'
 
+" do not make shallow clones, because I do occansonally code on plugins and
+" like to see their history for that
+let g:plug_shallow = 0
 call plug#begin('~/.config/nvim/bundle')
 
 " LaTex
