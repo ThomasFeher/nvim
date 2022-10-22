@@ -1,7 +1,7 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
   vim.cmd [[packadd packer.nvim]]
 end
 
@@ -153,7 +153,7 @@ return require('packer').startup(function(use)
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
-	if packer_bootstrap then
+	if PACKER_BOOTSTRAP then
 		require('packer').sync()
 	end
 
@@ -290,7 +290,7 @@ return require('packer').startup(function(use)
 		-- Use LSP as the handler for formatexpr.
 		--    See `:help formatexpr` for more information.
 		local has_formatting = nil
-		for k,v in pairs(vim.lsp.get_active_clients()) do
+		for _,v in pairs(vim.lsp.get_active_clients()) do
 			if v['document_range_formatting'] then
 				has_formatting = 1
 			end
