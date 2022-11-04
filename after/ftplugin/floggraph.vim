@@ -1,1 +1,1 @@
-command! -buffer Hash let @+ = trim(execute('call flog#run_command("Git rev-parse %h")'))
+command! -buffer Hash let @+ = trim(execute('Git rev-parse '.flog#Format("%h")))
