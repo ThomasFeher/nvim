@@ -10,10 +10,203 @@ vim.api.nvim_set_keymap('n', 'ü', '[', {})
 
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
+
+	use { 'lervag/vimtex', config = function()
+			vim.g.tex_flavor = 'latex'
+			vim.g.vimtex_fold_enabled = 0 -- actvated folding slowes neovim down significantly
+			vim.g.vimtex_view_general_viewer = 'okular'
+			vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
+			vim.g.vimtex_compiler_latexmk = { build_dir = 'build' }
+		end,
+		}
+
+	-- Snippets
+	use 'SirVer/ultisnips'
+	use 'honza/vim-snippets'
+
+	-- Git integration
+	use { 'tpope/vim-fugitive', config = function()
+		vim.api.nvim_set_keymap('n', '<leader>gs', ':Git<CR>', {noremap = true})
+		end,
+	}
+	-- Git tree viewer
+	-- g? in tree view to see mappings
+	-- '@ jump to current HEAD
+	use { 'rbong/vim-flog', branch = 'v2' }
+	use { 'airblade/vim-gitgutter' }
+	-- <Leader>gm to open window with last commit changing the content under the
+	-- cursor.
+	-- Again <Leader>gm to switch into the window and have the following additional
+	-- bindings:
+	-- q 	Close the popup window
+	-- o 	older. Back to older commit at the line
+	-- O 	Opposite to o. Forward to newer commit at the line
+	-- d 	Toggle diff hunks only related to current file in the commit
+	-- D 	Toggle all diff hunks in the commit
+	-- ? 	Show mappings help
+	use 'rhysd/git-messenger.vim'
+
+	-- File handling
+	--   -: enter file explorer
+	--   s: change sorting
+	--   I: change to old view
+	use 'tpope/vim-vinegar'
+	--   :Chmod
+	--   :Copy
+	--   :Mkdir
+	--   :Move
+	--   :Remove
+	--   :SudoEdit
+	--   and more
+	use 'tpope/vim-eunuch'
+
+	use { 'vimwiki/vimwiki',  branch = 'dev', config = function()
+			-- use vimwiki for markdown files
+			vim.g.vimwiki_ext2syntax = { ['.md'] = 'markdown', ['.mkd'] = 'markdown', ['.wiki'] = 'media' }
+			-- make vimwikis default syntax markdown
+			vim.g.vimwiki_list = { {path = '~/vimwiki', syntax = 'markdown', ext = '.md'} }
+			vim.g.vimwiki_markdown_link_ext = 1
+			-- remove mapping that shadows vim-vinegars mapping to enter file browsing
+			vim.keymap.set('n', '<Nop>', '<Plug>VimwikiRemoveHeaderLevel')
+			vim.keymap.set('n', '<CR>', '<Plug>VimwikiFollowLink')
+		end,
+	}
+
+	-- Modify quickfix (and location list) entries, writing these modifications will modify the original parts
+	use 'stefandtw/quickfix-reflector.vim'
+	use 'vim-scripts/TWiki-Syntax'
+	-- FZF for vim
+	-- :Files
+	-- :GitFiles :GFiles
+	-- :Buffers
+	-- :Lines
+	-- :BLines
+	-- :Colors
+	-- :Ag
+	-- :Rg
+	-- :Tags
+	-- :BTags
+	-- :Snippets
+	-- :Commands
+	-- :Marks
+	-- :Helptags
+	-- :Windows
+	-- :Commits
+	-- :BCommits
+	-- :Maps
+	-- :Filetypes
+	-- :History
+	-- install `bat` to get syntax highlighting in preview windows
+	use { 'junegunn/fzf.vim', config = function()
+		-- use floating window for FZF
+		vim.g.fzf_layout = { window = { width = 0.8, height = 0.5, highlight = 'Comment' } }
+		vim.keymap.set('n', '<Leader>fzf', ':FZF "--preview"')
+	end }
+	-- modern matchit and matchparen replacement
+	-- %: as usual
+	-- g%: like % but backwards
+	-- [%: previous surrounding open word
+	-- ]%: next surrounding close word
+	-- objects:
+	-- i%: the inside of an 'any block'
+	-- 1i%: the inside of an 'open-to-close block'
+	-- a%: an 'any block'
+	-- 1a%: an 'open-to-close block'
+	use { 'andymass/vim-matchup', config = function()
+		-- does in more situations the correct thing that `autocmd FileType cpp setlocal matchpairs+=<:>`
+		vim.g.matchup_matchpref = {cpp = {template = 1}}
+	end }
+	-- Zeal for vim
+	-- <leader>z on a word to search it in zeal (alternative :Zeavim or :ZeamvimV)
+	use 'KabbAmine/zeavim.vim'
+	-- automatically highlighting other uses of the current word under the cursor
+	use 'RRethy/vim-illuminate'
+	-- Diff two blocks in the same file
+	-- mark first block and do :Linediff
+	-- mark second block and do :Linediff
+	-- exit diff view with :LinediffReset
+	use 'AndrewRadev/linediff.vim'
+	use 'editorconfig/editorconfig-vim'
+	-- Integration of https://github.com/BobBuildTool/bob into Neovim
+	use { 'ThomasFeher/vim-bob' , config = function()
+		vim.keymap.set('n', '<leader>bb', ':make!<CR>', { noremap = true })
+		vim.keymap.set('n', '<leader>bC', ':BobClean<CR>', { noremap = true })
+		vim.keymap.set('n', '<leader>bd', ':BobDev!<Space>', { noremap = true })
+		vim.keymap.set('n', '<leader>bg', ':BobGoto<Space>', { noremap = true })
+		vim.keymap.set('n', '<leader>bi', ':BobInit<CR>', { noremap = true })
+		vim.keymap.set('n', '<leader>bo', ':BobOpen<Space>', { noremap = true })
+		vim.keymap.set('n', '<leader>bp', ':BobProject!<Space>', { noremap = true })
+		vim.keymap.set('n', '<leader>bs', ':BobSearchSource<Space>', { noremap = true })
+		vim.g.bob_config_path = 'configurations'
+		vim.g.bob_graph_type = 'dot'
+		vim.g.bob_auto_complete_items = { '-DBUILD_TYPE=Release',
+			                              '-DBUILD_TYPE=Debug',
+		                           	      '-DBUILD_SCRIPT_AS_SYMLINK=TRUE',
+		                                  '--destination '}
+	end}
+	-- syntax highlighting for PlantUML
+	-- The filetype will be set to plantuml for *.pu, *.uml or *.plantuml files or
+	-- if the first line of a file contains @startuml.
+	-- Additionally the makeprg is set to plantuml.
+	use 'aklt/plantuml-syntax'
+	-- fold python functions and classes
+	use 'tmhedberg/SimpylFold'
+	-- edit surrounding tags, quotes, etc.
+	-- cs"': change next surrounding double quotes to single quotes
+	-- ysiw": add ("yank") double quotes around current word
+	-- ds': delete next surrounding single quotes
+	use 'tpope/vim-surround'
+	-- dot command repeats plugin mappings, too, if supported by the plugin (e.g.
+	-- vim-surround)
+	use 'tpope/vim-repeat'
+	-- diff viewer on directory level
+	-- :DirDiff <dir1> <dir2>
+	use 'will133/vim-dirdiff'
+	-- press gS to split expressions on multiple lines
+	-- press gJ to join multiline expressions on one line
+	use 'AndrewRadev/splitjoin.vim'
+	-- press gs to x.y → x->y or && → || or true → false
+	use 'AndrewRadev/switch.vim'
+	-- read and write gnupg encrypted files (.gpg,.pgp,.asc)
+	use 'jamessan/vim-gnupg'
+	use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+		require("toggleterm").setup()
+	end }
+	use 'chrisbra/csv.vim'
+	use 'wellle/targets.vim'
+	use { 'echasnovski/mini.nvim', config = function()
+		-- ga: start alignment mode
+		-- gA: start alignment mode with preview
+		-- in alignment mode:
+		--   s: change split pattern
+		--   j: change justification
+		--   m: change merge delimiter
+		--   =: enhanced setup for '='
+		--   ,: enhanced setup for ','
+		--   <Space>: enhanced setup for ' '
+		--   pre-steps:
+		--   f: filter parts
+		--   i: ignore some split matches
+		--   p: pair parts
+		--   t: trim parts
+		--   <BS>: delete some pre-steps
+		--
+		require('mini.align').setup()
+	end }
+	use 'scrooloose/nerdcommenter'
+	use 'Raimondi/delimitMate'
+	use 'PProvost/vim-ps1'
+	use 'bronson/vim-trailing-whitespace'
+	use 'PotatoesMaster/i3-vim-syntax'
+	-- ga: print unicode value of character under the cursor
+	use 'tpope/vim-characterize'
 	-- color scheme
-	use 'ishan9299/nvim-solarized-lua'
+	use { 'ishan9299/nvim-solarized-lua', config = function() vim.cmd('colorscheme solarized') end, }
 	-- use :MarkdownPreview to render markdown files in the browser
-	use { 'iamcco/markdown-preview.nvim', run = function() fn['mkdp#util#install']() end }
+	use { 'iamcco/markdown-preview.nvim', run = function() fn['mkdp#util#install']() end,
+		                              -- to prevent losing connection between browser tab and markdown window in
+		                              -- neovim (see https://github.com/iamcco/markdown-preview.nvim/issues/107)
+	                                      config = function() vim.g.mkdp_auto_close = false end, }
 	-- <leader> dd start debugging with gdb
 	-- <leader> dp start debugging python
 	-- F8 :GdbBreakpointToggle
@@ -31,7 +224,65 @@ return require('packer').startup(function(use)
 	-- :w - put content of buffer into the text window
 	-- :q - close the Neovim overlay
 	-- <C-e> - open Neovim overlay in current text window manually
-	use { 'glacambre/firenvim', run = function() fn['firenvim#install'](0) end }
+	use { 'glacambre/firenvim',
+		run = function() fn['firenvim#install'](0) end,
+		config = function()
+			if vim.g.started_by_firenvim then
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Generally use Markdown syntax',
+														 pattern = '*.txt',
+														 callback = function() vim.opt.filetype = 'markdown' end, })
+				-- specialize here for certain pages (URL is always first part of file name)
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Redmine uses textile format',
+														 pattern = '*redmine*.txt',
+														 callback = function() vim.opt.filetype = 'textile'
+																			   vim.opt.textwidth = 0
+																	end, })
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'using Twiki syntax file and configuration suggested by https://twiki.org/cgi-bin/view/Codev/VimEditor',
+														 pattern = 'twiki*.txt',
+														 callback = function() vim.opt.filetype = 'twiki'
+																			   vim.opt.epandtab = true
+																			   vim.opt.softtabstop = 3
+																			   vim.opt.tabstop = 8
+																			   vim.opt.shiftwidth = 3
+																			   vim.opt.textwidth = 0
+																	end, })
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Jupyter notebook, Python',
+														 pattern = '*ipynb_er-DIV*.txt',
+														 callback = function() vim.opt.filetype = 'python'
+																			   vim.keymap.set('n', '<CR>', function()
+																				   vim.cmd.write {}
+																				   vim.cmd.call { 'firenvim#press_keys(\"<LT>C-CR>\")<CR>' }
+																			   end, {noremap = true})
+																	end, })
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Jupyter notebook, Octave',
+														 pattern = '*ipynb_er-DIV*.txt',
+														 callback = function() vim.opt.filetype = 'octave'
+																			   vim.keymap.set('n', '<CR>', function()
+																				   vim.cmd.write {}
+																				   vim.cmd.call { 'firenvim#press_keys(\"<LT>C-CR>\")<CR>' }
+																			   end, {noremap = true})
+																	end, })
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Jupyter notebook, Text',
+														 pattern = '*ipynb_ontainer-DIV*.txt',
+														 callback = function() vim.opt.filetype = 'markdown' end, })
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Chat pages: Enter sends the message and deletes the buffer. Shift Enter is normal return. Insert mode is default.',
+														 pattern = { '*slack.com*', '*gitter.im*', '*element.io*', '*discord.com*' },
+														 callback = function() vim.opt.filetype = 'markdown'
+																			   vim.keymap.set('i', '<CR>', function()
+																				   vim.cmd.call { '<Esc>' }
+																				   vim.cmd.write {}
+																				   vim.cmd.call { 'firenvim#press_keys(\"<LT>CR>\")<CR>ggdGa' }
+																			   end, {noremap = true})
+																			   vim.keymap.set('i', '<s-CR>', '<CR>', {noremap = true})
+																			   vim.opt.textwidth = 0
+																			   vim.opt.laststatus = 0
+																			   require'treesitter-context'.disable()
+																	end, })
+				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Compiler explorer',
+														 pattern = 'godbolt.org_*.txt',
+														 callback = function() vim.opt.filetype = 'cpp' end, })
+			end
+	end}
 	-- Whenever cursor jumps some distance or moves between windows, it will flash
 	-- so you can see where it is.
 	-- There is a bug when closing buffers created by Fugitive's :Gdiff, therefore
@@ -128,6 +379,10 @@ return require('packer').startup(function(use)
 			require("scrollbar").setup()
 			require("scrollbar.handlers.search").setup()
 		end
+	}
+	use { 'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		config = function() require('lualine').setup{ options = { theme  = 'solarized_dark' },} end,
 	}
 	-- display file name for each window at the top right via virtual text
 	use { 'b0o/incline.nvim',
@@ -349,4 +604,7 @@ return require('packer').startup(function(use)
 	-- https://github.com/MunifTanjim/exrc.nvim
 	-- :ExrcSource
 	use { 'MunifTanjim/exrc.nvim' }
+	-- Intelligently reopen files at your last edit position in Vim.
+	-- Handles more edge-cases than the code listed in `:help last-position-jump`
+	use { 'farmergreg/vim-lastplace' }
 end)
