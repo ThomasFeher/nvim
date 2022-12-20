@@ -50,7 +50,6 @@ vim.api.nvim_set_keymap('t', '<leader><left>', '<C-\\><C-N><C-W>h', {noremap = t
 vim.api.nvim_set_keymap('t', '<leader><right>', '<C-\\><C-N><C-W>l', {noremap = true})
 vim.api.nvim_set_keymap('t', '<leader><up>', '<C-\\><C-N><C-W>k', {noremap = true})
 vim.api.nvim_set_keymap('t', '<leader><down>', '<C-\\><C-N><C-W>j', {noremap = true})
-vim.api.nvim_set_keymap('t', '<Esc><Esc>', '<C-\\><C-N>', {noremap = true})
 -- tag navigation (view tag list with :tags)
 --   jump to tag (using 'K' seems better, because more generic)
 vim.keymap.set('n', '<leader><CR>', '<C-]>', {noremap = true})
