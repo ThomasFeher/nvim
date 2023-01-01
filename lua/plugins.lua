@@ -192,6 +192,7 @@ return require('packer').startup(function(use)
 		--   <BS>: delete some pre-steps
 		--
 		require('mini.align').setup()
+		require('mini.animate').setup()
 		require('mini.comment').setup{
 			mappings = {
 				-- Toggle comment (like `gcip` - comment inner paragraph) for both
