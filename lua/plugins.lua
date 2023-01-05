@@ -207,7 +207,10 @@ return require('packer').startup(function(use)
 	end }
 	use 'Raimondi/delimitMate'
 	use 'PProvost/vim-ps1'
-	use 'bronson/vim-trailing-whitespace'
+	use { 'bronson/vim-trailing-whitespace', setup = function()
+		-- list of file types that shall be ignored by this plugin
+		vim.g.extra_whitespace_ignored_filetypes = { 'fzf' }
+	end }
 	use 'PotatoesMaster/i3-vim-syntax'
 	-- ga: print unicode value of character under the cursor
 	use 'tpope/vim-characterize'
