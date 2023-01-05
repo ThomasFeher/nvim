@@ -8,7 +8,7 @@ end
 vim.api.nvim_set_keymap('n', 'ä', ']', {})
 vim.api.nvim_set_keymap('n', 'ü', '[', {})
 
-return require('packer').startup(function(use)
+return require('packer').startup({function(use)
 	use 'wbthomason/packer.nvim'
 
 	use { 'lervag/vimtex', config = function()
@@ -621,4 +621,9 @@ return require('packer').startup(function(use)
 	-- Intelligently reopen files at your last edit position in Vim.
 	-- Handles more edge-cases than the code listed in `:help last-position-jump`
 	use { 'farmergreg/vim-lastplace' }
-end)
+end,
+	config = {
+		git = {
+			-- do full checkouts on plugin repositories, because we might want to do changes
+			depth = nil } }
+})
