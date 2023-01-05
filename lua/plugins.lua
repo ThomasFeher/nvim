@@ -104,7 +104,8 @@ return require('packer').startup({function(use)
 	-- :Filetypes
 	-- :History
 	-- install `bat` to get syntax highlighting in preview windows
-	use { 'junegunn/fzf.vim', config = function()
+	use { 'junegunn/fzf', run = 'fzf#install()' }
+	use { 'junegunn/fzf.vim', requires = 'junegunn/fzf', config = function()
 		-- use floating window for FZF
 		vim.g.fzf_layout = { window = { width = 0.8, height = 0.5, highlight = 'Comment' } }
 		vim.keymap.set('n', '<Leader>fzf', ':FZF "--preview"')
@@ -261,7 +262,7 @@ return require('packer').startup({function(use)
 				vim.api.nvim_create_autocmd('BufEnter', {desc = 'using Twiki syntax file and configuration suggested by https://twiki.org/cgi-bin/view/Codev/VimEditor',
 														 pattern = 'twiki*.txt',
 														 callback = function() vim.opt.filetype = 'twiki'
-																			   vim.opt.epandtab = true
+																			   vim.opt.expandtab = true
 																			   vim.opt.softtabstop = 3
 																			   vim.opt.tabstop = 8
 																			   vim.opt.shiftwidth = 3
