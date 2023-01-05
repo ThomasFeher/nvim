@@ -4,6 +4,13 @@ if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
   vim.cmd [[packadd packer.nvim]]
 end
+-- recompile this file whenever it was changed
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
 
 vim.api.nvim_set_keymap('n', 'ä', ']', {})
 vim.api.nvim_set_keymap('n', 'ü', '[', {})
