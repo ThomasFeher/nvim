@@ -593,6 +593,7 @@ return require('packer').startup({function(use)
 	lspconfig.clangd.setup{
 		capabilities = capabilities,
 		on_attach = custom_lsp_attach,
+		cmd = {'clangd', '--log=verbose', '--background-index', '--suggest-missing-includes', '--clang-tidy', '--pretty'},
 	}
 	lspconfig.pyright.setup {
 		capabilities = capabilities,
