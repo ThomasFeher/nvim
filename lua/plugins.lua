@@ -599,6 +599,11 @@ return require('packer').startup({function(use)
 		capabilities = capabilities,
 		on_attach = custom_lsp_attach,
 	}
+	-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
+	lspconfig.ltex.setup {
+		capabilities = capabilities,
+		on_attach = custom_lsp_attach,
+	}
 	require('neogen').setup {
 		enabled = true,
 	}
