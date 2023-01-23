@@ -340,6 +340,7 @@ return require('packer').startup({function(use)
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/cmp-omni'
 	use 'quangnguyen30192/cmp-nvim-ultisnips'
 	use { 'hrsh7th/nvim-cmp',
 		config = function()
@@ -370,6 +371,7 @@ return require('packer').startup({function(use)
 					{ name = 'path' },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = 'ultisnips' },
+					{ name = 'omni' },
 					}, {
 						{ name = 'buffer' },
 				})
