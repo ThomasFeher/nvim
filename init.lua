@@ -58,44 +58,45 @@ vim.keymap.set('n', '<leader><insert>', '<C-T>', {noremap = true})
 -- fold navigation
 vim.keymap.set('n', 'z<up>', 'zk', {noremap = true})
 vim.keymap.set('n', 'z<down>', 'zj', {noremap = true})
+
 -- make popup menu usable via arrow keys
 -- TODO comment out, try to work without it
---vim.keymap.set('c', '<Up>', function()
-		--if vim.fn.pumvisible() then
-			--return '<C-p>'
-		--else
-			--return '<Up>'
-		--end
-	--end,
-	--{noremap = true,
-	 --expr = true,})
---vim.keymap.set('c', '<Down>', function()
-		--if vim.fn.pumvisible() then
-			--return '<C-n>'
-		--else
-			--return '<Down>'
-		--end
-	--end,
-	--{noremap = true,
-	 --expr = true,})
---vim.keymap.set('c', '<Left>', function()
-		--if vim.fn.pumvisible() then
-			--return '<Up>'
-		--else
-			--return '<Left>'
-		--end
-	--end,
-	--{noremap = true,
-	 --expr = true,})
---vim.keymap.set('c', '<Right>', function()
-		--if vim.fn.pumvisible() then
-			--return '<Down>'
-		--else
-			--return '<Right>'
-		--end
-	--end,
-	--{noremap = true,
-	 --expr = true,})
+vim.keymap.set('c', '<Up>', function()
+		if vim.fn.pumvisible() ~= 0 then
+			return '<C-p>'
+		else
+			return '<Up>'
+		end
+	end,
+	{noremap = true,
+	 expr = true,})
+vim.keymap.set('c', '<Down>', function()
+		if vim.fn.pumvisible() ~= 0 then
+			return '<C-n>'
+		else
+			return '<Down>'
+		end
+	end,
+	{noremap = true,
+	 expr = true,})
+vim.keymap.set('c', '<Left>', function()
+		if vim.fn.pumvisible() ~= 0 then
+			return '<Up>'
+		else
+			return '<Left>'
+		end
+	end,
+	{noremap = true,
+	 expr = true,})
+vim.keymap.set('c', '<Right>', function()
+		if vim.fn.pumvisible() ~= 0 then
+			return '<Down>'
+		else
+			return '<Right>'
+		end
+	end,
+	{noremap = true,
+	 expr = true,})
 
 vim.api.nvim_create_augroup('uml', {})
 vim.api.nvim_create_autocmd('BufWritePost', { desc = 'Generate PlantUML diagrams after writing the file',
