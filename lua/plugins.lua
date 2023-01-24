@@ -111,6 +111,25 @@ return require('packer').startup({function(use)
 		-- use floating window for FZF
 		vim.g.fzf_layout = { window = { width = 0.8, height = 0.5, highlight = 'Comment' } }
 		vim.keymap.set('n', '<Leader>fzf', ':FZF "--preview"')
+		-- AgIn: Start ag in the specified directory
+		-- Source: https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
+		--
+		-- e.g.
+		--   :AgIn .. following
+		vim.cmd(
+				[[
+		function! s:ag_in(bang, ...)
+		  if !isdirectory(a:1)
+			throw 'not a valid directory: ' . a:1
+		  endif
+		  " Press `?' to enable preview window.
+		  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}), a:bang)
+		  " If you don't want preview option, use this
+		  " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+		endfunction
+		command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
+				]]
+			)
 	end }
 	-- modern matchit and matchparen replacement
 	-- %: as usual
