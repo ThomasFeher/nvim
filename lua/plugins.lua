@@ -75,6 +75,11 @@ return require('packer').startup({function(use)
 			-- make vimwikis default syntax markdown
 			vim.g.vimwiki_list = { {path = '~/vimwiki', syntax = 'markdown', ext = '.md'} }
 			vim.g.vimwiki_markdown_link_ext = 1
+			-- remove mapping that shadows automatic indentation (==) which is not needed
+			-- in vimwiki, but sometimes we need to switch vimwiki files that are initially
+			-- of type vimwiki to another filetype where automatic indentation is needed,
+			-- especially in firenvim
+			vim.keymap.set('n', '<Nop>', '<Plug>VimwikiAddHeaderLevel')
 			-- remove mapping that shadows vim-vinegars mapping to enter file browsing
 			vim.keymap.set('n', '<Nop>', '<Plug>VimwikiRemoveHeaderLevel')
 			vim.keymap.set('n', '<CR>', '<Plug>VimwikiFollowLink')
