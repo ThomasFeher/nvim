@@ -250,10 +250,20 @@ return require('packer').startup({function(use)
 	-- color scheme
 	use { 'ishan9299/nvim-solarized-lua', config = function() vim.cmd('colorscheme solarized') end, }
 	-- use :MarkdownPreview to render markdown files in the browser
-	use { 'iamcco/markdown-preview.nvim', run = function() fn['mkdp#util#install']() end,
-		                              -- to prevent losing connection between browser tab and markdown window in
-		                              -- neovim (see https://github.com/iamcco/markdown-preview.nvim/issues/107)
-	                                      config = function() vim.g.mkdp_auto_close = false end, }
+	use { 'iamcco/markdown-preview.nvim',
+		run = function() fn['mkdp#util#install']() end,
+		-- to prevent losing connection between browser tab and markdown window in
+		-- neovim (see https://github.com/iamcco/markdown-preview.nvim/issues/107)
+		config = function()
+			vim.g.mkdp_auto_close = false
+			vim.g.mkdp_preview_options = {
+				uml = {
+					server = 'http://telford.vic.site:8080'
+				}
+			}
+			-- make the server visible in the network
+			vim.g.mkdp_open_to_the_world = 1
+	end, }
 	-- <leader> dd start debugging with gdb
 	-- <leader> dp start debugging python
 	-- F8 :GdbBreakpointToggle
@@ -340,135 +350,15 @@ return require('packer').startup({function(use)
 	use 'ThePrimeagen/vim-apm'
 	-- language parser for better syntax highlighting, refactoring, navigation,
 	-- text objects, folding and more
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	use 'nvim-treesitter/nvim-treesitter-refactor'
-	use 'nvim-treesitter/nvim-treesitter-textobjects'
-	use 'nvim-treesitter/playground'
-	-- Avoid spellchecking of code for tree-sitter enabled buffers
-	use 'lewis6991/spellsitter.nvim'
-	use 'nvim-treesitter/nvim-treesitter-context'
-	-- Configuration for most commonly used language servers
-	-- :LspInfo shows the status of active and configured language servers
-	use 'neovim/nvim-lspconfig'
-	use 'nvim-lua/popup.nvim'
-	use 'nvim-lua/plenary.nvim'
-	use 'nvim-telescope/telescope.nvim'
-	use 'danymat/neogen'
-	-- automatically demangle assembly files
-	use 'ThomasFeher/nvim-demangle'
-
-	-- Auto-completion
-	use 'hrsh7th/cmp-nvim-lsp-signature-help'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/cmp-omni'
-	use 'quangnguyen30192/cmp-nvim-ultisnips'
-	use { 'hrsh7th/nvim-cmp',
-		config = function()
-			-- Setup nvim-cmp.
-			local cmp = require'cmp'
-			cmp.setup({
-				snippet = {
-					-- REQUIRED - you must specify a snippet engine
-					expand = function(args)
-						vim.fn["UltiSnips#Anon"](args.body)
-					end,
+	use { 'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate',
+		config =  function()
+			require'nvim-treesitter.configs'.setup {
+				ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
+				highlight = {
+					enable = true,              -- false will disable the whole extension
+					disable = {},  -- list of language that will be disabled
 				},
-				mapping = {
-					['<C-n>'] = cmp.mapping.select_next_item({ 'i', 'c'}),
-					['<C-p>'] = cmp.mapping.select_prev_item({ 'i', 'c'}),
-					['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-					['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-					['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-					['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-					['<C-e>'] = cmp.mapping({
-						i = cmp.mapping.abort(),
-						c = cmp.mapping.close(),
-					}),
-					['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				},
-				sources = cmp.config.sources({
-					{ name = 'nvim_lsp' },
-					{ name = 'path' },
-					{ name = "nvim_lsp_signature_help" },
-					{ name = 'ultisnips' },
-					{ name = 'omni' },
-					}, {
-						{ name = 'buffer' },
-				})
-			})
-			-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline('/', {
-				sources = {
-					{ name = 'buffer' }
-				}
-			})
-		end
-	}
-	-- add information to current search
-	use { 'kevinhwang91/nvim-hlslens',
-		config = function()
-			local kopts = {noremap = true, silent = true}
-			vim.api.nvim_set_keymap('n', 'n',
-				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-			kopts)
-			vim.api.nvim_set_keymap('n', 'N',
-				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-			kopts)
-			vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
-		end
-	}
-	-- add a scrollbar that shows locations of diagnostics and search results
-	use { 'petertriho/nvim-scrollbar',
-		config = function()
-			require("scrollbar").setup()
-			require("scrollbar.handlers.search").setup()
-		end
-	}
-	use { 'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-		config = function() require('lualine').setup{ options = { theme  = 'solarized_dark' },} end,
-	}
-	-- display file name for each window at the top right via virtual text
-	use { 'b0o/incline.nvim',
-		config = function()
-			require('incline').setup {
-				hide = {
-					focused_win = true,
-				}
-			}
-		end
-	}
-	-- improved switching between windows
-	use { 'https://gitlab.com/yorickpeterse/nvim-window.git',
-		config = function()
-			vim.api.nvim_set_keymap('n', '<silent> <leader>W', '',  {
-				noremap = true,
-				callback = require('nvim-window').pick,
-				desc = 'navigate buffers with nvim-window',
-			})
-		end
-	}
-
-
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if PACKER_BOOTSTRAP then
-		require('packer').sync()
-	end
-
-	require'nvim-treesitter.configs'.setup {
-		ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
-		highlight = {
-			enable = true,              -- false will disable the whole extension
-			disable = {},  -- list of language that will be disabled
-		},
 		refactor = {
 			highlight_definitions = { enable = true },
 			highlight_current_scope = { enable = false },
@@ -556,92 +446,210 @@ return require('packer').startup({function(use)
 				node_decremental = '<S-TAB>',
 			},
 		},
-	}
-	require('spellsitter').setup()
-	require'treesitter-context'.setup {
-		enable = true,
-		max_lines = 0,
-		patterns = {
-			default = {
-				'class',
-				'struct',
-				'function',
-				'method',
-				'for',
-				'while',
-				'if',
-				'switch',
-				'case',
+		}
+	end }
+	use 'nvim-treesitter/nvim-treesitter-refactor'
+	use 'nvim-treesitter/nvim-treesitter-textobjects'
+	use 'nvim-treesitter/playground'
+	-- Avoid spellchecking of code for tree-sitter enabled buffers
+	use { 'lewis6991/spellsitter.nvim', config = function() require('spellsitter').setup() end }
+	use { 'nvim-treesitter/nvim-treesitter-context',
+		config = require'treesitter-context'.setup {
+			enable = true,
+			max_lines = 0,
+			patterns = {
+				default = {
+					'class',
+					'struct',
+					'function',
+					'method',
+					'for',
+					'while',
+					'if',
+					'switch',
+					'case',
+				}
 			}
 		}
 	}
-	local custom_lsp_attach = function(client)
-		-- See `:help nvim_buf_set_keymap()` for more information
-		vim.keymap.set('n', 'K', vim.lsp.buf.hover, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>def', vim.lsp.buf.definition, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>type', vim.lsp.buf.type_definition, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>imp', vim.lsp.buf.implementation, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>ref', vim.lsp.buf.rename, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>dn', vim.diagnostic.goto_next, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>dp', vim.diagnostic.goto_prev, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>dsb', function() return vim.diagnostic.open_float({scope='buffer'}) end, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>dsc', function() return vim.diagnostic.open_float({scope='cursor'}) end, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>dsl', function() return vim.diagnostic.open_float({scope='line'}) end, {noremap = true, buffer = true})
-		vim.keymap.set('n', '<Leader>dt', function() return require('telescope.builtin').diagnostics() end, {noremap = true, buffer = true})
-		-- Use LSP as the handler for omnifunc.
-		--    See `:help omnifunc` and `:help ins-completion` for more information.
-		vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-		-- Use LSP as the handler for formatexpr.
-		--    See `:help formatexpr` for more information.
-		local has_formatting = nil
-		for _,v in pairs(vim.lsp.get_active_clients()) do
-			if v['document_range_formatting'] then
-				has_formatting = 1
+	-- Configuration for most commonly used language servers
+	-- :LspInfo shows the status of active and configured language servers
+	use { 'neovim/nvim-lspconfig', config = function()
+		local custom_lsp_attach = function(client)
+			-- See `:help nvim_buf_set_keymap()` for more information
+			vim.keymap.set('n', 'K', vim.lsp.buf.hover, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>def', vim.lsp.buf.definition, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>type', vim.lsp.buf.type_definition, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>imp', vim.lsp.buf.implementation, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>ref', vim.lsp.buf.rename, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>dn', vim.diagnostic.goto_next, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>dp', vim.diagnostic.goto_prev, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>dsb', function() return vim.diagnostic.open_float({scope='buffer'}) end, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>dsc', function() return vim.diagnostic.open_float({scope='cursor'}) end, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>dsl', function() return vim.diagnostic.open_float({scope='line'}) end, {noremap = true, buffer = true})
+			vim.keymap.set('n', '<Leader>dt', function() return require('telescope.builtin').diagnostics() end, {noremap = true, buffer = true})
+			-- Use LSP as the handler for omnifunc.
+			--    See `:help omnifunc` and `:help ins-completion` for more information.
+			vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+			-- Use LSP as the handler for formatexpr.
+			--    See `:help formatexpr` for more information.
+			local has_formatting = nil
+			for _,v in pairs(vim.lsp.get_active_clients()) do
+				if v['document_range_formatting'] then
+					has_formatting = 1
+				end
 			end
+			if has_formatting then
+				vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+			end
+			-- For plugins with an `on_attach` callback, call them here. For example:
+			-- require('completion').on_attach()
 		end
-		if has_formatting then
-			vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
-		end
-		-- For plugins with an `on_attach` callback, call them here. For example:
-		-- require('completion').on_attach()
-	end
-	local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-	local lspconfig = require'lspconfig'
-	lspconfig.sumneko_lua.setup { -- lua-language-server
-		capabilities = capabilities,
-		on_attach = custom_lsp_attach,
-	}
-	lspconfig.clangd.setup{
-		capabilities = capabilities,
-		on_attach = custom_lsp_attach,
-		cmd = {'clangd', '--log=verbose', '--background-index', '--suggest-missing-includes', '--clang-tidy', '--pretty'},
-	}
-	lspconfig.pyright.setup {
-		capabilities = capabilities,
-		on_attach = custom_lsp_attach,
-	}
-	-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
-	lspconfig.ltex.setup {
-		capabilities = capabilities,
-		on_attach = custom_lsp_attach,
-	}
-	require('neogen').setup {
-		enabled = true,
-	}
-	vim.api.nvim_set_keymap(
-		'n',
-		'<Leader>gen',
-		'',
-		{
-			noremap = true,
-			callback = require('neogen').generate,
-			desc = 'create documentation with Neogen',
+		local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+		local lspconfig = require'lspconfig'
+		lspconfig.sumneko_lua.setup { -- lua-language-server
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
 		}
-	)
-	-- configure auto-completion with nvim-cmp
-	vim.opt.completeopt={"menu", "menuone", "noselect"}
+		lspconfig.clangd.setup{
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+			cmd = {'clangd', '--log=verbose', '--background-index', '--suggest-missing-includes', '--clang-tidy', '--pretty'},
+		}
+		lspconfig.pyright.setup {
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+		}
+		-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
+		lspconfig.ltex.setup {
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+		}
+	end }
+	use 'nvim-lua/popup.nvim'
+	use 'nvim-lua/plenary.nvim'
+	use 'nvim-telescope/telescope.nvim'
+	use { 'danymat/neogen', config = function()
+		require('neogen').setup {
+			enabled = true,
+		}
+		vim.api.nvim_set_keymap(
+			'n',
+			'<Leader>gen',
+			'',
+			{
+				noremap = true,
+				callback = require('neogen').generate,
+				desc = 'create documentation with Neogen',
+			}
+		)
+	end}
+	-- automatically demangle assembly files
+	use 'ThomasFeher/nvim-demangle'
+
+	-- Auto-completion
+	use 'hrsh7th/cmp-nvim-lsp-signature-help'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/cmp-omni'
+	use 'quangnguyen30192/cmp-nvim-ultisnips'
+	use { 'hrsh7th/nvim-cmp',
+		config = function()
+			-- Setup nvim-cmp.
+			local cmp = require'cmp'
+			cmp.setup({
+				snippet = {
+					-- REQUIRED - you must specify a snippet engine
+					expand = function(args)
+						vim.fn["UltiSnips#Anon"](args.body)
+					end,
+				},
+				mapping = {
+					['<C-n>'] = cmp.mapping.select_next_item({ 'i', 'c'}),
+					['<C-p>'] = cmp.mapping.select_prev_item({ 'i', 'c'}),
+					['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+					['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+					['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+					['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+					['<C-e>'] = cmp.mapping({
+						i = cmp.mapping.abort(),
+						c = cmp.mapping.close(),
+					}),
+					['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				},
+				sources = cmp.config.sources({
+					{ name = 'nvim_lsp' },
+					{ name = 'path' },
+					{ name = "nvim_lsp_signature_help" },
+					{ name = 'ultisnips' },
+					{ name = 'omni' },
+					}, {
+						{ name = 'buffer' },
+				})
+			})
+			-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+			cmp.setup.cmdline('/', {
+				sources = {
+					{ name = 'buffer' }
+				}
+			})
+			-- configure auto-completion with nvim-cmp
+			vim.opt.completeopt={"menu", "menuone", "noselect"}
+		end
+	}
+	-- add information to current search
+	use { 'kevinhwang91/nvim-hlslens',
+		config = function()
+			local kopts = {noremap = true, silent = true}
+			vim.api.nvim_set_keymap('n', 'n',
+				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+			kopts)
+			vim.api.nvim_set_keymap('n', 'N',
+				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+			kopts)
+			vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
+		end
+	}
+	-- add a scrollbar that shows locations of diagnostics and search results
+	use { 'petertriho/nvim-scrollbar',
+		config = function()
+			require("scrollbar").setup()
+			require("scrollbar.handlers.search").setup()
+		end
+	}
+	use { 'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		config = function() require('lualine').setup{ options = { theme  = 'solarized_dark' },} end,
+	}
+	-- display file name for each window at the top right via virtual text
+	use { 'b0o/incline.nvim',
+		config = function()
+			require('incline').setup {
+				hide = {
+					focused_win = true,
+				}
+			}
+		end
+	}
+	-- improved switching between windows
+	use { 'https://gitlab.com/yorickpeterse/nvim-window.git',
+		config = function()
+			vim.api.nvim_set_keymap('n', '<silent> <leader>W', '',  {
+				noremap = true,
+				callback = require('nvim-window').pick,
+				desc = 'navigate buffers with nvim-window',
+			})
+		end
+	}
+
 	-- interacting with compiler-explorer
 	-- https://github.com/krady21/compiler-explorer.nvim
     -- CECompile
@@ -664,6 +672,12 @@ return require('packer').startup({function(use)
 	-- Intelligently reopen files at your last edit position in Vim.
 	-- Handles more edge-cases than the code listed in `:help last-position-jump`
 	use { 'farmergreg/vim-lastplace' }
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if PACKER_BOOTSTRAP then
+    require('packer').sync()
+  end
 end,
 	config = {
 		git = {
