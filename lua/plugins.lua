@@ -41,7 +41,7 @@ return require('packer').startup({function(use)
 	-- Git tree viewer
 	-- g? in tree view to see mappings
 	-- '@ jump to current HEAD
-	use { 'rbong/vim-flog', branch = 'v2' }
+	use { 'rbong/vim-flog' }
 	use { 'airblade/vim-gitgutter' }
 	-- <Leader>gm to open window with last commit changing the content under the
 	-- cursor.
