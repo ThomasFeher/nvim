@@ -86,6 +86,137 @@ return require('packer').startup({function(use)
 		end,
 	}
 
+	-- Tree-sitter
+	-- language parser for better syntax highlighting, refactoring, navigation,
+	-- text objects, folding and more
+	use { 'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate',
+		config = function()
+			require'nvim-treesitter.configs'.setup {
+				ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
+				highlight = {
+					enable = true,              -- false will disable the whole extension
+					disable = {},  -- list of language that will be disabled
+				},
+			--[=[
+				refactor = {
+					highlight_definitions = { enable = true },
+					highlight_current_scope = { enable = false },
+					smart_rename = {
+						enable = true,
+						keymaps = {
+							smart_rename = "grr",
+						},
+					},
+					navigation = {
+						enable = true,
+						keymaps = {
+							goto_definition = "gnd",
+							list_definitions = "gnD",
+							list_definitions_toc = "gO",
+							goto_next_usage = "<a-*>",
+							goto_previous_usage = "<a-#>",
+						},
+					},
+				},
+				textobjects = {
+					-- possible text objects:
+					-- @block.inner
+					-- @block.outer
+					-- @call.inner
+					-- @call.outer
+					-- @class.inner
+					-- @class.outer
+					-- @comment.outer
+					-- @conditional.inner
+					-- @conditional.outer
+					-- @function.inner
+					-- @function.outer
+					-- @loop.inner
+					-- @loop.outer
+					-- @parameter.inner
+					-- @statement.outer
+					select = {
+						enable = true,
+						keymaps = {
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+						},
+					},
+					move = {
+						enable = true,
+						goto_next_start = {
+							["]m"] = "@function.outer",
+							["]]"] = "@class.outer",
+						},
+						goto_next_end = {
+							["]M"] = "@function.outer",
+							["]["] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[m"] = "@function.outer",
+							["[["] = "@class.outer",
+						},
+						goto_previous_end = {
+							["[M"] = "@function.outer",
+							["[]"] = "@class.outer",
+						},
+					},
+					swap = {
+						enable = true,
+						swap_next = {
+							["<leader>a"] = "@parameter.inner",
+						},
+						swap_previous = {
+							["<leader>A"] = "@parameter.inner",
+						},
+					},
+				},
+			--[=[
+				indent = {
+					enable = true,
+				},
+			--]=]
+				incremental_selection = {
+					enable = true,
+					-- keymaps = {
+					-- 	init_selection = '<CR>',
+					-- 	scope_incremental = '<CR>',
+					-- 	node_incremental = '<TAB>',
+					-- 	node_decremental = '<S-TAB>',
+					-- },
+				},
+			}
+		end
+	}
+	use 'nvim-treesitter/nvim-treesitter-refactor'
+	use 'nvim-treesitter/nvim-treesitter-textobjects'
+	use 'nvim-treesitter/playground'
+	-- Avoid spellchecking of code for tree-sitter enabled buffers
+	use { 'lewis6991/spellsitter.nvim', config = function() require('spellsitter').setup() end }
+	-- use { 'nvim-treesitter/nvim-treesitter-context'}
+	use { 'nvim-treesitter/nvim-treesitter-context',
+		config = require'treesitter-context'.setup {
+			enable = true,
+			max_lines = 0,
+			patterns = {
+				default = {
+					'class',
+					'struct',
+					'function',
+					'method',
+					'for',
+					'while',
+					'if',
+					'switch',
+					'case',
+				}
+			}
+		}
+	}
+
 	-- Modify quickfix (and location list) entries, writing these modifications will modify the original parts
 	use 'stefandtw/quickfix-reflector.vim'
 	use 'vim-scripts/TWiki-Syntax'
@@ -348,130 +479,6 @@ return require('packer').startup({function(use)
 	vim.g.beacon_ignore_buffers = { "[Git]" }
 	-- Statistics about your keystrokes
 	use 'ThePrimeagen/vim-apm'
-	-- language parser for better syntax highlighting, refactoring, navigation,
-	-- text objects, folding and more
-	use { 'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
-		config =  function()
-			require'nvim-treesitter.configs'.setup {
-				ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
-				highlight = {
-					enable = true,              -- false will disable the whole extension
-					disable = {},  -- list of language that will be disabled
-				},
-		refactor = {
-			highlight_definitions = { enable = true },
-			highlight_current_scope = { enable = false },
-			smart_rename = {
-				enable = true,
-				keymaps = {
-					smart_rename = "grr",
-				},
-			},
-			navigation = {
-				enable = true,
-				keymaps = {
-					goto_definition = "gnd",
-					list_definitions = "gnD",
-					list_definitions_toc = "gO",
-					goto_next_usage = "<a-*>",
-					goto_previous_usage = "<a-#>",
-				},
-			},
-		},
-		textobjects = {
-			-- possible text objects:
-			-- @block.inner
-			-- @block.outer
-			-- @call.inner
-			-- @call.outer
-			-- @class.inner
-			-- @class.outer
-			-- @comment.outer
-			-- @conditional.inner
-			-- @conditional.outer
-			-- @function.inner
-			-- @function.outer
-			-- @loop.inner
-			-- @loop.outer
-			-- @parameter.inner
-			-- @statement.outer
-			select = {
-				enable = true,
-				keymaps = {
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
-					["ac"] = "@class.outer",
-					["ic"] = "@class.inner",
-				},
-			},
-			move = {
-				enable = true,
-				goto_next_start = {
-					["]m"] = "@function.outer",
-					["]]"] = "@class.outer",
-				},
-				goto_next_end = {
-					["]M"] = "@function.outer",
-					["]["] = "@class.outer",
-				},
-				goto_previous_start = {
-					["[m"] = "@function.outer",
-					["[["] = "@class.outer",
-				},
-				goto_previous_end = {
-					["[M"] = "@function.outer",
-					["[]"] = "@class.outer",
-				},
-			},
-			swap = {
-				enable = true,
-				swap_next = {
-					["<leader>a"] = "@parameter.inner",
-				},
-				swap_previous = {
-					["<leader>A"] = "@parameter.inner",
-				},
-			},
-		},
-		indent = {
-			enable = true,
-		},
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = '<CR>',
-				scope_incremental = '<CR>',
-				node_incremental = '<TAB>',
-				node_decremental = '<S-TAB>',
-			},
-		},
-		}
-	end }
-	use 'nvim-treesitter/nvim-treesitter-refactor'
-	use 'nvim-treesitter/nvim-treesitter-textobjects'
-	use 'nvim-treesitter/playground'
-	-- Avoid spellchecking of code for tree-sitter enabled buffers
-	use { 'lewis6991/spellsitter.nvim', config = function() require('spellsitter').setup() end }
-	use { 'nvim-treesitter/nvim-treesitter-context',
-		config = require'treesitter-context'.setup {
-			enable = true,
-			max_lines = 0,
-			patterns = {
-				default = {
-					'class',
-					'struct',
-					'function',
-					'method',
-					'for',
-					'while',
-					'if',
-					'switch',
-					'case',
-				}
-			}
-		}
-	}
 	-- Configuration for most commonly used language servers
 	-- :LspInfo shows the status of active and configured language servers
 	use { 'neovim/nvim-lspconfig', config = function()
