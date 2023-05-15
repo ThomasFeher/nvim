@@ -194,8 +194,6 @@ return require('packer').startup({function(use)
 	use 'nvim-treesitter/nvim-treesitter-refactor'
 	use 'nvim-treesitter/nvim-treesitter-textobjects'
 	use 'nvim-treesitter/playground'
-	-- Avoid spellchecking of code for tree-sitter enabled buffers
-	use { 'lewis6991/spellsitter.nvim', config = function() require('spellsitter').setup() end }
 	-- use { 'nvim-treesitter/nvim-treesitter-context'}
 	use { 'nvim-treesitter/nvim-treesitter-context',
 		config = require'treesitter-context'.setup {
