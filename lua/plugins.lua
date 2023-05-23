@@ -196,7 +196,7 @@ return require('packer').startup({function(use)
 	use 'nvim-treesitter/playground'
 	-- use { 'nvim-treesitter/nvim-treesitter-context'}
 	use { 'nvim-treesitter/nvim-treesitter-context',
-		config = require'treesitter-context'.setup {
+		config = function() require'treesitter-context'.setup {
 			enable = true,
 			max_lines = 0,
 			patterns = {
@@ -213,6 +213,7 @@ return require('packer').startup({function(use)
 				}
 			}
 		}
+	end
 	}
 
 	-- Modify quickfix (and location list) entries, writing these modifications will modify the original parts
