@@ -515,7 +515,7 @@ return require('packer').startup({function(use)
 		end
 		local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		local lspconfig = require'lspconfig'
-		lspconfig.sumneko_lua.setup { -- lua-language-server
+		lspconfig.lua_ls.setup { -- lua-language-server
 			capabilities = capabilities,
 			on_attach = custom_lsp_attach,
 		}
