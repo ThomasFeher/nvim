@@ -1,5 +1,6 @@
 bundle/
 .netrwhist
+plugin/packer_compiled.lua
 spell/*.spl
 tags
 tags.lock
