@@ -116,3 +116,17 @@ vim.cmd('command! LcdFile lcd %:p:h')
 
 -- command for building neovim from source
 vim.cmd('command! MakeNeovim make "CMAKE_INSTALL_PREFIX=$HOME/bin/neovim" "CMAKE_BUILD_TYPE=RelWithDebInfo"')
+
+vim.cmd([[
+function! Save_and_exec() abort
+    if &filetype == 'vim'
+      :silent! write
+      :source %
+    elseif &filetype == 'lua'
+      :silent! write
+      :luafile %
+    endif
+    return
+  endfunction
+  command! SaveAndExec call Save_and_exec()
+]])
