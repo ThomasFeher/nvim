@@ -27,7 +27,7 @@ vim.opt.splitbelow = true -- Prefer windows splitting to the bottom
 vim.opt.startofline = false -- preserve cursor column
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
-vim.opt.wildmode = { 'longest', 'full' }
+vim.opt.wildmode = { 'longest:full' }
 vim.opt.winblend = 10 -- make floating windows semi-transparent
 
 -- load plugins
