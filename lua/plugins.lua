@@ -15,7 +15,7 @@ vim.api.nvim_set_keymap('n', 'ä', ']', {})
 vim.api.nvim_set_keymap('n', 'ü', '[', {})
 
 return require('lazy').setup({
-	{ 'lervag/vimtex', config = function()
+	{ 'lervag/vimtex', init = function()
 		vim.g.tex_flavor = 'latex'
 		vim.g.vimtex_fold_enabled = 0 -- actvated folding slowes neovim down significantly
 		vim.g.vimtex_view_general_viewer = 'okular'
@@ -66,7 +66,7 @@ return require('lazy').setup({
 	--   and more
 	'tpope/vim-eunuch',
 
-	{ 'vimwiki/vimwiki',  branch = 'dev', config = function()
+	{ 'vimwiki/vimwiki',  branch = 'dev', init = function()
 			-- use vimwiki for markdown files
 			vim.g.vimwiki_ext2syntax = { ['.md'] = 'markdown', ['.mkd'] = 'markdown', ['.wiki'] = 'media' }
 			-- make vimwikis default syntax markdown
@@ -241,9 +241,13 @@ return require('lazy').setup({
 	-- :History
 	-- install `bat` to get syntax highlighting in preview windows
 	{ 'junegunn/fzf', build = 'fzf#install()' },
-	{ 'junegunn/fzf.vim', dependencies = 'junegunn/fzf', config = function()
+	{ 'junegunn/fzf.vim',
+	dependencies = 'junegunn/fzf',
+	init = function()
 		-- use floating window for FZF
 		vim.g.fzf_layout = { window = { width = 0.8, height = 0.5, highlight = 'Comment' } }
+	end,
+	config = function()
 		vim.keymap.set('n', '<Leader>fzf', ':FZF "--preview"')
 		-- AgIn: Start ag in the specified directory
 		-- Source: https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
@@ -291,7 +295,7 @@ return require('lazy').setup({
 	'AndrewRadev/linediff.vim',
 	'editorconfig/editorconfig-vim',
 	-- Integration of https://github.com/BobBuildTool/bob into Neovim
-	{ 'ThomasFeher/vim-bob' , config = function()
+	{ 'ThomasFeher/vim-bob' , init = function()
 		vim.keymap.set('n', '<leader>bb', ':make!<CR>', { noremap = true })
 		vim.keymap.set('n', '<leader>bC', ':BobClean<CR>', { noremap = true })
 		vim.keymap.set('n', '<leader>bd', ':BobDev!<Space>', { noremap = true })
@@ -405,7 +409,7 @@ return require('lazy').setup({
 	{ 'ishan9299/nvim-solarized-lua', config = function() vim.cmd('colorscheme solarized') end, },
 	-- use :MarkdownPreview to render markdown files in the browser
 	{ 'iamcco/markdown-preview.nvim',
-		build = function() fn['mkdp#util#install']() end,
+		build = function() vim.fn['mkdp#util#install']() end,
 		-- to prevent losing connection between browser tab and markdown window in
 		-- neovim (see https://github.com/iamcco/markdown-preview.nvim/issues/107)
 		config = function()
@@ -436,7 +440,7 @@ return require('lazy').setup({
 	-- :q - close the Neovim overlay
 	-- <C-e> - open Neovim overlay in current text window manually
 	{ 'glacambre/firenvim',
-		build = function() fn['firenvim#install'](0) end,
+		build = function() vim.fn['firenvim#install'](0) end,
 		config = function()
 			if vim.g.started_by_firenvim then
 				vim.api.nvim_create_autocmd('BufEnter', {desc = 'Generally use Markdown syntax',
@@ -499,7 +503,7 @@ return require('lazy').setup({
 	-- There is a bug when closing buffers created by Fugitive's :Gdiff, therefore
 	-- ignoring those buffers for now.
 	{'danilamihailov/beacon.nvim',
-		config = function() vim.g.beacon_ignore_buffers = { "[Git]" } end},
+		init = function() vim.g.beacon_ignore_buffers = { "[Git]" } end, },
 	-- Statistics about your keystrokes
 	'ThePrimeagen/vim-apm',
 	-- Configuration for most commonly used language servers
