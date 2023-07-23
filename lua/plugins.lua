@@ -279,7 +279,7 @@ return require('lazy').setup({
 	-- 1i%: the inside of an 'open-to-close block'
 	-- a%: an 'any block'
 	-- 1a%: an 'open-to-close block'
-	{ 'andymass/vim-matchup', config = function()
+	{ 'andymass/vim-matchup', init = function()
 		-- does in more situations the correct thing that `autocmd FileType cpp setlocal matchpairs+=<:>`
 		vim.g.matchup_matchpref = {cpp = {template = 1}}
 	end },
