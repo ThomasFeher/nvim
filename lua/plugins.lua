@@ -90,7 +90,7 @@ return require('lazy').setup({
 	build = ':TSUpdate',
 	config = function()
 		require'nvim-treesitter.configs'.setup {
-			ensure_installed = "c", "cpp",     -- one of "all", "language", or a list of languages
+			ensure_installed = {"bash", "c", "cmake", "cpp", "latex", "lua", "python", "vim"},     -- one of "all", "language", or a list of languages
 			highlight = {
 				enable = true,              -- false will disable the whole extension
 				disable = {},  -- list of language that will be disabled
