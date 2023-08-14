@@ -30,6 +30,8 @@ vim.opt.termguicolors = true
 vim.opt.wildmode = { 'longest:full' }
 vim.opt.winblend = 10 -- make floating windows semi-transparent
 
+vim.diagnostic.config({severity_sort = true})
+
 -- load plugins
 require'plugins'
 
