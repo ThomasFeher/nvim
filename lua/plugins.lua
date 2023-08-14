@@ -336,7 +336,7 @@ return require('lazy').setup({
 	'AndrewRadev/switch.vim',
 	-- read and write gnupg encrypted files (.gpg,.pgp,.asc)
 	'jamessan/vim-gnupg',
-	{ "akinsho/toggleterm.nvim", tag = '*', config = function()
+	{ "akinsho/toggleterm.nvim", version = '*', config = function()
 		require("toggleterm").setup()
 	end },
 	'chrisbra/csv.vim',
