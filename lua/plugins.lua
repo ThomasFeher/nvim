@@ -556,6 +556,10 @@ return require('lazy').setup({
 			capabilities = capabilities,
 			on_attach = custom_lsp_attach,
 		}
+		lspconfig.pylsp.setup{
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+		}
 		-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
 		lspconfig.ltex.setup {
 			capabilities = capabilities,
