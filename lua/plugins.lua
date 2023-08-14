@@ -561,9 +561,23 @@ return require('lazy').setup({
 			on_attach = custom_lsp_attach,
 		}
 		-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
+		local path = vim.fn.stdpath("config") .. "/spell/de.utf-8.add"
+		local words_de = {}
+		for word in io.open(path, "r"):lines() do
+			table.insert(words_de, word)
+		end
+		local words_en = {}
+		for word in io.open(path, "r"):lines() do
+			table.insert(words_en, word)
+		end
 		lspconfig.ltex.setup {
 			capabilities = capabilities,
 			on_attach = custom_lsp_attach,
+			filetypes = { 'plaintex', 'tex' },
+			settings = {ltex = {dictionary = {
+				['de'] = { words_de },
+				['en'] = { words_en },
+			}}}
 		}
 	end },
 	'nvim-lua/popup.nvim',
