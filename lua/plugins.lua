@@ -191,29 +191,29 @@ return require('lazy').setup({
 		'nvim-treesitter/nvim-treesitter-refactor',
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		'nvim-treesitter/playground',
-		-- use { 'nvim-treesitter/nvim-treesitter-context'}
-		{ 'nvim-treesitter/nvim-treesitter-context',
-		config = function() require'treesitter-context'.setup {
-			enable = true,
-			max_lines = 0,
-			patterns = {
-				default = {
-					'class',
-					'struct',
-					'function',
-					'method',
-					'for',
-					'while',
-					'if',
-					'switch',
-					'case',
-				}
+	},
+	},
+	{ 'nvim-treesitter/nvim-treesitter-context',
+	dependencies = 'nvim-treesitter/nvim-treesitter',
+	config = function() require'treesitter-context'.setup {
+		enable = true,
+		max_lines = 0,
+		patterns = {
+			default = {
+				'class',
+				'struct',
+				'function',
+				'method',
+				'for',
+				'while',
+				'if',
+				'switch',
+				'case',
 			}
 		}
+	}
 	end
-},
-},
-},
+	},
 
 	-- Modify quickfix (and location list) entries, writing these modifications will modify the original parts
 	'stefandtw/quickfix-reflector.vim',
