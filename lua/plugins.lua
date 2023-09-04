@@ -26,9 +26,17 @@ return require('lazy').setup({
 		end,
 	},
 
-	-- Snippets
-	'SirVer/ultisnips',
+	-- Snippes
 	'honza/vim-snippets',
+	{ "L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+		config = function ()
+			require("luasnip.loaders.from_snipmate").lazy_load()
+		end
+	},
 
 	-- Git integration
 	{ 'tpope/vim-fugitive', config = function()
@@ -608,7 +616,7 @@ return require('lazy').setup({
 	'hrsh7th/cmp-path',
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/cmp-omni',
-	'quangnguyen30192/cmp-nvim-ultisnips',
+	{ 'saadparwaiz1/cmp_luasnip' },
 	{ 'hrsh7th/nvim-cmp',
 		config = function()
 			-- Setup nvim-cmp.
@@ -617,7 +625,7 @@ return require('lazy').setup({
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine
 					expand = function(args)
-						vim.fn["UltiSnips#Anon"](args.body)
+						require'luasnip'.lsp_expand(args.body)
 					end,
 				},
 				mapping = {
@@ -637,7 +645,7 @@ return require('lazy').setup({
 					{ name = 'nvim_lsp' },
 					{ name = 'path' },
 					{ name = "nvim_lsp_signature_help" },
-					{ name = 'ultisnips' },
+					{ name = 'luasnip' },
 					{ name = 'omni' },
 					}, {
 						{ name = 'buffer' },
