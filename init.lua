@@ -106,7 +106,7 @@ vim.api.nvim_create_autocmd('BufWritePost', { desc = 'Generate PlantUML diagrams
                                               group = 'uml',
 	                                          -- untested
                                               callback = function(data) io.popen('plantuml -tsvg ' .. data.file )
-                                                                        io.popen('plantuml -tsvg ' .. data.file )
+                                                                        io.popen('plantuml -teps ' .. data.file )
 	end })
 vim.api.nvim_create_autocmd('TextYankPost', { desc = 'highlight yanked region',
                                               pattern = {'*'},
