@@ -349,6 +349,11 @@ return require('lazy').setup({
 	end },
 	'chrisbra/csv.vim',
 	'wellle/targets.vim',
+	{ 'numToStr/Comment.nvim', opts = {
+		-- add any options here
+		},
+		lazy = false,
+	},
 	{ 'echasnovski/mini.nvim', config = function()
 		-- ga: start alignment mode
 		-- gA: start alignment mode with preview
@@ -367,17 +372,6 @@ return require('lazy').setup({
 		--   <BS>: delete some pre-steps
 		--
 		require('mini.align').setup()
-		require('mini.comment').setup{
-			mappings = {
-				-- Toggle comment (like `gcip` - comment inner paragraph) for both
-				-- Normal and Visual modes
-				comment = 'gc',
-				-- Toggle comment on current line
-				comment_line = 'gcc',
-				-- Define 'comment' textobject (like `dgc` - delete whole comment block)
-				textobject = 'gc',
-			},
-		}
 		require('mini.bracketed').setup {
 			-- First-level elements are tables describing behavior of a target:
 			--
