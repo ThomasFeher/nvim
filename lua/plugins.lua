@@ -674,7 +674,6 @@ return require('lazy').setup({
 			vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 			vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
 			vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
 		end
 	},
 	-- add a scrollbar that shows locations of diagnostics and search results
