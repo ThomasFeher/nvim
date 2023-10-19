@@ -87,7 +87,6 @@ return require('lazy').setup({
 			vim.keymap.set('n', '<Nop>', '<Plug>VimwikiAddHeaderLevel')
 			-- remove mapping that shadows vim-vinegars mapping to enter file browsing
 			vim.keymap.set('n', '<Nop>', '<Plug>VimwikiRemoveHeaderLevel')
-			vim.keymap.set('n', '<CR>', '<Plug>VimwikiFollowLink')
 		end,
 	},
 
