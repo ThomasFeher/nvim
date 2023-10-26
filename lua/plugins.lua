@@ -560,6 +560,15 @@ return require('lazy').setup({
 		lspconfig.pylsp.setup{
 			capabilities = capabilities,
 			on_attach = custom_lsp_attach,
+			settings = {
+				pylsp = {
+					plugins = {
+						pylint = {
+							enabled = true
+						}
+					}
+				}
+			}
 		}
 		-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
 		local path = vim.fn.stdpath("config") .. "/spell/de.utf-8.add"
@@ -588,6 +597,8 @@ return require('lazy').setup({
 			-- these are normally covered by clangd via LSP (given the flag `--clang-tidy` is used and depending on the .clang-tidy config file)
 			c = {'cc', 'clangtidy', 'clangcheck'},
 			cpp = {'cc', 'clangtidy', 'clangcheck'},
+			python = {'pylint', -- provided py pylsp
+					  'flake8'}, -- pylint/pylsp contains everything from flake8
 		}
 	end },
 	'nvim-lua/popup.nvim',
