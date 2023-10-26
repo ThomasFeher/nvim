@@ -584,7 +584,11 @@ return require('lazy').setup({
 	{ 'dense-analysis/ale', config = function()
 		vim.g.ale_use_neovim_diagnostics_api = 1
 		vim.g.ale_disable_lsp = 1  -- using LSP directly
-		vim.g.ale_linters_ignore = {'cc'}  -- in order to work, we'd need to provide a compile_commands.json
+		vim.g.ale_linters_ignore = {
+			-- these are normally covered by clangd via LSP (given the flag `--clang-tidy` is used and depending on the .clang-tidy config file)
+			c = {'cc', 'clangtidy', 'clangcheck'},
+			cpp = {'cc', 'clangtidy', 'clangcheck'},
+		}
 	end },
 	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
