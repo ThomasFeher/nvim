@@ -589,6 +589,16 @@ return require('lazy').setup({
 				['en'] = { words_en },
 			}}}
 		}
+		lspconfig.texlab.setup {
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+			settings = {
+
+				args = {"-auxdir=aux_texlab", "outdir=pdf_texlab"}, -- should all be specified in the .latexmkrc
+				auxDirectory = "aux_texlab",
+				pdfDirectory = "pdf_texlab",
+			}
+		}
 	end },
 	{ 'dense-analysis/ale', config = function()
 		vim.g.ale_use_neovim_diagnostics_api = 1
