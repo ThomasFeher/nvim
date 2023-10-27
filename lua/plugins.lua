@@ -622,6 +622,12 @@ return require('lazy').setup({
 					  'flake8'}, -- pylint/pylsp contains everything from flake8
 		}
 	end },
+	{ "chrisgrieser/nvim-rulebook",
+		keys = {
+			{ "<leader>i", function() require("rulebook").ignoreRule() end },
+			{ "<leader>?", function() require("rulebook").lookupRule() end },
+		}
+	},
 	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
