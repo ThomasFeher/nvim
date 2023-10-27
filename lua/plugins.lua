@@ -80,6 +80,7 @@ return require('lazy').setup({
 			-- make vimwikis default syntax markdown
 			vim.g.vimwiki_list = { {path = '~/vimwiki', syntax = 'markdown', ext = '.md'} }
 			vim.g.vimwiki_markdown_link_ext = 1
+			vim.g.vimwiki_filetypes = {'markdown'}
 			-- remove mapping that shadows automatic indentation (==) which is not needed
 			-- in vimwiki, but sometimes we need to switch vimwiki files that are initially
 			-- of type vimwiki to another filetype where automatic indentation is needed,
@@ -87,8 +88,50 @@ return require('lazy').setup({
 			vim.keymap.set('n', '<Nop>', '<Plug>VimwikiAddHeaderLevel')
 			-- remove mapping that shadows vim-vinegars mapping to enter file browsing
 			vim.keymap.set('n', '<Nop>', '<Plug>VimwikiRemoveHeaderLevel')
+			vim.treesitter.language.register('markdown', 'vimwiki')
 		end,
 	},
+    { 'lukas-reineke/headlines.nvim',
+	  dependencies = "nvim-treesitter/nvim-treesitter",
+      -- config = true, -- or `opts = {}`
+	  config = function()
+		  -- vim.treesitter.language.register('markdown', 'vimwiki')
+		  require('headlines').setup{
+			['vimwiki.markdown'] = {
+				    treesitter_language = "markdown",
+					query = vim.treesitter.query.parse(
+						"markdown",
+						[[
+							(atx_heading [
+								(atx_h1_marker)
+								(atx_h2_marker)
+								(atx_h3_marker)
+								(atx_h4_marker)
+								(atx_h5_marker)
+								(atx_h6_marker)
+							] @headline)
+
+							(thematic_break) @dash
+
+							(fenced_code_block) @codeblock
+
+							(block_quote_marker) @quote
+							(block_quote (paragraph (inline (block_continuation) @quote)))
+						]]
+					),
+					headline_highlights = { "Headline" },
+					codeblock_highlight = "CodeBlock",
+					dash_highlight = "Dash",
+					dash_string = "-",
+					quote_highlight = "Quote",
+					quote_string = "┃",
+					fat_headlines = true,
+					fat_headline_upper_string = "▃",
+					fat_headline_lower_string = "🬂",
+				},
+		  }
+	  end
+    },
 
 	-- Tree-sitter
 	-- language parser for better syntax highlighting, refactoring, navigation,
