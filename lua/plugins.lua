@@ -35,7 +35,8 @@ return require('lazy').setup({
 		build = "make install_jsregexp",
 		config = function ()
 			require("luasnip.loaders.from_snipmate").lazy_load()
-		end
+		end,
+		dependencies = 'honza/vim-snippets',
 	},
 
 	-- Git integration
