@@ -667,8 +667,8 @@ return require('lazy').setup({
 	end },
 	{ "chrisgrieser/nvim-rulebook",
 		keys = {
-			{ "<leader>i", function() require("rulebook").ignoreRule() end },
-			{ "<leader>?", function() require("rulebook").lookupRule() end },
+			{ "<leader>i", function() require("rulebook").ignoreRule() end, desc = "Add command to ignore this linter rule." },
+			{ "<leader>?", function() require("rulebook").lookupRule() end , desc = "Show documentation to this linter rule." },
 		}
 	},
 	'nvim-lua/popup.nvim',
