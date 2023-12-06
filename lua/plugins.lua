@@ -47,7 +47,13 @@ return require('lazy').setup({
 	-- Git tree viewer
 	-- g? in tree view to see mappings
 	-- '@ jump to current HEAD
-	{ 'rbong/vim-flog' },
+	{ 'rbong/vim-flog',
+		lazy = true,
+		cmd = { "Flog", "Flogsplit", "Floggit" },
+		dependencies = {
+			"tpope/vim-fugitive",
+		},
+	},
 	{ 'airblade/vim-gitgutter' },
 	-- <Leader>gm to open window with last commit changing the content under the
 	-- cursor.
@@ -485,6 +491,9 @@ return require('lazy').setup({
 	-- :q - close the Neovim overlay
 	-- <C-e> - open Neovim overlay in current text window manually
 	{ 'glacambre/firenvim',
+		-- Lazy load firenvim
+		-- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+		lazy = not vim.g.started_by_firenvim,
 		build = function() vim.fn['firenvim#install'](0) end,
 		config = function()
 			if vim.g.started_by_firenvim then
