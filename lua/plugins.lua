@@ -350,7 +350,6 @@ return require('lazy').setup({
 	-- mark second block and do :Linediff
 	-- exit diff view with :LinediffReset
 	'AndrewRadev/linediff.vim',
-	'editorconfig/editorconfig-vim',
 	-- Integration of https://github.com/BobBuildTool/bob into Neovim
 	{ 'ThomasFeher/vim-bob' , init = function()
 		vim.keymap.set('n', '<leader>bb', ':make!<CR>', { noremap = true })
