@@ -777,7 +777,11 @@ return require('lazy').setup({
 	},
 	{ 'nvim-lualine/lualine.nvim',
 		dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true },
-		config = function() require('lualine').setup{ options = { theme  = 'solarized_dark' },} end,
+		config = function() require('lualine').setup{
+			options = { theme  = 'solarized_dark' },
+			sections = { lualine_c = { { 'filename', path = 1 } } },
+				}
+			end,
 	},
 	-- display file name for each window at the top right via virtual text
 	{ 'b0o/incline.nvim',
