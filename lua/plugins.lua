@@ -826,6 +826,10 @@ return require('lazy').setup({
 	-- Intelligently reopen files at your last edit position in Vim.
 	-- Handles more edge-cases than the code listed in `:help last-position-jump`
 	{ 'farmergreg/vim-lastplace' },
+	{ 'ThomasFeher/broot.nvim',
+		dependencies = 'rbgrouleff/bclose.vim',
+		branch = 'fixes',
+	},
 },
 	{
 		git = {
