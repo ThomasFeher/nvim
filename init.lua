@@ -17,6 +17,7 @@ vim.opt.number = true -- But show the actual number for the line we're on
 vim.opt.pumblend = 10 -- make popup-menu semi-transparent
 vim.opt.relativenumber = true -- Show line numbers
 vim.opt.scrolloff = 5
+vim.opt.shell = '/usr/bin/zsh'
 vim.opt.shiftwidth = 4
 vim.opt.signcolumn = 'auto:9'
 vim.opt.showcmd = true -- display incomplete commands
