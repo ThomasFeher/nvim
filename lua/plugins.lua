@@ -522,7 +522,7 @@ return require('lazy').setup({
 		},
 	},
 	-- Statistics about your keystrokes
-	'ThePrimeagen/vim-apm',
+	'aldevv/vim-apm',
 	-- Configuration for most commonly used language servers
 	-- :LspInfo shows the status of active and configured language servers
 	{ 'neovim/nvim-lspconfig', config = function()
