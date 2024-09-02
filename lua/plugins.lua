@@ -515,7 +515,12 @@ return require('lazy').setup({
 	-- There is a bug when closing buffers created by Fugitive's :Gdiff, therefore
 	-- ignoring those buffers for now.
 	{'danilamihailov/beacon.nvim',
-		init = function() vim.g.beacon_ignore_buffers = { "[Git]" } end, },
+		init = function() vim.g.beacon_ignore_buffers = { "[Git]" } end,
+		opts = {
+			winblend = 70,
+			highlight = {bg = 'white', ctermbg = 15},
+		},
+	},
 	-- Statistics about your keystrokes
 	'ThePrimeagen/vim-apm',
 	-- Configuration for most commonly used language servers
