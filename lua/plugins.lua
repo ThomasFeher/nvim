@@ -624,6 +624,11 @@ return require('lazy').setup({
 				pdfDirectory = "pdf_texlab",
 			}
 		}
+		lspconfig.yamlls.setup {
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+			filetypes = { '*yaml*' },
+		}
 	end },
 	{ 'dense-analysis/ale', config = function()
 		vim.g.ale_use_neovim_diagnostics_api = 1
