@@ -595,13 +595,14 @@ return require('lazy').setup({
 			}
 		}
 		-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
-		local path = vim.fn.stdpath("config") .. "/spell/de.utf-8.add"
+		local path_de = vim.fn.stdpath("config") .. "/spell/de.utf-8.add"
 		local words_de = {}
-		for word in io.open(path, "r"):lines() do
+		for word in io.open(path_de, "r"):lines() do
 			table.insert(words_de, word)
 		end
+		local path_en = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 		local words_en = {}
-		for word in io.open(path, "r"):lines() do
+		for word in io.open(path_en, "r"):lines() do
 			table.insert(words_en, word)
 		end
 		lspconfig.ltex.setup {
@@ -609,8 +610,8 @@ return require('lazy').setup({
 			on_attach = custom_lsp_attach,
 			filetypes = { 'plaintex', 'tex' },
 			settings = {ltex = {dictionary = {
-				['de'] = { words_de },
-				['en'] = { words_en },
+				['de'] = words_de,
+				['en'] = words_en,
 			}}}
 		}
 		lspconfig.texlab.setup {
