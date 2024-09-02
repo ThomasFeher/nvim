@@ -555,15 +555,10 @@ return require('lazy').setup({
 			if has_formatting then
 				vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
 			end
-			if client.server_capabilities.renameProvider then
-				-- current client is a rename provider, check that we do not already have one, because having multiple ones will prompt the user multiple times for the new name and apply the renaming multiple times
-				if not vim.b.has_rename_provider then
-					-- there was no rename provider until now, but this client is a rename provider, keep that information for this buffer
-					vim.b.has_rename_provider = true
-				else
-					-- we already have a rename provider, so disable this new one
-					client.server_capabilities.renameProvider = false
-				end
+			-- TODO use client.supports_method(<method>) instead of `server_capabilities` (see nvim v0.10.0 Changelog: https://neovim.io/doc/user/news-0.10.html)
+			-- Do not use Pyright for renaming, because LSP server (pylsp) is doing that already, otherwise renaming would be triggered twice in Python files.
+			if client.name == 'pyright' then
+				client.server_capabilities.renameProvider = false
 			end
 			-- For plugins with an `on_attach` callback, call them here. For example:
 			-- require('completion').on_attach()
