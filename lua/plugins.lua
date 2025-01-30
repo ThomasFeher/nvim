@@ -544,17 +544,6 @@ return require('lazy').setup({
 			-- Use LSP as the handler for omnifunc.
 			--    See `:help omnifunc` and `:help ins-completion` for more information.
 			vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-			-- Use LSP as the handler for formatexpr.
-			--    See `:help formatexpr` for more information.
-			local has_formatting = nil
-			for _,v in pairs(vim.lsp.get_active_clients()) do
-				if v['document_range_formatting'] then
-					has_formatting = 1
-				end
-			end
-			if has_formatting then
-				vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
-			end
 			-- TODO use client.supports_method(<method>) instead of `server_capabilities` (see nvim v0.10.0 Changelog: https://neovim.io/doc/user/news-0.10.html)
 			-- Do not use Pyright for renaming, because LSP server (pylsp) is doing that already, otherwise renaming would be triggered twice in Python files.
 			if client.name == 'pyright' then
