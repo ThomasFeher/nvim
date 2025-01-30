@@ -645,6 +645,9 @@ return require('lazy').setup({
 			python = {'pylint', -- provided py pylsp
 					  'flake8'}, -- pylint/pylsp contains everything from flake8
 		}
+		vim.g.ale_linters = {
+			matlab = {'mlint', 'mh_lint', 'mh_style'},
+		}
 	end },
 	{ "chrisgrieser/nvim-rulebook",
 		keys = {
