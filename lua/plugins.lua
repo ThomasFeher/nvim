@@ -534,7 +534,7 @@ return require('lazy').setup({
 			vim.keymap.set('n', '<Leader>imp', vim.lsp.buf.implementation, {noremap = true, buffer = true, desc = 'goto implementation'})
 			vim.keymap.set('n', '<Leader>ref', vim.lsp.buf.rename, {noremap = true, buffer = true, desc = 'rename'})
 			vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, {noremap = true, buffer = true, desc = 'code action'})
-			vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, {noremap = true, buffer = true, desc = 'format'})
+			vim.keymap.set('n', '<Leader>format', vim.lsp.buf.format, {noremap = true, buffer = true, desc = 'format'})
 			vim.keymap.set('n', '<Leader>dn', vim.diagnostic.goto_next, {noremap = true, buffer = true, desc = 'goto next diagnostic'})
 			vim.keymap.set('n', '<Leader>dp', vim.diagnostic.goto_prev, {noremap = true, buffer = true, desc = 'goto previous diagnostic'})
 			vim.keymap.set('n', '<Leader>dsb', function() return vim.diagnostic.open_float({scope='buffer'}) end, {noremap = true, buffer = true, desc = 'open diagnostics for buffer in floating window'})
