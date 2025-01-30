@@ -551,6 +551,15 @@ return require('lazy').setup({
 			end
 			-- For plugins with an `on_attach` callback, call them here. For example:
 			-- require('completion').on_attach()
+			-- from https://github.com/justinmk/config/commit/c0d5457f05056bf978dc4c8541091c77879fcf43
+			vim.keymap.set('n', 'gK', function(ev)
+				if vim.v.count > 0 then
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+				else
+					-- vim.diagnostic.open_float()
+					vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+				end
+			end, { buffer = 0, desc = 'Toggle verbose diagnostics. Toggle inlay_hint with [count].' })
 		end
 		local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		local lspconfig = require'lspconfig'
