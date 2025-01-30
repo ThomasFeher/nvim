@@ -806,6 +806,8 @@ return require('lazy').setup({
 		dependencies = 'rbgrouleff/bclose.vim',
 		branch = 'fixes',
 	},
+	-- show colorcolumn depending on actual length of the line
+    { 'Bekaboo/deadcolumn.nvim' },
 },
 	{
 		git = {
