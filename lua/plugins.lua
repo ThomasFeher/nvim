@@ -574,6 +574,11 @@ return require('lazy').setup({
 			on_attach = custom_lsp_attach,
 			cmd = {'clangd', '--log=verbose', '--background-index', '--suggest-missing-includes', '--clang-tidy', '--pretty'},
 		}
+		-- local util = require 'lspconfig.util'
+		lspconfig.julials.setup {
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+		}
 		lspconfig.pyright.setup {
 			capabilities = capabilities,
 			on_attach = custom_lsp_attach,
