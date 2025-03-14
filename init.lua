@@ -45,6 +45,11 @@ vim.diagnostic.config({
 		source = true, },
 })
 
+-- python virtual environment for python3 provider
+-- Allows installing nvim specific Python packages.
+-- Upate via `uv sync`
+vim.g.python3_host_prog =  '~/.config/nvim/.venv/bin/python'
+
 -- load plugins
 require'plugins'
 
