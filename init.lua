@@ -32,7 +32,18 @@ vim.opt.updatetime = 100 -- faster updates of gitgutter signs
 vim.opt.wildmode = { 'longest:full' }
 vim.opt.winblend = 10 -- make floating windows semi-transparent
 
-vim.diagnostic.config({severity_sort = true})
+-- see current state with `:lua vim.print(vim.diagnostic.config())`
+vim.diagnostic.config({
+	float = {
+		-- header = 'Diagnostics',
+		source = true,
+		-- border = 'rounded',
+	},
+	severity_sort = true,
+	signs = true,
+	virtual_text = {
+		source = true, },
+})
 
 -- load plugins
 require'plugins'
