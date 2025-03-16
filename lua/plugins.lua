@@ -264,7 +264,12 @@ return require('lazy').setup({
 		vim.g.fzf_layout = { window = { width = 0.8, height = 0.5, highlight = 'Comment' } }
 	end,
 	config = function()
-		vim.keymap.set('n', '<Leader>fzf', ':FZF "--preview"')
+		vim.keymap.set('n', '<Leader>fzf', ':FZF<CR>')
+		vim.keymap.set('n', '<Leader>fb', ':Buffers<CR>')
+		vim.keymap.set('n', '<Leader>fg', ':GFiles<CR>')
+		vim.keymap.set('n', '<Leader>fl', ':Lines<CR>')
+		vim.keymap.set('n', '<Leader>fj', ':Jumps<CR>')
+		vim.keymap.set('n', '<Leader>fc', ':Commits<CR>')
 		-- AgIn: Start ag in the specified directory
 		-- Source: https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
 		--
