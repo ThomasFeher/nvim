@@ -540,7 +540,6 @@ return require('lazy').setup({
 			vim.keymap.set('n', '<Leader>dsb', function() return vim.diagnostic.open_float({scope='buffer'}) end, {noremap = true, buffer = true, desc = 'open diagnostics for buffer in floating window'})
 			vim.keymap.set('n', '<Leader>dsc', function() return vim.diagnostic.open_float({scope='cursor'}) end, {noremap = true, buffer = true, desc = 'open diagnostics for cursor in floating window'})
 			vim.keymap.set('n', '<Leader>dsl', function() return vim.diagnostic.open_float({scope='line'}) end, {noremap = true, buffer = true, desc = 'open diagnostics for line in floating buffer'})
-			vim.keymap.set('n', '<Leader>dt', function() return require('telescope.builtin').diagnostics() end, {noremap = true, buffer = true, desc = 'open all diagnostics with telescope'})
 			-- Use LSP as the handler for omnifunc.
 			--    See `:help omnifunc` and `:help ins-completion` for more information.
 			vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -655,7 +654,23 @@ return require('lazy').setup({
 	},
 	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope.nvim',
+	{ 'nvim-telescope/telescope.nvim',
+	  dependencies = { 'nvim-lua/plenary.nvim',
+					   {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+					   {'kyazdani42/nvim-web-devicons', lazy = true },
+				   },
+	  init = function()
+		require('telescope').load_extension('fzf')
+	  	vim.keymap.set(
+	  		'n', '<Leader>dt', function() return require('telescope.builtin').diagnostics() end,
+	  		{ noremap = true, desc = 'open all diagnostics with telescope' }
+	  	)
+		vim.keymap.set('n', '<Leader>ff', function() return require('telescope.builtin').find_files() end,
+		    { noremap =true, desc = 'Telescope find_files'}
+		)
+	  	vim.keymap.set('n', '<Leader>fm', ':Telescope keymaps<CR>')
+	  end
+	},
 	{ 'danymat/neogen', config = function()
 		require('neogen').setup {
 			enabled = true,
