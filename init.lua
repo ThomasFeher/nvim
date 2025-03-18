@@ -42,7 +42,7 @@ vim.diagnostic.config({
 	severity_sort = true,
 	signs = true,
 	virtual_text = {
-		source = true, },
+		source = false, },
 })
 
 -- python virtual environment for python3 provider
