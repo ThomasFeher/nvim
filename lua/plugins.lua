@@ -679,6 +679,12 @@ return require('lazy').setup({
 		    { noremap =true, desc = 'Telescope find_files'}
 		)
 	  	vim.keymap.set('n', '<Leader>fm', ':Telescope keymaps<CR>')
+		-- vim.cmd('command! TelescopeFdUnrestricted lua require("telescope.builtin").fd({no_ignore = true,})')
+		vim.api.nvim_create_user_command(
+			'TelescopeFdNoignore',
+			function() require("telescope.builtin").fd({no_ignore = true,}) end,
+			{desc = 'do not ignore files specified in .gitignore'}
+			)
 	  end
 	},
 	{ 'danymat/neogen', config = function()
