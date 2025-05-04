@@ -1,0 +1,7 @@
+[project]
+name = "nvim"
+version = "0.1.0"
+description = "Developing with Neovim"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ['pynvim']

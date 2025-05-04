@@ -17,8 +17,9 @@ vim.opt.number = true -- But show the actual number for the line we're on
 vim.opt.pumblend = 10 -- make popup-menu semi-transparent
 vim.opt.relativenumber = true -- Show line numbers
 vim.opt.scrolloff = 5
+vim.opt.shell = '/usr/bin/zsh'
 vim.opt.shiftwidth = 4
-vim.opt.signcolumn = 'auto:9'
+vim.opt.signcolumn = 'auto:3'
 vim.opt.showcmd = true -- display incomplete commands
 vim.opt.smartcase = true -- Don't ignore case when there is a capital letter in the query
 vim.opt.spelloptions = 'camel' -- each part of came-case words is spell-checked individually
@@ -27,8 +28,27 @@ vim.opt.splitbelow = true -- Prefer windows splitting to the bottom
 vim.opt.startofline = false -- preserve cursor column
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
+vim.opt.updatetime = 100 -- faster updates of gitgutter signs
 vim.opt.wildmode = { 'longest:full' }
 vim.opt.winblend = 10 -- make floating windows semi-transparent
+
+-- see current state with `:lua vim.print(vim.diagnostic.config())`
+vim.diagnostic.config({
+	float = {
+		-- header = 'Diagnostics',
+		source = true,
+		-- border = 'rounded',
+	},
+	severity_sort = true,
+	signs = true,
+	virtual_text = {
+		source = false, },
+})
+
+-- python virtual environment for python3 provider
+-- Allows installing nvim specific Python packages.
+-- Upate via `uv sync`
+vim.g.python3_host_prog =  '~/.config/nvim/.venv/bin/python'
 
 -- load plugins
 require'plugins'
@@ -104,7 +124,7 @@ vim.api.nvim_create_autocmd('BufWritePost', { desc = 'Generate PlantUML diagrams
                                               group = 'uml',
 	                                          -- untested
                                               callback = function(data) io.popen('plantuml -tsvg ' .. data.file )
-                                                                        io.popen('plantuml -tsvg ' .. data.file )
+                                                                        io.popen('plantuml -teps ' .. data.file )
 	end })
 vim.api.nvim_create_autocmd('TextYankPost', { desc = 'highlight yanked region',
                                               pattern = {'*'},
