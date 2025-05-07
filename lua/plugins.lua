@@ -572,6 +572,10 @@ return require('lazy').setup({
 		end
 		local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		local lspconfig = require'lspconfig'
+		lspconfig.julials.setup {
+			capabilities = capabilities,
+			on_attach = custom_lsp_attach,
+		}
 		lspconfig.lua_ls.setup { -- lua-language-server
 			capabilities = capabilities,
 			on_attach = custom_lsp_attach,
@@ -579,7 +583,7 @@ return require('lazy').setup({
 		lspconfig.clangd.setup{
 			capabilities = capabilities,
 			on_attach = custom_lsp_attach,
-			cmd = {'clangd', '--log=verbose', '--background-index', '--suggest-missing-includes', '--clang-tidy', '--pretty'},
+			cmd = {'clangd', --[[ '--log=verbose', ]] '--background-index', '--suggest-missing-includes', '--clang-tidy', '--pretty'},
 		}
 		-- local util = require 'lspconfig.util'
 		lspconfig.julials.setup {
