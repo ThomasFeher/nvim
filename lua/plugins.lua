@@ -535,7 +535,14 @@ return require('lazy').setup({
 	'aldevv/vim-apm',
 	-- Configuration for most commonly used language servers
 	-- :LspInfo shows the status of active and configured language servers
-	{ 'neovim/nvim-lspconfig', config = function()
+	{ 'neovim/nvim-lspconfig',
+	 dependencies = {
+		-- package manager for LSP servers, DAP servers, linters and formatters
+		{ "mason-org/mason.nvim", config = true },
+		-- add LspInstall command and translate names between Mason and Lspconfig
+		"mason-org/mason-lspconfig.nvim",
+	 },
+	  config = function()
 		local custom_lsp_attach = function(client)
 			-- See `:help nvim_buf_set_keymap()` for more information
 			vim.keymap.set('n', 'K', vim.lsp.buf.hover, {noremap = true, buffer = true, desc = 'hover'})
