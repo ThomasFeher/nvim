@@ -8,7 +8,6 @@ vim.opt.colorcolumn = { 81 } -- highlight overlength column
 vim.opt.cursorcolumn = true -- highlight current column
 vim.opt.cursorline = true -- highlight current line
 vim.opt.diffopt = { 'filler', 'vertical' }
-vim.opt.history = 50 -- keep 50 lines of command line history
 vim.opt.ignorecase = true -- Ignore case when searching
 vim.opt.inccommand = 'split' -- show result of substitution in separate split window
 vim.opt.incsearch = true -- do incremental searching
