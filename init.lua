@@ -117,6 +117,9 @@ vim.keymap.set('c', '<Right>', function()
 	{noremap = true,
 	 expr = true,})
 
+-- open quickfix window over complete width (mnemonic: `:copen`)
+vim.keymap.set('n', '<leader>co', ':botright copen<CR>', { desc = 'open quickfix using complete width', noremap = true })
+
 vim.api.nvim_create_augroup('uml', {})
 vim.api.nvim_create_autocmd('BufWritePost', { desc = 'Generate PlantUML diagrams after writing the file',
 	                                          pattern = {'*.plantuml', '*.pu', '*.puml', '*.uml'},
