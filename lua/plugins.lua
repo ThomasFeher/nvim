@@ -690,6 +690,8 @@ return require('lazy').setup({
 		    { noremap =true, desc = 'Telescope find_files'}
 		)
 	  	vim.keymap.set('n', '<Leader>fm', ':Telescope keymaps<CR>')
+		vim.keymap.set('n', '<Leader>fr', function() return require('telescope.builtin').resume() end,
+			{ noremap = true, desc = 'resume last Telescope session' })
 		-- vim.cmd('command! TelescopeFdUnrestricted lua require("telescope.builtin").fd({no_ignore = true,})')
 		vim.api.nvim_create_user_command(
 			'TelescopeFdNoignore',
