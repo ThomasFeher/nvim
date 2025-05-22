@@ -130,7 +130,7 @@ vim.api.nvim_create_autocmd('BufWritePost', { desc = 'Generate PlantUML diagrams
 	end })
 vim.api.nvim_create_autocmd('TextYankPost', { desc = 'highlight yanked region',
                                               pattern = {'*'},
-                                              callback = function() vim.highlight.on_yank() end, })
+											  callback = function() vim.hl.on_yank() end, })
 
 -- commands for changing directory to current file's directory
 vim.cmd('command! CdFile cd %:p:h')
