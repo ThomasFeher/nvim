@@ -689,6 +689,17 @@ return require('lazy').setup({
 		vim.keymap.set('n', '<Leader>ff', function() return require('telescope.builtin').find_files() end,
 		    { noremap =true, desc = 'Telescope find_files'}
 		)
+		vim.keymap.set("v", "<leader>ff", function() require("telescope.builtin").find_files({
+			search_file = vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"))[1], })
+				end, { noremap = true, desc = 'Telescope search selected string in files' }
+		)
+		vim.keymap.set({'n', 'v'}, '<Leader>fs', function() return require('telescope.builtin').grep_string() end,
+		    { noremap =true, desc = 'Telescope search selected string in files'}
+		)
+		vim.keymap.set("n", "<leader>fw", function() require("telescope.builtin").find_files({
+						search_file = vim.fn.expand("<cword>"), })
+				end, { noremap = true, desc = 'Telescope search selected string in files' }
+		)
 	  	vim.keymap.set('n', '<Leader>fm', ':Telescope keymaps<CR>')
 		vim.keymap.set('n', '<Leader>fr', function() return require('telescope.builtin').resume() end,
 			{ noremap = true, desc = 'resume last Telescope session' })
