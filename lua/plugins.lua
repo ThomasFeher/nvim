@@ -271,7 +271,6 @@ return require('lazy').setup({
 	config = function()
 		vim.keymap.set('n', '<Leader>fzf', ':FZF<CR>')
 		vim.keymap.set('n', '<Leader>fb', ':Buffers<CR>')
-		vim.keymap.set('n', '<Leader>fg', ':GFiles<CR>')
 		vim.keymap.set('n', '<Leader>fl', ':Lines<CR>')
 		vim.keymap.set('n', '<Leader>fj', ':Jumps<CR>')
 		vim.keymap.set('n', '<Leader>fc', ':Commits<CR>')
@@ -691,13 +690,20 @@ return require('lazy').setup({
 		)
 		vim.keymap.set("v", "<leader>ff", function() require("telescope.builtin").find_files({
 			search_file = vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"))[1], })
-				end, { noremap = true, desc = 'Telescope search selected string in files' }
+				end, { noremap = true, desc = 'Telescope search selected string in file names' }
 		)
-		vim.keymap.set({'n', 'v'}, '<Leader>fs', function() return require('telescope.builtin').grep_string() end,
+		vim.keymap.set('n', '<Leader>fg', ":lua require('telescope.builtin').grep_string({search = ''})",
+		    { noremap =true, desc = 'Telescope search a string in files'}
+		)
+		vim.keymap.set('v', '<Leader>fg', function() return require('telescope.builtin').grep_string() end,
 		    { noremap =true, desc = 'Telescope search selected string in files'}
 		)
-		vim.keymap.set("n", "<leader>fw", function() require("telescope.builtin").find_files({
+		vim.keymap.set("n", "<leader>fwf", function() require("telescope.builtin").find_files({
 						search_file = vim.fn.expand("<cword>"), })
+				end, { noremap = true, desc = 'Telescope search selected string in files' }
+		)
+		vim.keymap.set("n", "<leader>fwg", function() require("telescope.builtin").grep_string({
+						search = vim.fn.expand("<cword>"), })
 				end, { noremap = true, desc = 'Telescope search selected string in files' }
 		)
 	  	vim.keymap.set('n', '<Leader>fm', ':Telescope keymaps<CR>')
