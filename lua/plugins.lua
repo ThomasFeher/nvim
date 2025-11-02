@@ -867,6 +867,40 @@ return require('lazy').setup({
 	},
 	-- show colorcolumn depending on actual length of the line
     { 'Bekaboo/deadcolumn.nvim' },
+	{ "mfussenegger/nvim-dap",
+		keys = {
+			{"gdebug", "<cmd>DapNew<cr>", desc = "Start a new debugging session."},
+		},
+	},
+	{ "rcarriga/nvim-dap-ui",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		config = true,
+		init = function()
+			local dap, dapui = require("dap"), require("dapui")
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+		end,
+	},
+	-- use lldb via CodeLLDB extension (install via Mason)
+	-- { "julianolf/nvim-dap-lldb", dependencies = { "mfussenegger/nvim-dap" }, },
+	{ "jay-babu/mason-nvim-dap.nvim",
+		-- dependencies = { "mfussenegger/nvim-dap", "mason-org/mason.nvim"},
+		opts = { ensure_installed = { "cppdbg", "codelldb" }, handlers = {} },
+		-- config = true,
+	},
+	{ 'theHamsta/nvim-dap-virtual-text', config = true, },
+	-- this is not working, but would be a good starting point for implementing a dap mode
+	{ 'JGStyle/nvim-dap-mode'},
 },
 	{
 		git = {
