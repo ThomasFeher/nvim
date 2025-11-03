@@ -1,5 +1,5 @@
-vim.g.mapleader = 'ß'
-vim.g.maplocalleader = 'ß'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 vim.g.load_doxygen_syntax = true
 
 vim.opt.breakindent = true -- better indentation for soft wrapping
