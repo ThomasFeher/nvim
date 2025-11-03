@@ -341,6 +341,9 @@ return require('lazy').setup({
 	-- Additionally the makeprg is set to plantuml.
 	'aklt/plantuml-syntax',
 	-- fold python functions and classes
+	-- use zR to open all folds
+	-- and zM to close all folds
+	-- or zi to toggle folding completely
 	'tmhedberg/SimpylFold',
 	-- edit surrounding tags, quotes, etc.
 	-- cs"': change next surrounding double quotes to single quotes
