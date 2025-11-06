@@ -692,7 +692,7 @@ return require('lazy').setup({
 			search_file = vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"))[1], })
 				end, { noremap = true, desc = 'Telescope search selected string in file names' }
 		)
-		vim.keymap.set('n', '<Leader>fg', ":lua require('telescope.builtin').grep_string({search = ''})",
+		vim.keymap.set('n', '<Leader>fg', ":lua require('telescope.builtin').grep_string({search = vim.fn.input('Search text: ')})<CR>",
 		    { noremap =true, desc = 'Telescope search a string in files'}
 		)
 		vim.keymap.set('v', '<Leader>fg', function() return require('telescope.builtin').grep_string() end,
