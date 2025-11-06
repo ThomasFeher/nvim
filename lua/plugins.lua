@@ -550,7 +550,7 @@ return require('lazy').setup({
 			vim.keymap.set('n', 'K', vim.lsp.buf.hover, {noremap = true, buffer = true, desc = 'hover'})
 			vim.keymap.set('n', '<Leader>def', vim.lsp.buf.definition, {noremap = true, buffer = true, desc = 'goto definition'})
 			vim.keymap.set('n', '<Leader>type', vim.lsp.buf.type_definition, {noremap = true, buffer = true, desc = 'goto type definition'})
-			vim.keymap.set('n', '<Leader>imp', vim.lsp.buf.implementation, {noremap = true, buffer = true, desc = 'goto implementation'})
+			-- vim.keymap.set('n', '<Leader>imp', vim.lsp.buf.implementation, {noremap = true, buffer = true, desc = 'goto implementation'}) -- this is now `gri` per neovim's defaults
 			vim.keymap.set('n', '<Leader>ref', vim.lsp.buf.rename, {noremap = true, buffer = true, desc = 'rename'})
 			vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, {noremap = true, buffer = true, desc = 'code action'})
 			vim.keymap.set('n', '<Leader>format', vim.lsp.buf.format, {noremap = true, buffer = true, desc = 'format'})
@@ -579,32 +579,32 @@ return require('lazy').setup({
 				end
 			end, { buffer = 0, desc = 'Toggle verbose diagnostics. Toggle inlay_hint with [count].' })
 		end
-		local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-		local lspconfig = require'lspconfig'
-		lspconfig.julials.setup {
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
+		-- more refined capabilities for nvim-cmp to be able to provide more completion candidates
+		local cmp_nvim_lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+		vim.lsp.config('*', {
+			-- capabilities are merged with the language server capabilities
+			capabilities = cmp_nvim_lsp_capabilities,
+		})
+		-- perform actions after the default `on_attach` actions are performed
+		vim.api.nvim_create_autocmd('LspAttach', {
+			callback = custom_lsp_attach
+		})
+		vim.lsp.enable('julials')
+		vim.lsp.enable('lua_ls')
+		vim.lsp.config.clangd = {
+			cmd = {
+				'clangd',
+				--'--log=verbose',
+				'--background-index',
+				'--suggest-missing-includes',
+				'--clang-tidy',
+				'--pretty',
+			},
 		}
-		lspconfig.lua_ls.setup { -- lua-language-server
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
-		}
-		lspconfig.clangd.setup{
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
-			cmd = {'clangd', --[[ '--log=verbose', ]] '--background-index', '--suggest-missing-includes', '--clang-tidy', '--pretty'},
-		}
-		-- local util = require 'lspconfig.util'
-		lspconfig.julials.setup {
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
-		}
-		lspconfig.pyright.setup {
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
-		}
-		lspconfig.pylsp.setup{
-			capabilities = capabilities,
+		vim.lsp.enable('clangd')
+		vim.lsp.enable('julials')
+		vim.lsp.enable('pyright')
+		vim.lsp.config('pylsp', {
 			on_attach = custom_lsp_attach,
 			settings = {
 				pylsp = {
@@ -618,7 +618,8 @@ return require('lazy').setup({
 					}
 				}
 			}
-		}
+		})
+		vim.lsp.enable('pylsp')
 		-- LTeX can be downloaded here: https://github.com/valentjn/ltex-ls/releases/
 		local path_de = vim.fn.stdpath("config") .. "/spell/de.utf-8.add"
 		local words_de = {}
@@ -630,30 +631,26 @@ return require('lazy').setup({
 		for word in io.open(path_en, "r"):lines() do
 			table.insert(words_en, word)
 		end
-		lspconfig.ltex.setup {
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
+		vim.lsp.config.ltex = {
 			filetypes = { 'plaintex', 'tex' },
 			settings = {ltex = {dictionary = {
 				['de'] = words_de,
 				['en'] = words_en,
 			}}}
 		}
-		lspconfig.texlab.setup {
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
+		vim.lsp.enable('ltex')
+		vim.lsp.config.texlab = {
 			settings = {
-
 				args = {"-auxdir=aux_texlab", "outdir=pdf_texlab"}, -- should all be specified in the .latexmkrc
 				auxDirectory = "aux_texlab",
 				pdfDirectory = "pdf_texlab",
 			}
 		}
-		lspconfig.yamlls.setup {
-			capabilities = capabilities,
-			on_attach = custom_lsp_attach,
+		vim.lsp.enable('texlab')
+		vim.lsp.config.yamlls = {
 			filetypes = { '*yaml*' },
 		}
+		vim.lsp.enable('yamlls')
 	end },
 	{ 'dense-analysis/ale', config = function()
 		vim.g.ale_use_neovim_diagnostics_api = 1
