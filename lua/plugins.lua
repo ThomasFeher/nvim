@@ -901,6 +901,13 @@ return require('lazy').setup({
 	{ 'theHamsta/nvim-dap-virtual-text', config = true, },
 	-- this is not working, but would be a good starting point for implementing a dap mode
 	{ 'JGStyle/nvim-dap-mode'},
+	-- practice touch typing
+	{
+		"nvzone/typr",
+		dependencies = "nvzone/volt",
+		opts = {},
+		cmd = { "Typr", "TyprStats" },
+	}
 },
 	{
 		git = {
