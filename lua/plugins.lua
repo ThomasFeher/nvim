@@ -679,9 +679,12 @@ return require('lazy').setup({
 	  dependencies = { 'nvim-lua/plenary.nvim',
 					   {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 					   {'kyazdani42/nvim-web-devicons', lazy = true },
+					   -- use Telescope for calls to vim.ui.select
+					   {'nvim-telescope/telescope-ui-select.nvim' },
 				   },
 	  init = function()
 		require('telescope').load_extension('fzf')
+		require("telescope").load_extension("ui-select")
 	  	vim.keymap.set(
 	  		'n', '<Leader>dt', function() return require('telescope.builtin').diagnostics() end,
 	  		{ noremap = true, desc = 'open all diagnostics with telescope' }
