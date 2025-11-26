@@ -599,6 +599,7 @@ return require('lazy').setup({
 				'--suggest-missing-includes',
 				'--clang-tidy',
 				'--pretty',
+				'--rename-file-limit=0',
 			},
 		}
 		vim.lsp.enable('clangd')
