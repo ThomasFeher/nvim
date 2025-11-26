@@ -895,10 +895,44 @@ return require('lazy').setup({
 	-- use lldb via CodeLLDB extension (install via Mason)
 	-- { "julianolf/nvim-dap-lldb", dependencies = { "mfussenegger/nvim-dap" }, },
 	{ "jay-babu/mason-nvim-dap.nvim",
-		-- dependencies = { "mfussenegger/nvim-dap", "mason-org/mason.nvim"},
-		opts = { ensure_installed = { "cppdbg", "codelldb" }, handlers = {} },
-		-- config = true,
-	},
+		dependencies = { "mfussenegger/nvim-dap", "mason-org/mason.nvim"},
+		opts = {
+			ensure_installed = { "cppdbg", "codelldb", "python" },
+			handlers = {
+				function(config)
+					-- all sources with no handler get passed here
+
+					-- Keep original functionality
+					require('mason-nvim-dap').default_setup(config)
+				end,
+				cppdbg = function(config)
+						config.configurations = {
+							{
+								name = "(gdb) attach",
+								type = "cppdbg",
+								request = "attach",
+								cwd = "${workspaceFolder}",
+								processId = "${command:pickProcess}",
+								program = "${command:pickFile}",
+								stopAtEntry = false,
+								setupCommands = {
+									{
+										text = "-enable-pretty-printing",
+										description = "enable pretty printing",
+										ignoreFailures = false,
+									},
+								},
+							},
+						}
+					-- merge with defaults
+					vim.list_extend(config.configurations, require('mason-nvim-dap.mappings.configurations').cppdbg)
+					-- add the configuration to the corresponding filetypes
+					require('mason-nvim-dap').default_setup(config)
+				end,
+			},
+		},
+		config = true,
+ 	},
 	{ 'theHamsta/nvim-dap-virtual-text', config = true, },
 	-- this is not working, but would be a good starting point for implementing a dap mode
 	{ 'JGStyle/nvim-dap-mode'},
