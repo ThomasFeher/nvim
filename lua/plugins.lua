@@ -604,7 +604,7 @@ return require('lazy').setup({
 		}
 		vim.lsp.enable('clangd')
 		vim.lsp.enable('julials')
-		vim.lsp.enable('pyright')
+		vim.lsp.enable('basedpyright')
 		vim.lsp.config('pylsp', {
 			on_attach = custom_lsp_attach,
 			settings = {
