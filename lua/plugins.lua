@@ -909,6 +909,16 @@ return require('lazy').setup({
 					require('mason-nvim-dap').default_setup(config)
 				end,
 				cppdbg = function(config)
+						-- modify defaults to use pretty printing
+						local defaults = require('mason-nvim-dap.mappings.configurations').cppdbg
+						for _, conf in pairs(defaults) do
+							conf.setupCommands = { {
+								text = "-enable-pretty-printing",
+								description = "enable pretty printing",
+								ignoreFailures = false,
+							} }
+						end
+						-- add own configurations
 						config.configurations = {
 							{
 								name = "(gdb) attach",
@@ -927,8 +937,8 @@ return require('lazy').setup({
 								},
 							},
 						}
-					-- merge with defaults
-					vim.list_extend(config.configurations, require('mason-nvim-dap.mappings.configurations').cppdbg)
+					-- merge own configurations with (modified) defaults
+					vim.list_extend(config.configurations, defaults)
 					-- add the configuration to the corresponding filetypes
 					require('mason-nvim-dap').default_setup(config)
 				end,
