@@ -108,112 +108,146 @@ return require('lazy').setup({
 	-- language parser for better syntax highlighting, refactoring, navigation,
 	-- text objects, folding and more
 	{ 'nvim-treesitter/nvim-treesitter',
+	lazy = false,
 	build = ':TSUpdate',
 	config = function()
-		require'nvim-treesitter.configs'.setup {
-			ensure_installed = {"bash", "c", "cmake", "cpp", "latex", "lua", "python", "vim"},     -- one of "all", "language", or a list of languages
-			highlight = {
-				enable = true,              -- false will disable the whole extension
-				disable = {},  -- list of language that will be disabled
-			},
-			--[=[
-			refactor = {
-				highlight_definitions = { enable = true },
-				highlight_current_scope = { enable = false },
-				smart_rename = {
-					enable = true,
-					keymaps = {
-						smart_rename = "grr",
-					},
-				},
-				navigation = {
-					enable = true,
-					keymaps = {
-						goto_definition = "gnd",
-						list_definitions = "gnD",
-						list_definitions_toc = "gO",
-						goto_next_usage = "<a-*>",
-						goto_previous_usage = "<a-#>",
-					},
-				},
-			},
-			textobjects = {
-				-- possible text objects:
-				-- @block.inner
-				-- @block.outer
-				-- @call.inner
-				-- @call.outer
-				-- @class.inner
-				-- @class.outer
-				-- @comment.outer
-				-- @conditional.inner
-				-- @conditional.outer
-				-- @function.inner
-				-- @function.outer
-				-- @loop.inner
-				-- @loop.outer
-				-- @parameter.inner
-				-- @statement.outer
-				select = {
-					enable = true,
-					keymaps = {
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
-					},
-				},
-				move = {
-					enable = true,
-					goto_next_start = {
-						["]m"] = "@function.outer",
-						["]]"] = "@class.outer",
-					},
-					goto_next_end = {
-						["]M"] = "@function.outer",
-						["]["] = "@class.outer",
-					},
-					goto_previous_start = {
-						["[m"] = "@function.outer",
-						["[["] = "@class.outer",
-					},
-					goto_previous_end = {
-						["[M"] = "@function.outer",
-						["[]"] = "@class.outer",
-					},
-				},
-				swap = {
-					enable = true,
-					swap_next = {
-						["<leader>a"] = "@parameter.inner",
-					},
-					swap_previous = {
-						["<leader>A"] = "@parameter.inner",
-					},
-				},
-			},
-			--[=[
-			indent = {
-				enable = true,
-			},
-			--]=]
-			incremental_selection = {
-				enable = true,
-				-- keymaps = {
-					-- 	init_selection = '<CR>',
-					-- 	scope_incremental = '<CR>',
-					-- 	node_incremental = '<TAB>',
-					-- 	node_decremental = '<S-TAB>',
-					-- },
-				},
-			}
-		end,
+		local langs = {
+			"bash", "c", "cmake", "cpp", "latex", "lua", "python", "vim"
+		}
+		require'nvim-treesitter'.install { langs }
+		for _,lang in ipairs(langs) do
+			vim.api.nvim_create_autocmd( 'FileType', { pattern = lang,
+				callback = function(args)
+					vim.treesitter.start(args.buf, lang)
+					-- vim.bo[args.buf].syntax = 'on'  -- only if additional legacy syntax is needed
+				end
+			})
+		end
+	end,
 	dependencies = {
-		'nvim-treesitter/nvim-treesitter-refactor',
+		'nvim-treesitter/nvim-treesitter-locals',
 		'nvim-treesitter/nvim-treesitter-textobjects',
-		'nvim-treesitter/playground',
 	},
 	},
+	{ 'nvim-treesitter/nvim-treesitter-textobjects',
+		branch = 'main',
+		init = function()
+			-- Disable entire built-in ftplugin mappings to avoid conflicts.
+			-- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin
+			-- for built-in ftplugins.
+			vim.g.no_plugin_maps = true
+		end,
+		config = function()
+			require('nvim-treesitter-textobjects').setup{
+			  select = {
+				-- Automatically jump forward to textobj, similar to targets.vim
+				lookahead = true,
+				-- You can choose the select mode (default is charwise 'v')
+				--
+				-- Can also be a function which gets passed a table with the keys
+				-- * query_string: eg '@function.inner'
+				-- * method: eg 'v' or 'o'
+				-- and should return the mode ('v', 'V', or '<c-v>') or a table
+				-- mapping query_strings to modes.
+				selection_modes = {
+				  ['@parameter.outer'] = 'v', -- charwise
+				  ['@function.outer'] = 'V', -- linewise
+				  -- ['@class.outer'] = '<c-v>', -- blockwise
+				},
+				-- If you set this to `true` (default is `false`) then any textobject is
+				-- extended to include preceding or succeeding whitespace. Succeeding
+				-- whitespace has priority in order to act similarly to eg the built-in
+				-- `ap`.
+				--
+				-- Can also be a function which gets passed a table with the keys
+				-- * query_string: eg '@function.inner'
+				-- * selection_mode: eg 'v'
+				-- and should return true of false
+				include_surrounding_whitespace = false,
+			  },
+			move = {
+			-- whether to set jumps in the jumplist
+			set_jumps = true,
+			},
+		  }
+			-- keymaps
+			-- select
+			-- m: method/function
+			vim.keymap.set({ "x", "o" }, "am", function()
+			  require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "x", "o" }, "im", function()
+			  require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+			end)
+			-- c: class
+			vim.keymap.set({ "x", "o" }, "ac", function()
+			  require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "x", "o" }, "ic", function()
+			  require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+			end)
+			-- s: scope
+			vim.keymap.set({ "x", "o" }, "as", function()
+			  require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals")
+			end)
+			-- swap parameters
+			vim.keymap.set("n", "<leader>a", function()
+			  require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
+			end)
+			vim.keymap.set("n", "<leader>A", function()
+			  require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
+			end)
+		    -- move cursor to
+			-- m: method/function
+			vim.keymap.set({ "n", "x", "o" }, "]m", function()
+			  require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "]M", function()
+			  require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[m", function()
+			  require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[M", function()
+			  require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+			end)
+			-- ]: class (for consistency with vim defaults)
+			vim.keymap.set({ "n", "x", "o" }, "]]", function()
+			  require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "][", function()
+			  require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[[", function()
+			  require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[]", function()
+			  require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
+			end)
+			-- o: loop (cirlce, or two "o" in "loop", collides with "oldfile" from mini.bracketed)
+			-- vim.keymap.set({ "n", "x", "o" }, "]o", function()
+			--   move.goto_next_start({"@loop.inner", "@loop.outer"}, "textobjects")
+			-- end)
+			-- s: scope (collides with spelllchecking)
+			-- vim.keymap.set({ "n", "x", "o" }, "]s", function()
+			--   require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
+			-- end)
+			-- z: fold (z looks folded, used by vim for folds as well)
+			vim.keymap.set({ "n", "x", "o" }, "]z", function()
+			  require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
+			end, {desc="go to next fold, alt: z<down>"})
+			vim.keymap.set({ "n", "x", "o" }, "[z", function()
+			  require("nvim-treesitter-textobjects.move").goto_previous_start("@fold", "folds")
+			end, {desc="go to previous fold, alt: z<up>"})
+			-- i: "if", conditional
+			vim.keymap.set({ "n", "x", "o" }, "]i", function()
+			  require("nvim-treesitter-textobjects.move").goto_next_start("@conditional.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[i", function()
+			  require("nvim-treesitter-textobjects.move").goto_previous_start("@conditional.outer", "textobjects")
+			end)
+		end,
+},
 	{ 'nvim-treesitter/nvim-treesitter-context',
 	dependencies = 'nvim-treesitter/nvim-treesitter',
 	config = function() require'treesitter-context'.setup {
@@ -406,7 +440,7 @@ return require('lazy').setup({
 			conflict   = { suffix = 'x', options = {} },
 			diagnostic = { suffix = 'd', options = {} },
 			file       = { suffix = 'f', options = {} },
-			indent     = { suffix = 'i', options = {} },
+			indent     = { suffix = '' },
 			jump       = { suffix = 'j', options = {} },
 			location   = { suffix = 'l', options = {} },
 			oldfile    = { suffix = 'o', options = {} },
