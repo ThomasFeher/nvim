@@ -597,8 +597,8 @@ return require('lazy').setup({
 			--    See `:help omnifunc` and `:help ins-completion` for more information.
 			vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 			-- TODO use client.supports_method(<method>) instead of `server_capabilities` (see nvim v0.10.0 Changelog: https://neovim.io/doc/user/news-0.10.html)
-			-- Do not use Pyright for renaming, because LSP server (pylsp) is doing that already, otherwise renaming would be triggered twice in Python files.
-			if client.name == 'pyright' then
+			-- Do not use Basedpyright for renaming, because LSP server (pylsp) is doing that already, otherwise renaming would be triggered twice in Python files.
+			if client.name == 'basedpyright' then
 				client.server_capabilities.renameProvider = false
 			end
 			-- For plugins with an `on_attach` callback, call them here. For example:
