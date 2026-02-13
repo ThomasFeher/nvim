@@ -103,6 +103,12 @@ return require('lazy').setup({
 			vim.treesitter.language.register('markdown', 'vimwiki')
 		end,
 	},
+	{ 'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
+	},
 
 	-- Tree-sitter
 	-- language parser for better syntax highlighting, refactoring, navigation,
@@ -112,7 +118,7 @@ return require('lazy').setup({
 	build = ':TSUpdate',
 	config = function()
 		local langs = {
-			"bash", "c", "cmake", "cpp", "latex", "lua", "python", "vim"
+			"bash", "c", "cmake", "cpp", "latex", "lua", "markdown", "python", "vim"
 		}
 		require'nvim-treesitter'.install { langs }
 		for _,lang in ipairs(langs) do
@@ -450,6 +456,7 @@ return require('lazy').setup({
 			window     = { suffix = 'w', options = {} },
 			yank       = { suffix = 'y', options = {} },
 		}
+		require('mini.icons').setup()
 	end },
 	'Raimondi/delimitMate',
 	'PProvost/vim-ps1',
@@ -712,7 +719,7 @@ return require('lazy').setup({
 	{ 'nvim-telescope/telescope.nvim',
 	  dependencies = { 'nvim-lua/plenary.nvim',
 					   {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-					   {'kyazdani42/nvim-web-devicons', lazy = true },
+					   {'nvim-tree/nvim-web-devicons', lazy = true },
 					   -- use Telescope for calls to vim.ui.select
 					   {'nvim-telescope/telescope-ui-select.nvim' },
 				   },
@@ -849,7 +856,7 @@ return require('lazy').setup({
 		end
 	},
 	{ 'nvim-lualine/lualine.nvim',
-		dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true },
+		dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
 		config = function() require('lualine').setup{
 			options = { theme  = 'solarized_dark' },
 			sections = { lualine_c = { { 'filename', path = 1 } } },
