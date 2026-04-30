@@ -103,12 +103,6 @@ return require('lazy').setup({
 			vim.treesitter.language.register('markdown', 'vimwiki')
 		end,
 	},
-	{ 'MeanderingProgrammer/render-markdown.nvim',
-		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {},
-	},
 
 	-- Tree-sitter
 	-- language parser for better syntax highlighting, refactoring, navigation,
@@ -274,6 +268,13 @@ return require('lazy').setup({
 		}
 	}
 	end
+	},
+	{ 'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
+		ft = { "markdown" },
 	},
 
 	-- Modify quickfix (and location list) entries, writing these modifications will modify the original parts
