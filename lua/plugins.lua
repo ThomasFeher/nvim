@@ -114,7 +114,7 @@ return require('lazy').setup({
 		local langs = {
 			"bash", "c", "cmake", "cpp", "latex", "lua", "markdown", "python", "vim"
 		}
-		require'nvim-treesitter'.install { langs }
+		require'nvim-treesitter'.install(langs)
 		for _,lang in ipairs(langs) do
 			vim.api.nvim_create_autocmd( 'FileType', { pattern = lang,
 				callback = function(args)
