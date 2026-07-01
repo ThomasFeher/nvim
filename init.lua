@@ -152,3 +152,5 @@ function! Save_and_exec() abort
   endfunction
   command! SaveAndExec call Save_and_exec()
 ]])
+
+vim.keymap.set('n', 'grh', ':LspClangdSwitchSourceHeader<Return>')
