@@ -110,11 +110,12 @@ return require('lazy').setup({
 	{ 'nvim-treesitter/nvim-treesitter',
 	lazy = false,
 	build = ':TSUpdate',
-	config = function()
+	branch = 'main',
+	opts = function()
 		local langs = {
-			"bash", "c", "cmake", "cpp", "latex", "lua", "markdown", "python", "vim"
+			"bash", "c", "cmake", "cpp", "java", "lua", "python", "vim"
 		}
-		require'nvim-treesitter'.install(langs)
+		require'nvim-treesitter'.install(langs)--:wait(30000) -- wait max. 5 minutes
 		for _,lang in ipairs(langs) do
 			vim.api.nvim_create_autocmd( 'FileType', { pattern = lang,
 				callback = function(args)
@@ -716,7 +717,7 @@ return require('lazy').setup({
 	'nvim-lua/plenary.nvim',
 	{ 'nvim-telescope/telescope.nvim',
 	  dependencies = { 'nvim-lua/plenary.nvim',
-					   {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+					   {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install' },
 					   {'nvim-tree/nvim-web-devicons', lazy = true },
 					   -- use Telescope for calls to vim.ui.select
 					   {'nvim-telescope/telescope-ui-select.nvim' },

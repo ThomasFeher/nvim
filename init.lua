@@ -154,3 +154,5 @@ function! Save_and_exec() abort
 ]])
 
 vim.keymap.set('n', 'grh', ':LspClangdSwitchSourceHeader<Return>')
+
+require('vim._core.ui2').enable()
