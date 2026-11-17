@@ -410,11 +410,6 @@ return require('lazy').setup({
 	end },
 	'chrisbra/csv.vim',
 	'wellle/targets.vim',
-	{ 'numToStr/Comment.nvim', opts = {
-		-- add any options here
-		},
-		lazy = false,
-	},
 	{ 'echasnovski/mini.nvim', config = function()
 		-- ga: start alignment mode
 		-- gA: start alignment mode with preview
@@ -458,6 +453,7 @@ return require('lazy').setup({
 			window     = { suffix = 'w', options = {} },
 			yank       = { suffix = 'y', options = {} },
 		}
+		require('mini.comment').setup()
 		require('mini.icons').setup()
 	end },
 	'Raimondi/delimitMate',
