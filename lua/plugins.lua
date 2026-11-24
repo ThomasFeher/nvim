@@ -847,7 +847,6 @@ return require('lazy').setup({
 	{ 'petertriho/nvim-scrollbar',
 		config = function()
 			require("scrollbar").setup()
-			require("scrollbar.handlers.search").setup()
 		end
 	},
 	{ 'nvim-lualine/lualine.nvim',
